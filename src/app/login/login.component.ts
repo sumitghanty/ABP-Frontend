@@ -8,12 +8,8 @@ import {
   trigger
 } from '@angular/animations';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {
-  GoogleLoginProvider,
-  AuthService,
-  SocialUser
-} from 'angular-6-social-login';
-import { SocialLoginModule, AuthServiceConfig } from 'angular-6-social-login';
+//import {  GoogleLoginProvider,  AuthService,  SocialUser} from 'angular-6-social-login';
+//import { SocialLoginModule, AuthServiceConfig } from 'angular-6-social-login';
 import { Socialusers } from '../shared/product';
 import { SocialloginService } from '../service/sociallogin.service';
 @Component({
@@ -35,13 +31,13 @@ export class LoginComponent implements OnInit {
   constructor(
     private SocialloginService: SocialloginService,
     private router: Router,
-    private authService: AuthService,
+    //private authService: AuthService,
     private snackBar: MatSnackBar //private loginService: LoginService
   ) {}
 
   ngOnInit(): void {}
   signInWithGoogle(): void {
-    this.authService
+    /*this.authService
       .signIn(GoogleLoginProvider.PROVIDER_ID)
       .then(socialusers => {
         console.log(socialusers);
@@ -49,7 +45,7 @@ export class LoginComponent implements OnInit {
         //on success
         //this will return user data from google. What you need is a user token which you will send it to the server
         //this.sendToRestApiMethod(userData.idToken);
-      });
+      });*/
     this.router.navigate(['/home']);
   }
   scrollToLogin() {

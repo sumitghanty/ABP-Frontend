@@ -13,15 +13,15 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-import { GoogleLoginProvider, AuthService } from 'angular-6-social-login';
-import { SocialLoginModule, AuthServiceConfig } from 'angular-6-social-login';
+//import { GoogleLoginProvider, AuthService } from 'angular-6-social-login';
+//import { SocialLoginModule, AuthServiceConfig } from 'angular-6-social-login';
 import { TripListComponent } from './trip-list/trip-list.component';
 import { CreateTripComponent } from './create-trip/create-trip.component';
 import { ApproveTripComponent } from './approve-trip/approve-trip.component';
 import { CreateExpenseComponent } from './create-expense/create-expense.component';
 import { ApproveExpenseComponent } from './approve-expense/approve-expense.component';
 import { ApproveAdvanceComponent } from './approve-advance/approve-advance.component';
-export function socialConfigs() {
+/*export function socialConfigs() {
   const config = new AuthServiceConfig([
     {
       id: GoogleLoginProvider.PROVIDER_ID,
@@ -31,9 +31,19 @@ export function socialConfigs() {
     }
   ]);
   return config;
-}
+}*/
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, TripListComponent, CreateTripComponent, ApproveTripComponent, CreateExpenseComponent, ApproveExpenseComponent, ApproveAdvanceComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    LoginComponent,
+    TripListComponent,
+    CreateTripComponent,
+    ApproveTripComponent,
+    CreateExpenseComponent,
+    ApproveExpenseComponent,
+    ApproveAdvanceComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -46,11 +56,10 @@ export function socialConfigs() {
     MatProgressSpinnerModule
   ],
   providers: [
-    AuthService,
-    {
+    /*{
       provide: AuthServiceConfig,
       useFactory: socialConfigs
-    }
+    }*/
   ],
   bootstrap: [AppComponent]
 })
