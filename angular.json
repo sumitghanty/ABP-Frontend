@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "TravelManagement"
+  "defaultProject": "TravelManagement",
+  "cli": {
+    "analytics": "6abcc1ca-3ee4-4bb1-b0e6-912786fa2517"
+  }
 }
