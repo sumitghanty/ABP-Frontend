@@ -21,6 +21,8 @@ import { ApproveTripComponent } from './approve-trip/approve-trip.component';
 import { CreateExpenseComponent } from './create-expense/create-expense.component';
 import { ApproveExpenseComponent } from './approve-expense/approve-expense.component';
 import { ApproveAdvanceComponent } from './approve-advance/approve-advance.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 /*export function socialConfigs() {
   const config = new AuthServiceConfig([
     {
@@ -42,7 +44,9 @@ import { ApproveAdvanceComponent } from './approve-advance/approve-advance.compo
     ApproveTripComponent,
     CreateExpenseComponent,
     ApproveExpenseComponent,
-    ApproveAdvanceComponent
+    ApproveAdvanceComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
