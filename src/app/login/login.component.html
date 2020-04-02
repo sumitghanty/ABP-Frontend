@@ -1,0 +1,80 @@
+<!--<div class="google-btn">
+  <div class="google-icon-wrapper">
+    <img
+      class="google-icon"
+      src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+    />
+  </div>
+  <p class="btn-text" (click)="signInWithGoogle()"><b>LOGIN WITH GOOGLE</b></p>
+</div>-->
+
+<div class="container" style="padding-top:60px;">
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <div class="card-group">
+        <div class="card p-4">
+          <div class="card-body">
+            <form name="form">
+              <!-- <button class="btn btn-primary" style="text-align:center">Login</button>   -->
+              <button type="submit" class="btn btn-block btn-success">
+                Login
+              </button>
+              <div style="padding-top: 20px;" class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="icon-user"></i
+                  ></span>
+                </div>
+                <input
+                  type="text"
+                  name="UserName"
+                  class="form-control sty1"
+                  placeholder="Email"
+                  required
+                />
+              </div>
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="icon-lock"></i
+                  ></span>
+                </div>
+                <input
+                  type="password"
+                  name="Passward"
+                  class="form-control"
+                  placeholder="Password"
+                />
+              </div>
+              <div></div>
+              <div class="row">
+                <div class="col-6">
+                  <button type="submit" class="btn btn-primary px-4">
+                    Login
+                  </button>
+                </div>
+                <div class="col-6 text-right">
+                  <button type="button" class="btn btn-link px-0">
+                    Forgot password?
+                  </button>
+                </div>
+              </div>
+            </form>
+            <hr style="border-top: 1px solid #eee;" />
+            <div class="row">
+              <div class="col-6"></div>
+              <div class="col-6 text-right">
+                <button
+                  (click)="signInWithGoogle()"
+                  class="loginBtn loginBtn--google"
+                >
+                  Login with Google
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
