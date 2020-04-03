@@ -7,7 +7,7 @@ import {
   transition,
   trigger
 } from '@angular/animations';
-import { MatSnackBar } from '@angular/material/snack-bar';
+//import { MatSnackBar } from '@angular/material/snack-bar';
 //import {  GoogleLoginProvider,  AuthService,  SocialUser} from 'angular-6-social-login';
 //import { SocialLoginModule, AuthServiceConfig } from 'angular-6-social-login';
 import { Socialusers } from '../shared/product';
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     private SocialloginService: SocialloginService,
     private router: Router,
     //private authService: AuthService,
-    private snackBar: MatSnackBar //private loginService: LoginService
+  //  private snackBar: MatSnackBar //private loginService: LoginService
   ) {}
 
   ngOnInit(): void {}

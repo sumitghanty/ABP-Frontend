@@ -12,6 +12,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+//import { MatChipInputEvent } from '@angular/material/chips';
+//import { MatSnackBar } from '@angular/material/snack-bar';
+//import { MatHorizontalStepper } from '@angular/material/stepper';
+import {MatStepperModule} from '@angular/material/stepper';
 
 //import { GoogleLoginProvider, AuthService } from 'angular-6-social-login';
 //import { SocialLoginModule, AuthServiceConfig } from 'angular-6-social-login';
@@ -57,7 +61,10 @@ import { FooterComponent } from './footer/footer.component';
     MatIconModule,
     MatButtonModule,
     MatCardModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatStepperModule,
+    //MatChipInputEvent,
+    //MatSnackBar
   ],
   providers: [
     /*{

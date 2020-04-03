@@ -1,4 +1,4 @@
-<div style="padding: 13px;">
+<!--<div style="padding: 13px;">
   <mat-spinner *ngIf="products.length === 0"></mat-spinner>
 
   <mat-card *ngFor="let product of products" style="margin-top:10px;">
@@ -18,10 +18,110 @@
       <button mat-button>Buy product</button>
     </mat-card-actions>
   </mat-card>
+  
 </div>
 <div>
   <button (click)="firstPage()" mat-button>First</button>
   <button (click)="previousPage()" mat-button>Previous</button>
   <button (click)="nextPage()" mat-button>Next</button>
   <button (click)="lastPage()" mat-button>Last</button>
+</div>
+!-->
+<div class="cover-shape">
+  <div class="content-wrap">
+ <div class="row">
+  <div class="mb-3 col-3 col-md-3 col-sm-12">
+    <mat-card class="h-100 text-center">       
+      <mat-card-content>
+        <div class="card-icon pad-xl">
+          <img class="align-items-center" src="./assets/images/icon/pending-approval.png" alt="icon">
+         </div> 
+       <span class="num-count">8</span>
+      </mat-card-content>
+      <mat-card-actions>
+       <span class="card-description">Pending trip for Approval</span> 
+      </mat-card-actions>
+    </mat-card>    
+  </div>
+  <div class="mb-3 col-3 col-md-3 col-sm-12">
+    <mat-card class="h-100 text-center">      
+      <mat-card-content>
+        <div class="card-icon">
+          <img class="align-items-center" src="./assets/images/icon/approved-trip.png" alt="icon">
+         </div> 
+       <span class="num-count">8</span>
+      </mat-card-content>
+      <mat-card-actions>
+       <span class="card-description">Pending trip for Approval</span> 
+      </mat-card-actions>
+    </mat-card>    
+  </div>
+  <div class="mb-3 col-3 col-md-3 col-sm-12">
+    <mat-card class="h-100 text-center">        
+      <mat-card-content>
+        <div class="card-icon">
+          <img class="align-items-center" src="./assets/images/icon/pending-finance.png" alt="icon">
+         </div> 
+       <span class="num-count">8</span>
+      </mat-card-content>
+      <mat-card-actions>
+       <span class="card-description">Pending Trip from Finance</span> 
+      </mat-card-actions>
+    </mat-card>    
+  </div>
+  <div class="mb-3 col-3 col-md-3 col-sm-12">
+    <mat-card class="h-100 text-center">  
+     
+      <mat-card-content>
+        <div class="card-icon">
+          <img class="align-items-center" src="./assets/images/icon/rejected-trip.png" alt="icon">
+         </div>
+       <span class="num-count">8</span>
+      </mat-card-content>
+      <mat-card-actions>
+       <span class="card-description">Rejected Trip</span> 
+      </mat-card-actions>
+    </mat-card>    
+  </div>
+  <div class="mb-3 col-3 col-md-3 col-sm-12">
+    <mat-card class="h-100 text-center"> 
+      <mat-card-content>
+        <div class="card-icon">
+          <img class="align-items-center" src="./assets/images/icon/advance-claim.png" alt="icon">
+         </div> 
+       <span class="num-count">8</span>
+      </mat-card-content>
+      <mat-card-actions>
+       <span class="card-description">Advance Claimed</span> 
+      </mat-card-actions>
+    </mat-card>    
+  </div>
+  <div class="mb-3 col-3 col-md-3 col-sm-12">
+    <mat-card class="h-100 text-center">        
+      <mat-card-content>
+        <div class="card-icon">
+          <img class="align-items-center" src="./assets/images/icon/completed-trip.png" alt="icon">
+         </div> 
+       <span class="num-count">8</span>
+      </mat-card-content>
+      <mat-card-actions>
+       <span class="card-description">Already Completed Trip</span> 
+      </mat-card-actions>
+    </mat-card>    
+  </div>
+  <div class="mb-3 col-3 col-md-3 col-sm-12">
+    <mat-card class="h-100 text-center">         
+      <mat-card-content>
+        <div class="card-icon">
+          <img class="align-items-center" src="./assets/images/icon/escalation-finance.png" alt="icon">
+         </div>
+       <span class="num-count">8</span>
+      </mat-card-content>
+      <mat-card-actions>
+       <span class="card-description">Escalation from Finance</span> 
+      </mat-card-actions>
+    </mat-card>    
+  </div>
+ </div>
+</div>
 </div>

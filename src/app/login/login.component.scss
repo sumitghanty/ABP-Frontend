@@ -1,0 +1,60 @@
+.cover-login{
+    background-size: cover;
+    height: 100%;
+    position: fixed;
+    width: 70%;
+}
+$google-blue: #4285f4;
+$button-active-blue: #1669F2;
+$white:#fff;
+
+.google-btn {
+    width: 241px;
+    height: 61px;
+    background-color: #fff;
+    border-radius: 70px;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
+    position: fixed;
+    right: 80px;
+    top: 60%;
+  // position: right;
+  .google-icon-wrapper {
+    position: absolute;
+    margin-top: 11px;
+    margin-left: 4px;
+    width: 49px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: $white;
+  }
+  .google-icon {
+    position: absolute;
+    margin-top: 4px;
+    margin-left: 11px;
+    width: 38px;
+    height: 31px;
+  }
+  .btn-text {
+    float: right;
+    margin: 22px 15px 0 0;
+    color: black;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    font-family: "Open Sans";
+  }
+  &:hover {
+    box-shadow: 0 0 6px $google-blue;
+  }
+  &:active {
+    background: $button-active-blue;
+  }
+}
+.login-text{
+    bottom: 100px;
+    position: absolute;
+    padding: 0 50px;
+    color: #fff;
+}
+@media(max-width:760px){
+
+}
