@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 html,
 body {
   height: 100%;
@@ -7,10 +7,56 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  
 }
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
-
 $primary: #b71c1c;
+$black-text:#000;
+$white-bg:#fff;
+.mat-toolbar.mat-primary{
+  background:$white-bg;
+  color: $black-text ;
+}
+.mat-step-icon-selected{
+  background-color: $primary;
+}
+.container-bg{
+  background: $white-bg;
+  padding: 20px;
+  box-shadow: rgba(0,0,0,.08);
+}
+.cover-shape{
+  background-image: url("assets/images/background-shape.png");
+  background-position: top center;
+  background-repeat: no-repeat;
+  padding: 50px 70px;
+}
+.card-icon{
+  padding: 20px 0px;
+  margin:0 auto;
+}
+.num-count{
+  font-size: 30px;
+  color:#c62828;
+  font-weight: 400;
+}
+.dashboard .mat-card{
+  cursor: pointer;
+  transition: all 0.3s ease; 
+  border: 1px solid #ddd;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  height:240px;
+}
+.dashboard .mat-card:hover{
+  transform: translatey(-10px);
+
+}
+.mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit{
+  background: $primary;
+}
+.mat-step-header{
+  background: none;
+}
 .action-circle{
     width: 40px;
     height: 40px;
@@ -117,7 +163,7 @@ $primary: #b71c1c;
   }
   .form-control{
     border-radius: 50.25rem;
-    height: calc(1.5em + 1.75rem + 2px);
+    //height: calc(1.5em + 1.75rem + 2px);
   }
   .font20{
     font-size: 20px;
@@ -187,4 +233,42 @@ $primary: #b71c1c;
   .icon-space{
     margin-right: 6px;
   }
+  table.dataTable thead .sorting{
+    cursor: pointer;
+    position: relative;
+  }
+  // table.dataTable thead .sorting:before{
+  //   content: "\f0dd";
+  //   font-family: 'Font Awesome\ 5 Free';
+  //   font-weight: 900;
+  //   right: 16px;
+  //   font-size: 1rem;
+  // }
+  // table.dataTable thead .sorting:after{
+  //   content: "\f0dd";
+  //   font-family: 'Font Awesome\ 5 Free';
+  //   font-weight: 900;
+  //   right: 16px;
+  //   font-size: 1rem;
+  // }
+  table.dataTable tbody tr:hover{
+    transform: scale(1.03);
+    transition: all 1.0s ease; 
+  }
+  input,select,textarea{
+    outline: none;
+    border:1px solid #000;
+  }
+  .mat-typography h4,.mat-typography h3{
+    font-size: 20px !important;
+  }
+  @media (min-width:100px) and (max-width:760px){
+    .cover-shape{
+      background-image: none;
+      padding: 00;
   
+    }
+    .mat-step-text-label{
+      opacity: 0;
+    }
+  }
