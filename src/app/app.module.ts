@@ -27,6 +27,7 @@ import { ApproveExpenseComponent } from './approve-expense/approve-expense.compo
 import { ApproveAdvanceComponent } from './approve-advance/approve-advance.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { SocialloginService } from './service/sociallogin.service';
 /*export function socialConfigs() {
   const config = new AuthServiceConfig([
     {
@@ -67,6 +68,7 @@ import { FooterComponent } from './footer/footer.component';
     //MatSnackBar
   ],
   providers: [
+    SocialloginService
     /*{
       provide: AuthServiceConfig,
       useFactory: socialConfigs

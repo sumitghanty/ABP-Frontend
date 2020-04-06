@@ -9,6 +9,7 @@ $button-active-blue: #1669F2;
 $white:#fff;
 
 .google-btn {
+    cursor: pointer;
     width: 241px;
     height: 61px;
     background-color: #fff;
@@ -17,6 +18,7 @@ $white:#fff;
     position: fixed;
     right: 80px;
     top: 60%;
+    
   // position: right;
   .google-icon-wrapper {
     position: absolute;
