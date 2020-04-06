@@ -1,2 +1,19 @@
-<p>header works!</p>
-nbnbnbnbnn
+<mat-toolbar color="primary" class="main-header d-flex flex-column flex-md-row justify-content-sm-around px-md-4 bg-white border-bottom shadow-sm">
+    <div class="branding-logo my-0 mr-md-auto font-weight-normal">
+     <img src="assets/images/logo.png" alt="logo">
+     <span class="tagline">Travel & Expense Management</span>
+    </div>
+    <nav class="my-2 my-md-0 mr-md-3"> 
+    <button mat-button routerLink="/home">Home</button>
+    <button mat-button routerLink="/login">Login</button>
+    <button mat-button routerLink="/createTrip">Create Trip</button>
+    <button mat-button routerLink="/tripList">TripList</button>
+    <button mat-button routerLink="/approveTrip">Approve Trip</button>
+    </nav>
+    <div class="prof-thumb">
+      <img src="assets/images/hotel.jpg" alt="profile image">
+    </div>
+    
+
+  </mat-toolbar>
+  <ng-content select="[app-content]"></ng-content>

@@ -1,5 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+$primary: #c62828;
+$black-text:#000;
+$white-bg:#fff;
 html,
 body {
   height: 100%;
@@ -7,11 +11,16 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  
+  background:url();  
 }
-$primary: #b71c1c;
-$black-text:#000;
-$white-bg:#fff;
+.tagline{
+  position: relative;
+  top: 13px;
+  font-size: 16px;
+}
+.main-header{
+  height: 85px !important;
+}
 .mat-toolbar.mat-primary{
   background:$white-bg;
   color: $black-text ;
@@ -31,25 +40,25 @@ $white-bg:#fff;
   padding: 50px 70px;
 }
 .card-icon{
-  padding: 20px 0px;
+  padding: 20px 0px 29px;
   margin:0 auto;
 }
 .num-count{
   font-size: 30px;
   color:#c62828;
-  font-weight: 400;
+  font-weight:500;
 }
 .dashboard .mat-card{
   cursor: pointer;
-  transition: all 0.3s ease; 
-  border: 1px solid #ddd;
+  transition: all 0.3s ease;
+  border: 1px solid #e8e8e8;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.08);
   border-radius: 8px;
-  height:240px;
+  height: 240px;
 }
 .dashboard .mat-card:hover{
   transform: translatey(-10px);
-
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.10);
 }
 .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit{
   background: $primary;
@@ -262,6 +271,42 @@ $white-bg:#fff;
   .mat-typography h4,.mat-typography h3{
     font-size: 20px !important;
   }
+  .trip-round-button {
+    width: 150px;
+    position: fixed;
+    right: 20px;
+    bottom: 0px;
+  }
+  .trip-round-button{
+    background-image: url(assets/images/floating-button.png);
+    width: 166px;
+    height: 166px;
+    text-align: center;
+    transition: all 1.0s ease; 
+  }
+  .trip-round-button:hover{
+    transform: scale(1.1)
+  }
+  .trip-round-button a {
+    display: block;
+    width: 170px;
+    height: 200px;
+    color: #fff;
+    font-size: 18px;
+    padding-top: 55px;
+  }
+  .trip-round-button a:hover {
+    text-decoration: none;
+  }
+  .trip-round-button a span{
+    display: block;
+  }
+  .prof-thumb{
+    width: 40px;
+    height: 40px;
+    border-radius: 130px;
+    overflow: hidden;
+  }
   @media (min-width:100px) and (max-width:760px){
     .cover-shape{
       background-image: none;
@@ -271,4 +316,8 @@ $white-bg:#fff;
     .mat-step-text-label{
       opacity: 0;
     }
+    .tagline{
+      display: none;
+    }
+
   }
