@@ -26,7 +26,7 @@ export class SocialloginService {
     };
     console.log('call',param);
     return this.http
-      .post('http://13.232.154.220:9092/login', param, httpOptions)
+      .post(this.apiUrl+'login', param, httpOptions)
       .pipe(map(user => {
         // if (user.data && user.data.accessToken) {
         //   this.storage.set('shopData', user.data);

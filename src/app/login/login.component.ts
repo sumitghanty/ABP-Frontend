@@ -12,6 +12,7 @@ import {
 //import { SocialLoginModule, AuthServiceConfig } from 'angular-6-social-login';
 import { Socialusers } from '../shared/product';
 import { SocialloginService } from '../service/sociallogin.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -28,6 +29,7 @@ import { SocialloginService } from '../service/sociallogin.service';
 export class LoginComponent implements OnInit {
 
   auth2: any;
+  loginError: any;
   @ViewChild('loginRef', {static: true }) loginElement: ElementRef;
 
   response;
@@ -35,6 +37,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: SocialloginService,
     private router: Router,
+    private toastr: ToastrService
     //private authService: AuthService,
   //  private snackBar: MatSnackBar //private loginService: LoginService
   ) {}
@@ -95,8 +98,15 @@ export class LoginComponent implements OnInit {
         const param = {userEmail: profile.getEmail()};
         //param.email =  profile.getEmail();
         this.authService.login(googleUser.getAuthResponse().id_token,param).subscribe(
-            info => {
-              console.log('info');
+            allData => {
+              this.afterLogin(allData);
+              // let userLoginData = info.;
+              // localStorage.setItem("userLoginData", JSON.stringify(userLoginData));
+              // if(userLoginData.login === null && userLoginData.responseCode === 201){
+
+              // } else {
+
+              // }
               // this.buttonDisabled = false;
               // const brandData = info.data;
               // sessionStorage.setItem('accessToken', brandData.accessToken);
@@ -138,4 +148,23 @@ export class LoginComponent implements OnInit {
     }(document, 'script', 'google-jssdk'));
   }
 
+  afterLogin(getData){
+    //console.log(getData.login);
+    console.log('call');
+    this.toastr.success("Hello, I'm the toastr message.");
+    if(getData && getData.login === null && getData.responseCode === 201){
+      this.loginError = getData.responseMessage;
+      //this.loginError.status = true;
+      console.log('not login');
+    } else if(getData && getData.login && getData.user) {
+      //this.loginError.status = false;
+      console.log('login');
+      let userLoginData = getData;
+      localStorage.setItem("userLoginData", JSON.stringify(userLoginData));
+      this.router.navigate(['/home']);
+    }
+  }
+
 }
+
+
