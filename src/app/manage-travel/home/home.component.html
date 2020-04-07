@@ -29,22 +29,22 @@
 !-->
 <div class="cover-shape">
 <div class="dashboard">
-  <div class="content-wrap">
+  <div class="container">
  <div class="row">
-  <div class="mb-3 col-lg-3 col-md-6 col-sm-12">
+  <div class="mb-3 col-lg-3 col-md-6 col-sm-12" *ngFor = "let tile of tiles">
     <mat-card class="text-center">       
       <mat-card-content>
         <div class="card-icon pad-xl">
           <img class="align-items-center" src="./assets/images/icon/pending-approval.png" alt="icon">
          </div> 
-       <span class="num-count">8</span>
+       <span class="num-count">{{tile.count}}</span>
       </mat-card-content>
       <mat-card-actions>
-       <span class="card-description">Pending trip for Approval</span> 
+       <span class="card-description">{{tile.tileText}}</span> 
       </mat-card-actions>
     </mat-card>    
   </div>
-  <div class="mb-3 col-lg-3 col-md-6 col-sm-12">
+  <!-- <div class="mb-3 col-lg-3 col-md-6 col-sm-12">
     <mat-card class="text-center">      
       <mat-card-content>
         <div class="card-icon">
@@ -122,8 +122,13 @@
        <span class="card-description">Escalation from Finance</span> 
       </mat-card-actions>
     </mat-card>    
-  </div>
+  </div> -->
  </div>
 </div>
 </div>
 </div>
+<div class="trip-round-button">   
+  <div class="round-button-circle">
+    <a routerLink="/managetravel/createTrip" class="round-button"><span>+</span>Create Trip</a>
+ </div> 
+ </div>

@@ -150,7 +150,7 @@ export class LoginComponent implements OnInit {
 
   afterLogin(getData){
     //console.log(getData.login);
-    console.log('call');
+    //console.log('call');
     this.toastr.success("Hello, I'm the toastr message.");
     if(getData && getData.login === null && getData.responseCode === 201){
       this.loginError = getData.responseMessage;
@@ -158,10 +158,12 @@ export class LoginComponent implements OnInit {
       console.log('not login');
     } else if(getData && getData.login && getData.user) {
       //this.loginError.status = false;
-      console.log('login');
+      //console.log('login');
       let userLoginData = getData;
       localStorage.setItem("userLoginData", JSON.stringify(userLoginData));
-      this.router.navigate(['/home']);
+      localStorage.setItem("homeTilesData", JSON.stringify(getData.tileMaster));
+      localStorage.setItem("homeTilesData", getData.tileMaster);
+      this.router.navigate(['/managetravel/dashboard']);
     }
   }
 
