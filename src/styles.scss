@@ -4,6 +4,7 @@
 $primary: #c62828;
 $black-text:#000;
 $white-bg:#fff;
+$success:#99cc67;
 html,
 body {
   height: 100%;
@@ -13,10 +14,17 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background:url();  
 }
+
 .tagline{
   position: relative;
   top: 13px;
   font-size: 16px;
+}
+.container-bg{
+  background: #fff;
+  box-shadow:0 0 10px rgba(0, 0, 0, 0.1) !important;
+  padding: 40px;
+  border-radius: 10px;
 }
 .main-header{
   height: 85px !important;
@@ -28,11 +36,11 @@ body {
 .mat-step-icon-selected{
   background-color: $primary;
 }
-.container-bg{
-  background: $white-bg;
-  padding: 20px;
-  box-shadow: rgba(0,0,0,.08);
-}
+// .container-bg{
+//   background: $white-bg;
+//   padding: 20px;
+//   box-shadow: rgba(0,0,0,.08);
+// }
 .cover-shape{
   background-image: url("assets/images/background-shape.png");
   background-position: top center;
@@ -83,6 +91,7 @@ body {
     background-color: $primary;
     color: #fff !important;
   }
+  
   .traveler-list{
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -198,6 +207,23 @@ body {
     background-color:$primary;
     border-color: $primary;
   }
+  .btn-primary:hover{
+    background-color: #b91111;
+    border-color: $primary;
+  }
+  .btn-outline-primary{
+    border-color: $primary;
+    color: $primary;
+  }
+  .btn-outline-primary:hover{
+    background-color:$primary;
+    color: $white-bg;
+    border-color: $primary;
+  }
+  .btn-success{
+    background-color: $success;;
+    border-color: $success;
+  }
   .hightlight-gray{
     background-color: #ddd;
     border-radius: 50px;
@@ -210,6 +236,7 @@ body {
   .ratings{
     border:1px solid $primary;
     padding: 6px 12px;
+    text-align:center;
   }
   .ui-icon-bullet{
     padding: 0;
@@ -228,12 +255,9 @@ body {
   .radius-full{
     border-radius: 50px;
   }
-  .btn-outline-primary{
-    border-color: $primary;
-    color: $primary;
-  }
+  
   .btn-lg-cus button{
-    padding: 8px 40px;
+    padding: 8px 30px;
     font-size: 16px;
   }
   .bottom-space{
@@ -306,6 +330,12 @@ body {
     height: 40px;
     border-radius: 130px;
     overflow: hidden;
+  }
+  .breadcrumb-cus .breadcrumb{
+    background-color: inherit;
+  }
+  .breadcrumb-cus .breadcrumb li,.breadcrumb-cus .breadcrumb li a,.breadcrumb-cus .breadcrumb li:before{
+    color: white;
   }
   @media (min-width:100px) and (max-width:760px){
     .cover-shape{
