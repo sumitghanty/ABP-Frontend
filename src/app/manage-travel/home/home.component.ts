@@ -4,6 +4,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 import { Product } from '../../shared/product';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -12,7 +13,7 @@ import { Product } from '../../shared/product';
 export class HomeComponent implements OnInit, OnDestroy {
   products: Product[] = [];
   tiles: any;
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService, private router: Router) {}
   destroy$: Subject<boolean> = new Subject<boolean>();
   
   
@@ -21,7 +22,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     let userLoginData : any;
     userLoginData = JSON.parse(localStorage.getItem('userLoginData'));
     this.tiles = userLoginData.tileMaster;
-    console.log('tilesData',this.tiles);
     // let userLoginData = localStorage.getItem('userLoginData').tileMaster;
     // console.log('tiles-----',userLoginData.tileMaster);
     // this.dataService
@@ -32,6 +32,17 @@ export class HomeComponent implements OnInit, OnDestroy {
     //     this.products = res.body;
     //   });
   }
+
+  goToList(){
+    console.log('goto');
+    this.router.navigate(['/managetravel/tripList']);
+  }
+
+  gotoCreateTrip(){
+    console.log('goto createTrip');
+    this.router.navigate(['/managetravel/createTrip']);
+  }
+
   ngOnDestroy() {
     this.destroy$.next(true);
     // Unsubscribe from the subject

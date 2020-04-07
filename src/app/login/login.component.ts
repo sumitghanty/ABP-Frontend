@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   animate,
@@ -37,7 +37,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: SocialloginService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private ngZone : NgZone
     //private authService: AuthService,
   //  private snackBar: MatSnackBar //private loginService: LoginService
   ) {}
@@ -161,9 +162,10 @@ export class LoginComponent implements OnInit {
       //console.log('login');
       let userLoginData = getData;
       localStorage.setItem("userLoginData", JSON.stringify(userLoginData));
-      localStorage.setItem("homeTilesData", JSON.stringify(getData.tileMaster));
-      localStorage.setItem("homeTilesData", getData.tileMaster);
-      this.router.navigate(['/managetravel/dashboard']);
+      // localStorage.setItem("homeTilesData", JSON.stringify(getData.tileMaster));
+      // localStorage.setItem("homeTilesData", getData.tileMaster);
+      this.ngZone.run(() => this.router.navigate(['/managetravel/dashboard']));
+      //this.router.navigate(['/home']);
     }
   }
 

@@ -9,7 +9,7 @@ import { TravelNavComponent } from './travel-nav/travel-nav.component';
 
 
 const routes: Routes = [
-  {
+   {
     path:'', component: TravelNavComponent,
     children: [
       { 
@@ -19,6 +19,10 @@ const routes: Routes = [
       { 
         path: 'createTrip',
         component: CreateTripComponent
+      },
+      {
+        path: 'tripList',
+        component: TripListComponent
       }
     ]
   }
