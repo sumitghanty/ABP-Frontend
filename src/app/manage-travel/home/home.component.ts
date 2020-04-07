@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { DataService } from '../service/data.service';
+import { DataService } from '../../service/data.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
-import { Product } from '../shared/product';
+import { Product } from '../../shared/product';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -11,16 +11,26 @@ import { Product } from '../shared/product';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   products: Product[] = [];
+  tiles: any;
   constructor(private dataService: DataService) {}
   destroy$: Subject<boolean> = new Subject<boolean>();
-  ngOnInit(): void {
-    this.dataService
-      .sendGetRequest()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((res: HttpResponse<Product[]>) => {
-        console.log(res);
-        this.products = res.body;
-      });
+  
+  
+  ngOnInit() {
+    //console.log('local',localStorage.getItem('homeTilesData').length);
+    let userLoginData : any;
+    userLoginData = JSON.parse(localStorage.getItem('userLoginData'));
+    this.tiles = userLoginData.tileMaster;
+    console.log('tilesData',this.tiles);
+    // let userLoginData = localStorage.getItem('userLoginData').tileMaster;
+    // console.log('tiles-----',userLoginData.tileMaster);
+    // this.dataService
+    //   .sendGetRequest()
+    //   .pipe(takeUntil(this.destroy$))
+    //   .subscribe((res: HttpResponse<Product[]>) => {
+    //     console.log(res);
+    //     this.products = res.body;
+    //   });
   }
   ngOnDestroy() {
     this.destroy$.next(true);
