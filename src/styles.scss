@@ -107,11 +107,11 @@ body {
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: flex;  
+    // display: -webkit-box;
+    // display: -ms-flexbox;
+    // display: -webkit-flex;
+    // display: -moz-box;
+    //display: flex;  
     -webkit-align-items: center;
     -moz-box-align: center;
     align-items: center;
@@ -166,8 +166,7 @@ body {
     width: 230px;
     height: 95px;
     border-right: solid 1px #e7e7e7;
-    padding-left: 20px;
-    margin-left: -18px;
+    padding: 0 16px 0px;
   }
   .fsw_inputField {
     border: 0;
@@ -303,6 +302,7 @@ body {
   }
   .trip-round-button{
     background-image: url(assets/images/floating-button.png);
+    background-repeat: no-repeat;
     width: 166px;
     height: 166px;
     text-align: center;
@@ -337,6 +337,13 @@ body {
   .breadcrumb-cus .breadcrumb li,.breadcrumb-cus .breadcrumb li a,.breadcrumb-cus .breadcrumb li:before{
     color: white;
   }
+  .ex-col{
+    padding-bottom: 20px;
+  }
+  .icon-rup-cus{
+    font-size: 24px !important;
+    padding-right: 5px;
+  }
   @media (min-width:100px) and (max-width:760px){
     .cover-shape{
       background-image: none;
@@ -346,8 +353,47 @@ body {
     .mat-step-text-label{
       opacity: 0;
     }
-    .tagline{
-      display: none;
+    .branding-logo{
+      text-align: center;
     }
-
+    .branding-logo img{
+      width: 50%;
+    }
+    .tagline{
+      top: 2px;
+      display: block;
+    }
+    .main-header {
+      height: 95px !important;
+  }
+  .trip-round-button {
+    width: 146px;
+    height: 166px;
+    background-size: 100%;
+  }
+  .trip-round-button a{
+    padding-top: 45px;
+    width: auto;
+  }
+  .mat-horizontal-stepper-header-container{
+    position: fixed;
+    background: #000;
+    bottom: 0;
+    z-index: 5;
+    left: 0;
+    width: 100%;
+  }
+  .mat-horizontal-stepper-header{
+    padding: unset;
+  }
+  .fsw_inner.search-panel .fsw_inputBox.searchToCity,.fsw_inputBox.searchCity{
+    border: none;
+    height: auto;
+    width: auto;
+    padding-bottom: 10px;
+  }
+  .mat-horizontal-content-container{
+    padding: 0 !important;
+  }
+  
   }

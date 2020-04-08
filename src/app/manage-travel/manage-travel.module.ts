@@ -5,13 +5,15 @@ import { HomeComponent } from './home/home.component';
 import { ManageTravelRoutingModule } from './manage-travel-routing.module';
 import { ShareModule } from './../share/share.module';
 import { TravelNavComponent } from './travel-nav/travel-nav.component';
+import { ApproveTripComponent } from './approve-trip/approve-trip.component';
 
 
 @NgModule({
   declarations: [
     CreateTripComponent,
     HomeComponent,
-    TravelNavComponent
+    TravelNavComponent,
+    ApproveTripComponent
   ],
   imports: [
     CommonModule, 
