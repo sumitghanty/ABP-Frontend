@@ -5,6 +5,8 @@ $primary: #c62828;
 $black-text:#000;
 $white-bg:#fff;
 $success:#99cc67;
+$btn-gray:#777;
+$white-text:#fff;
 html,
 body {
   height: 100%;
@@ -160,7 +162,6 @@ body {
     -moz-box-orient: vertical;
     -moz-box-direction: normal;
     flex-direction: column;
-    position: relative;
   }
   .fsw_inputBox.searchToCity {
     width: 230px;
@@ -206,6 +207,10 @@ body {
     background-color:$primary;
     border-color: $primary;
   }
+  .btn-gray{
+    background-color:$btn-gray;
+    color:$white-text;
+  }
   .btn-primary:hover{
     background-color: #b91111;
     border-color: $primary;
@@ -245,6 +250,7 @@ body {
   }
   .t-val{
     font-weight: 500;
+    font-size: 16px;
   }
   .label-val{
     background-color: #f5cfc7;
@@ -295,6 +301,7 @@ body {
     font-size: 20px !important;
   }
   .trip-round-button {
+    cursor: pointer;
     width: 150px;
     position: fixed;
     right: 20px;
@@ -344,15 +351,30 @@ body {
     font-size: 24px !important;
     padding-right: 5px;
   }
+  .trip-info-list label{
+    color: #777;
+  }
+  .exp-col label{
+    display: block;
+  }
+  .white-bg{
+    background-color: $white-bg !important;
+  }
   @media (min-width:100px) and (max-width:760px){
     .cover-shape{
       background-image: none;
-      padding: 00;
-  
+      padding: 0;  
     }
-    .mat-step-text-label{
-      opacity: 0;
+    .mat-step-text-label,.mat-stepper-horizontal-line{
+      display:none;
     }
+    .mat-step-label{
+      min-width: auto !important;
+    }
+    .mat-horizontal-stepper-header{
+      padding: 0 !important;
+      width: 10% !important;
+    }    
     .branding-logo{
       text-align: center;
     }
@@ -383,9 +405,7 @@ body {
     left: 0;
     width: 100%;
   }
-  .mat-horizontal-stepper-header{
-    padding: unset;
-  }
+  
   .fsw_inner.search-panel .fsw_inputBox.searchToCity,.fsw_inputBox.searchCity{
     border: none;
     height: auto;
@@ -394,6 +414,11 @@ body {
   }
   .mat-horizontal-content-container{
     padding: 0 !important;
+  }
+  .rec-flag{
+    position: absolute;
+    top: -15px;
+    right: -20px;
   }
   
   }
