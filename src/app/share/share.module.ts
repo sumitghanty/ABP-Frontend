@@ -13,6 +13,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 //import { MatSnackBar } from '@angular/material/snack-bar';
 //import { MatHorizontalStepper } from '@angular/material/stepper';
 import {MatStepperModule} from '@angular/material/stepper';
+import { PopoverModule } from "ngx-smart-popover";
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule }        from '@angular/forms';
+
+//import { MdePopoverModule } from '@angular/material/mde';
 
 
 
@@ -31,7 +36,11 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatStepperModule,
     MatFormFieldModule,
     MatDialogModule,
-    MatInputModule
+    MatInputModule,
+    PopoverModule,
+    NgbModule,
+    FormsModule
+    //MdePopoverModule
   ],
   exports: [
     MatCardModule,
@@ -45,6 +54,10 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatFormFieldModule,
     MatDialogModule,
     MatInputModule,
+    PopoverModule,
+    NgbModule,
+    FormsModule
+    //MdePopoverModule
   ]
 })
 export class ShareModule { }

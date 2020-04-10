@@ -6,6 +6,7 @@ import { TripListComponent } from './trip-list/trip-list.component';
 import { ManageTravelRoutingModule } from './manage-travel-routing.module';
 import { ShareModule } from './../share/share.module';
 import { TravelNavComponent } from './travel-nav/travel-nav.component';
+import { TravellerModalComponent } from './create-trip/traveller-modal/traveller-modal.component';
 
 
 
@@ -14,7 +15,8 @@ import { TravelNavComponent } from './travel-nav/travel-nav.component';
     CreateTripComponent,
     HomeComponent,
     TravelNavComponent,
-    TripListComponent
+    TripListComponent,
+    TravellerModalComponent
   ],
   imports: [
     CommonModule, 

@@ -24,7 +24,6 @@ export class SocialloginService {
         'Access-Control-Allow-Origin':'*'
       }),
     };
-    console.log('call',param);
     return this.http
       .post(this.apiUrl+'login', param, httpOptions)
       .pipe(map(user => {
