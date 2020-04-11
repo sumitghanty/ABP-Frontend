@@ -7,6 +7,8 @@ import { ManageTravelRoutingModule } from './manage-travel-routing.module';
 import { ShareModule } from './../share/share.module';
 import { TravelNavComponent } from './travel-nav/travel-nav.component';
 import { TravellerModalComponent } from './create-trip/traveller-modal/traveller-modal.component';
+import { ApproveTripComponent } from './approve-trip/approve-trip.component';
+import { ExpenseClaimComponent } from './expense-claim/expense-claim.component';
 
 
 
@@ -16,7 +18,10 @@ import { TravellerModalComponent } from './create-trip/traveller-modal/traveller
     HomeComponent,
     TravelNavComponent,
     TripListComponent,
-    TravellerModalComponent
+    TravellerModalComponent,
+    ApproveTripComponent,
+    TripListComponent,
+    ExpenseClaimComponent
   ],
   imports: [
     CommonModule, 
@@ -25,3 +30,4 @@ import { TravellerModalComponent } from './create-trip/traveller-modal/traveller
   ]
 })
 export class ManageTravelModule { }
+

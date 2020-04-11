@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" class="main-header d-flex flex-column flex-md-row justify-content-sm-around px-md-4 bg-white border-bottom shadow-sm">
+<mat-toolbar color="primary" class="main-header d-flex flex-md-row justify-content-around px-md-4 bg-white border-bottom shadow-sm">
     <div class="branding-logo my-0 mr-md-auto font-weight-normal">
      <img src="assets/images/logo.png" alt="logo">
      <span class="tagline">Travel & Expense Management</span>
@@ -25,8 +25,13 @@
      <!-- <button mat-button [ngbPopover]="popContent">{{userFisrtname}} <i class="fa fa-angle-down"></i></button> -->
      <button mat-button routerLink="/managetravel/dashboard">Home</button>
     <!-- <button mat-button routerLink="/createTrip">Create Trip</button>
-    <button mat-button routerLink="/tripList">TripList</button>
-    <button mat-button routerLink="/approveTrip">Approve Trip</button>  -->
+    <button mat-button routerLink="/tripList">TripList</button> -->
+    <button mat-button routerLink="/managetravel/approveTrip">Approve Trip</button> 
+    <button mat-button routerLink="/managetravel/expenseClaim">Expense Claim</button>
+    <button mat-button routerLink="/managetravel/approveExpense">Approve Expense</button>
+    <button mat-button routerLink="/managetravel/approveAdvance">ApproveAdvanceComponent</button>
+    
+     
     <button mat-button (click)="logout()">Logout</button>
     </nav>
     
@@ -272,3 +277,4 @@
 </ng-template>
 <ng-template #popTitle>Fancy </ng-template>
 <router-outlet></router-outlet>
+
