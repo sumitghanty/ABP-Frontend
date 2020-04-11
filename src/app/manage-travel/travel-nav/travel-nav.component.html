@@ -3,44 +3,118 @@
      <img src="assets/images/logo.png" alt="logo">
      <span class="tagline">Travel & Expense Management</span>
     </div>
+
+   <!-- <div> 
+    <div class="prof-thumb" [ngbPopover]="popContent" style="cursor: pointer;">
+      <img src="assets/images/hotel.jpg" alt="profile image">
+    </div>
+    <span class="tagline">{{userFisrtname}} <i class="fa fa-angle-down"></i></span>
+   </div> -->
+
+   <div class="row profileDiv"  [ngbPopover]="popContent" >
+      <div class="col-xs-6">
+        <div class="prof-thumb">
+          <img src="assets/images/profile.png" class="headerProfilePic" alt="profile image">
+        </div>
+      </div>
+      <div class="col-xs-6 headerUserName">
+        {{userFisrtname}} <i class="fa fa-angle-down"></i>
+      </div>
+  </div>
    <nav class="my-2 my-md-0 mr-md-3"> 
-     <button mat-button [ngbPopover]="popContent">Chandra Chur</button>
+     <!-- <button mat-button [ngbPopover]="popContent">{{userFisrtname}} <i class="fa fa-angle-down"></i></button> -->
      <button mat-button routerLink="/managetravel/dashboard">Home</button>
     <!-- <button mat-button routerLink="/createTrip">Create Trip</button>
     <button mat-button routerLink="/tripList">TripList</button>
     <button mat-button routerLink="/approveTrip">Approve Trip</button>  -->
     <button mat-button (click)="logout()">Logout</button>
     </nav>
-    <div class="prof-thumb"  style="cursor: pointer;">
-      <img src="assets/images/hotel.jpg" alt="profile image">
-    </div>
+    
 </mat-toolbar>
 
 
 <ng-template #popContent>
-  <div>
-    <div class="prof-thumb" [ngbPopover]="popContent" style="cursor: pointer;">
-      <img src="assets/images/hotel.jpg" alt="profile image">
-    </div>
-    Test &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Test
-    <hr>
-    Test &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Test
-    <hr>
-    Test &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Test
-    <hr>
-    Test &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Test
-    <hr>
-    Test &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Test
-    <hr>
-    Test &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Test
-    <hr>
-    Test &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Test
-    <hr>
-    Test &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Test
-    <hr>
+ <div class="container"> 
+  
+  <div class="row">    
+    <div class="col-12 col-md-12">
+                <div class="row popOverProfile">
+                  <div class="col-lg-6 col-sm-12 popoverprofilepicdiv">
+                    <div>
+                      <img src="assets/images/profile.png" class="popoverprofilepic" alt="profile image">
+                    </div>
+                  </div>
+                  <br>
+                  <div class=" col-lg-6 col-sm-12 popverusernamediv">
+                    <div class="form-group">
+                      <i class="fa fa-user"></i>
+                      {{userFisrtname}} {{userLastname}}
+                      <button class="btn btn-primary radius-full btn-xs">254888A </button>
+                    </div>
+                  </div>
+               </div> 
+               
+               <br>
+               
+               <div class="row otherDetDiv">
+                <div class=" col-lg-6 col-sm-12">
+                  <div class="form-group">
+                    <label for="fromlocation">Organization</label> 
+                  </div>
+                </div>
+        
+                <div class=" col-lg-6 col-sm-12 otherDetSecondDiv">
+                  <div class="form-group">
+                      <b>ABPL</b>
+                  </div>
+                </div>
+             </div> 
+
+
+             <div class="row otherDetDiv">
+              <div class=" col-lg-6 col-sm-12">
+                <div class="form-group">
+                  <label for="fromlocation">Employee Category Group</label> 
+                </div>
+              </div>
+      
+              <div class=" col-lg-6 col-sm-12 otherDetSecondDiv">
+                <div class="form-group">
+                    <b></b>
+                </div>
+              </div>
+           </div>
+           
+           <div class="row otherDetDiv">
+            <div class=" col-lg-6 col-sm-12">
+              <div class="form-group">
+                <label for="fromlocation">Date Of Birth</label> 
+              </div>
+            </div>
     
-    
-  </div>
+            <div class=" col-lg-6 col-sm-12 otherDetSecondDiv">
+              <div class="form-group">
+                  <b></b>
+              </div>
+            </div>
+         </div>
+
+      
+
+            
+            
+            
+            
+           
+           
+          
+
+
+
+          </div>
+      </div> 
+   </div>
+
 </ng-template>
 <ng-template #popTitle>Fancy </ng-template>
 <router-outlet></router-outlet>
