@@ -12,6 +12,8 @@ import {NgbPopoverConfig} from '@ng-bootstrap/ng-bootstrap';
     :host >>> .popover {
       color: #000;
       max-width: 22%;
+      height: 80%;
+      overflow: scroll;
     }`
   ]
 })
@@ -22,6 +24,7 @@ export class TravelNavComponent implements OnInit {
   constructor(private router:Router,public _NgbPopoverConfig:NgbPopoverConfig) { 
     _NgbPopoverConfig.placement = 'bottom';
     _NgbPopoverConfig.popoverClass = 'otherCla';
+    _NgbPopoverConfig.autoClose = false;
   }
 
   ngOnInit() {
