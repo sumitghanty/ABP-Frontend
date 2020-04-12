@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    //this.toastr.error("Hello, I'm the toastr message.");
     this.googleSDK();
   }
   signInWithGoogle(): void {
@@ -152,10 +153,11 @@ export class LoginComponent implements OnInit {
   afterLogin(getData){
     //console.log(getData.login);
     //console.log('call');
-    this.toastr.success("Hello, I'm the toastr message.");
+    
     if(getData && getData.login === null && getData.responseCode === 201){
       this.loginError = getData.responseMessage;
       //this.loginError.status = true;
+     //this.toastr.success("Hello, I'm the toastr message.");
       console.log('not login');
     } else if(getData && getData.login && getData.user) {
       //this.loginError.status = false;

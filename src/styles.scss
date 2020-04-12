@@ -4,9 +4,6 @@
 $primary: #c62828;
 $black-text:#000;
 $white-bg:#fff;
-$success:#99cc67;
-$btn-gray:#777;
-$white-text:#fff;
 html,
 body {
   height: 100%;
@@ -16,17 +13,10 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background:url();  
 }
-
 .tagline{
   position: relative;
   top: 13px;
   font-size: 16px;
-}
-.container-bg{
-  background: #fff;
-  box-shadow:0 0 10px rgba(0, 0, 0, 0.1) !important;
-  padding: 40px;
-  border-radius: 10px;
 }
 .main-header{
   height: 85px !important;
@@ -38,11 +28,11 @@ body {
 .mat-step-icon-selected{
   background-color: $primary;
 }
-// .container-bg{
-//   background: $white-bg;
-//   padding: 20px;
-//   box-shadow: rgba(0,0,0,.08);
-// }
+.container-bg{
+  background: $white-bg;
+  padding: 20px;
+  box-shadow: rgba(0,0,0,.08);
+}
 .cover-shape{
   background-image: url("assets/images/background-shape.png");
   background-position: top center;
@@ -93,7 +83,6 @@ body {
     background-color: $primary;
     color: #fff !important;
   }
-  
   .traveler-list{
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -109,11 +98,11 @@ body {
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
-    // display: -webkit-box;
-    // display: -ms-flexbox;
-    // display: -webkit-flex;
-    // display: -moz-box;
-    //display: flex;  
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: flex;  
     -webkit-align-items: center;
     -moz-box-align: center;
     align-items: center;
@@ -162,12 +151,14 @@ body {
     -moz-box-orient: vertical;
     -moz-box-direction: normal;
     flex-direction: column;
+    position: relative;
   }
   .fsw_inputBox.searchToCity {
     width: 230px;
     height: 95px;
     border-right: solid 1px #e7e7e7;
-    padding: 0 16px 0px;
+    padding-left: 20px;
+    margin-left: -18px;
   }
   .fsw_inputField {
     border: 0;
@@ -207,27 +198,6 @@ body {
     background-color:$primary;
     border-color: $primary;
   }
-  .btn-gray{
-    background-color:$btn-gray;
-    color:$white-text;
-  }
-  .btn-primary:hover{
-    background-color: #b91111;
-    border-color: $primary;
-  }
-  .btn-outline-primary{
-    border-color: $primary;
-    color: $primary;
-  }
-  .btn-outline-primary:hover{
-    background-color:$primary;
-    color: $white-bg;
-    border-color: $primary;
-  }
-  .btn-success{
-    background-color: $success;;
-    border-color: $success;
-  }
   .hightlight-gray{
     background-color: #ddd;
     border-radius: 50px;
@@ -240,7 +210,6 @@ body {
   .ratings{
     border:1px solid $primary;
     padding: 6px 12px;
-    text-align:center;
   }
   .ui-icon-bullet{
     padding: 0;
@@ -250,7 +219,6 @@ body {
   }
   .t-val{
     font-weight: 500;
-    font-size: 16px;
   }
   .label-val{
     background-color: #f5cfc7;
@@ -260,9 +228,12 @@ body {
   .radius-full{
     border-radius: 50px;
   }
-  
+  .btn-outline-primary{
+    border-color: $primary;
+    color: $primary;
+  }
   .btn-lg-cus button{
-    padding: 8px 30px;
+    padding: 8px 40px;
     font-size: 16px;
   }
   .bottom-space{
@@ -309,7 +280,6 @@ body {
   }
   .trip-round-button{
     background-image: url(assets/images/floating-button.png);
-    background-repeat: no-repeat;
     width: 166px;
     height: 166px;
     text-align: center;
@@ -338,94 +308,26 @@ body {
     border-radius: 130px;
     overflow: hidden;
   }
-  .breadcrumb-cus .breadcrumb{
-    background-color: inherit;
-  }
-  .breadcrumb-cus .breadcrumb li,.breadcrumb-cus .breadcrumb li a,.breadcrumb-cus .breadcrumb li:before{
-    color: white;
-  }
-  .ex-col{
-    padding-bottom: 20px;
-  }
-  .icon-rup-cus{
-    font-size: 24px !important;
-    padding-right: 5px;
-  }
-  .trip-info-list label{
-    color: #777;
-  }
-  .exp-col label{
-    display: block;
-  }
-  .white-bg{
-    background-color: $white-bg !important;
-  }
   @media (min-width:100px) and (max-width:760px){
     .cover-shape{
       background-image: none;
-      padding: 0;  
+      padding: 00;
+  
     }
-    .mat-step-text-label,.mat-stepper-horizontal-line{
-      display:none;
-    }
-    .mat-step-label{
-      min-width: auto !important;
-    }
-    .mat-horizontal-stepper-header{
-      padding: 0 !important;
-      width: 10% !important;
-    }    
-    .branding-logo{
-      text-align: center;
-    }
-    .branding-logo img{
-      width: 50%;
+    .mat-step-text-label{
+      opacity: 0;
     }
     .tagline{
-      top: 2px;
-      display: block;
+      display: none;
     }
-    .main-header {
-      height: 95px !important;
-      padding: 10px 0px !important;
-  }
-  .trip-round-button {
-    width: 146px;
-    height: 166px;
-    background-size: 100%;
-  }
-  .trip-round-button a{
-    padding-top: 45px;
-    width: auto;
-  }
-  .mat-horizontal-stepper-header-container{
-    position: fixed;
-    background: #000;
-    bottom: 0;
-    z-index: 5;
-    left: 0;
-    width: 100%;
-  }
-  
-  .fsw_inner.search-panel .fsw_inputBox.searchToCity,.fsw_inputBox.searchCity{
-    border: none;
-    height: auto;
-    width: auto;
-    padding-bottom: 10px;
-  }
-  .mat-horizontal-content-container{
-    padding: 0 !important;
-  }
-  .rec-flag{
-    position: absolute;
-    top: -15px;
-    right: -20px;
-  }
-  .breadcrumb-cus .breadcrumb li,.breadcrumb-cus .breadcrumb li a,.breadcrumb-cus .breadcrumb li:before{
-    color:$black-text;
-  }
-  .btn-group-apptrip button{
-    width: 100%;
-  }
-  
+    .popover-inner {
+      width: 500px !important;
+      max-width:500px !important;
+   }
+   .popover {
+      width: 500px !important;
+      max-width:500px !important;
+   }
+   
+
   }

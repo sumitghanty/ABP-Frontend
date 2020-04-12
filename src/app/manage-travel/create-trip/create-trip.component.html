@@ -6,7 +6,7 @@
         <mat-card-title>Create Trip</mat-card-title>
         <mat-card-content>
           <div class="my-5">
-            <mat-horizontal-stepper >            
+            <mat-horizontal-stepper #stepper>            
               <mat-step label="Trip Information">
                 <div class="section-title text-primary">               
                   <div class="d-flex justify-content-between">
@@ -16,22 +16,22 @@
                 <div class="row">
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-check form-check-inline mb-3">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                      <input class="form-check-input" type="radio" [(ngModel)]="travelType" name="traveltype" id="inlineRadio1" value="d">
                       <label class="form-check-label" for="inlineRadio1">Domestic Travel</label>
                     </div>
                     <div class="form-check form-check-inline mb-3">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                      <input class="form-check-input" type="radio" [(ngModel)]="travelType" name="traveltype" id="inlineRadio2" value="I">
                       <label class="form-check-label" for="inlineRadio2">International Travel</label>
                     </div>
                   </div>
           
                   <div class=" col-lg-6 col-sm-12 hightlight-gray mb-3">
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option1">
+                      <input class="form-check-input" type="radio" [(ngModel)]="wayType" name="wayType" id="inlineRadio3" value="1">
                       <label class="form-check-label" for="inlineRadio3">One Way</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option2">
+                      <input class="form-check-input" type="radio" [(ngModel)]="wayType" name="wayType" id="inlineRadio4" value="2">
                       <label class="form-check-label" for="inlineRadio4">Round Way</label>
                     </div>
                   </div>
@@ -40,14 +40,23 @@
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-group">
                       <label for="fromlocation">From Location</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                      <!-- <input type="text" class="form-control" [(ngModel)]="fromLocation"  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="From Location">
+                     -->
+                      <select class="form-control" [(ngModel)]="fromLocation"> 
+                         <option selected>Select</option>
+                         <option *ngFor="let city of getCity" value="{{city.id}}">{{city.city_name}}</option>
+                      </select>
                     </div>
                   </div>
           
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-group">
                       <label for="tolocation">To Location</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                      <!-- <input type="email" class="form-control" [(ngModel)]="toLocation" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="To Location"> -->
+                      <select class="form-control" [(ngModel)]="toLocation"> 
+                        <option selected>Select</option>
+                        <option *ngFor="let city of getCity" value="{{city.id}}">{{city.city_name}}</option>
+                     </select>
                     </div>
                   </div>
                 </div>
@@ -55,14 +64,14 @@
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-group">
                       <label for="fromlocation">Start Date</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                      <input type="date" class="form-control" [(ngModel)]="startDate" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
                     </div>
                   </div>
           
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-group">
                       <label for="tolocation">End Date</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                      <input type="date" class="form-control" [(ngModel)]="endDate" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
                     </div>
                   </div>
                 </div>
@@ -70,22 +79,22 @@
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-group">
                       <label for="fromlocation">Purpose</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                      <input type="text" class="form-control" [(ngModel)]="purpose" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Purpose">
                     </div>
                   </div>
           
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-group">
                       <label for="tolocation">Trip For</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                      <input type="text" [(ngModel)]="tripFor" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Trip For">
                     </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class=" col-lg-12 col-sm-12">
                     <div class="form-group">
-                      <label for="tolocation">Trip For</label>                    
-                      <textarea class="form-control"></textarea>
+                      <label for="tolocation">Travel Details</label>                    
+                      <textarea class="form-control" [(ngModel)]="travelDetails"></textarea>
                     </div>
                   </div>
                 </div>
@@ -93,29 +102,49 @@
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-group">
                       <label for="fromlocation">Trip Cost Center</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                      <input type="text" class="form-control" [(ngModel)]="tripCostCenter" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Trip Cost Center">
                     </div>
                   </div>
           
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-group">
                       <label for="tolocation">Event Code</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                      <input type="text" class="form-control" [(ngModel)]="eventCode" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Event Code">
                     </div>
                   </div>
                 </div> 
-                     
+                <!-- <div>
+                  <button mat-button matStepperNext (click)="goNext()">Next</button>
+                </div>      -->
               </mat-step>
               <mat-step label="Traveller Details">
                 <div class="section-title text-primary">               
                  <div class="d-flex justify-content-between">
                   <div class="text-primary"><h4><i></i>Travellers Details</h4></div> 
-                  <div ><button class="btn btn-primary ">+ Add Traveller</button></div>
+                  <div ><button class="btn btn-primary " (click)="openDialog()">+ Add Traveller</button></div>
                  </div>
                 </div>              
                  
                   
-                  <div class="row traveler-list">
+                  <div class="row traveler-list" *ngFor="let allTravellerLists of allTravellerList; index as i ">
+                    <div class="col-md-4 col-sm-12">
+                      <div class="pt-3">{{allTravellerLists.userFirstName}}</div>
+                    </div>
+                    <div class="col-md-4 col-sm-12" *ngIf="allTravellerLists.type && allTravellerLists.type === 'G'">
+                      <div class="text-md-center pt-3"><img class="icon-space" src="assets/images/icon/guest-employee.png">Guest</div>
+                    </div>
+                    <div class="col-md-4 col-sm-12" *ngIf="allTravellerLists.userId && allTravellerLists.type !== ''">
+                      <div class="text-md-center pt-3"><img class="icon-space" src="assets/images/icon/guest-employee.png">Employee</div>
+                    </div>
+                    <div class="col-md-4 col-sm-12" *ngIf="allTravellerLists.retainerId && allTravellerLists.retainerId !== ''">
+                      <div class="text-md-center pt-3"><img class="icon-space" src="assets/images/icon/guest-employee.png">Retainer</div>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                      <div class="d-flex justify-content-end"><a class="action-circle outline-circle"><i class="fa fa-arrow-down"></i></a>
+                        <a style="cursor: pointer;" class="action-circle primary-bg" (click)="deleteTraveller(i)"><i class="fa fa-remove"></i></a></div>
+                    </div>                  
+                  </div>
+                  <!-- <div class="row traveler-list">
                     <div class="col-md-4 col-sm-12">
                       <div class="pt-3">Abhisek</div>
                     </div>
@@ -125,8 +154,8 @@
                     <div class="col-md-4 col-sm-12">
                       <div class="d-flex justify-content-end"><a class="action-circle outline-circle"><i class="fa fa-arrow-down"></i></a><a class="action-circle primary-bg"><i class="fa fa-remove"></i></a></div>
                     </div>                  
-                  </div>
-                  <div class="row traveler-list">
+                  </div> -->
+                  <!-- <div class="row traveler-list">
                     <div class="col-md-4 col-sm-12">
                       <div class="pt-3">Abhisek</div>
                     </div>
@@ -136,21 +165,7 @@
                     <div class="col-md-4 col-sm-12">
                       <div class="d-flex justify-content-end"><a class="action-circle outline-circle"><i class="fa fa-arrow-down"></i></a><a class="action-circle primary-bg"><i class="fa fa-remove"></i></a></div>
                     </div>                  
-                  </div>
-                  <div class="row traveler-list">
-                    <div class="col-md-4 col-sm-12">
-                      <div class="pt-3">Abhisek</div>
-                    </div>
-                    <div class="col-md-4 col-sm-12">
-                      <div class="text-md-center pt-3"><img class="icon-space" src="assets/images/icon/guest-employee.png">Guest</div>
-                    </div>
-                    <div class="col-md-4 col-sm-12">
-                      <div class="d-flex justify-content-end"><a class="action-circle outline-circle"><i class="fa fa-arrow-down"></i></a><a class="action-circle primary-bg"><i class="fa fa-remove"></i></a></div>
-                    </div>                  
-                  </div>
-               
-                      
-  
+                  </div> -->
               </mat-step>
               <mat-step label="Flight/Train">
                 <div class="section-title text-primary">               
@@ -161,11 +176,11 @@
                  <div class="row mb-5">
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-check form-check-inline mb-3">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                      <input class="form-check-input" [(ngModel)]="tripType" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="F">
                       <label class="form-check-label" for="inlineRadio1">Flight Booking</label>
                     </div>
                     <div class="form-check form-check-inline mb-3">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                      <input class="form-check-input" [(ngModel)]="tripType" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="T">
                       <label class="form-check-label" for="inlineRadio2">Train booking</label>
                     </div>
                     </div>
@@ -173,37 +188,40 @@
                 <div class="fsw_inner d-md-flex search-panel">
                   <div class="fsw_inputBox searchCity inactiveWidget ">
                     <label for="fromCity">
-                      <div><span class="lbl_input appendBottom5">Departture From Mumbai</span></div>                    
-                      <select class="fsw_inputField font20 lineHeight36 latoBlack font20">
-                        <option>Before 6AM</option>
+                      <div><span class="lbl_input appendBottom5">Departture From {{tripFromLocation}}</span></div>                    
+                      <select class="fsw_inputField font20 lineHeight36 latoBlack font20" [(ngModel)]="departtureTime">
+                        <option  value="1">Before 6AM</option>
+                        <option  value="1">Before 8AM</option>
                       </select>   
                      </label>
                       </div>
                       <span class="swipCircle"><span class="landingSprite swipIcon"></span></span>
                         <div class="fsw_inputBox searchToCity inactiveWidget ">
-                          <label for="toCity"><div><span class="lbl_input latoBold  appendBottom5">Arrival at Kolkata</span></div>
-                          <select class="fsw_inputField font20 lineHeight36 latoBlack font20">
-                            <option>Before 6AM</option>
+                          <label for="toCity"><div><span class="lbl_input latoBold  appendBottom5">Arrival at {{tripToLocation}}</span></div>
+                          <select class="fsw_inputField font20 lineHeight36 latoBlack font20" [(ngModel)]="arrivalTime">
+                            <option value="1">Before 10AM</option>
+                            <option  value="1">Before 12AM</option>
                           </select>  
                         </label>
                         </div>
                           <div class="fsw_inputBox searchToCity  inactiveWidget">                        
                            <div><span class="lbl_input appendBottom10">Stops</span></div>                          
-                            <select class="fsw_inputField font20">
-                              <option>NonStop</option>
+                            <select class="fsw_inputField font20" [(ngModel)]="travelStop">
+                              <option value="0">0</option>
+                              <option value="1">1</option>
+                              <option value="2">2</option>
                             </select>                        
                           </div>  
                           <div class="fsw_inputBox dates inactiveWidget">                                        
-                             <select class="form-control">
+                             <select class="form-control" >
                                <option>Airlines</option>
                              </select>                        
                            </div>                       
                            <div class="fsw_inputBox dates inactiveWidget"> 
-                             <button class="btn btn-primary btn-lg">Search</button>
+                             <button class="btn btn-primary btn-lg" (click)="getFlight();">Search</button>
                            </div>
-  
                 </div>
-                <div class="fsw_inner d-flex">
+                <!-- <div class="fsw_inner">
                   <div class="fsw_inputBox searchCity inactiveWidget">
                     <div class="text-center">                                       
                       <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
@@ -244,173 +262,51 @@
                              </span>                          
                              </div> 
                           </div>
-                           
-  
-                </div>
-                <div class="fsw_inner d-flex">
+                </div> -->
+
+                <div class="fsw_inner" *ngFor="let flights of getFlightData; index as i" id="airDiv{{i}}" (click)="selectFlight(i,flights.airline,flights.flightNo,flights.depTime,flights.origin,flights.stops,flights.arrTime,flights.destination,flights.fare)">
                   <div class="fsw_inputBox searchCity inactiveWidget">
                     <div class="text-center">                                       
                       <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
-                       Air India
+                       {{flights.airline}}
                       </span>   
-                      <div><span class="lbl_input appendBottom5">G8-286</span></div> 
+                      <div><span class="lbl_input appendBottom5">{{flights.flightNo}}</span></div> 
                     </div>
                       </div>                    
                         <div class="fsw_inputBox searchToCity inactiveWidget ">
                           <div class="text-center"> 
                           <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
-                            10:30
+                            {{flights.depTime}}
                            </span>                          
-                           <div><span class="lbl_input latoBold appendBottom5">Mumbai</span></div> 
+                           <div><span class="lbl_input latoBold appendBottom5"> {{flights.origin}}</span></div> 
                           </div>
                         </div>
                           <div class="fsw_inputBox searchToCity inactiveWidget">    
                            <div class="text-center">                     
                             <div><hr class="space-right20">
-                              <span class="lbl_input latoBold appendBottom10">Non Stop</span></div>                          
+                              <span class="lbl_input latoBold appendBottom10" *ngIf="flights.stops>0"> {{flights.stops}}</span>
+                              <span class="lbl_input latoBold appendBottom10" *ngIf="flights.stops===0"> Non Stop</span>
+                            </div>                          
                            </div>                      
                           </div>  
                           <div class="fsw_inputBox searchToCity inactiveWidget">
                             <div class="text-center"> 
                             <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
-                              10:30
+                              {{flights.arrTime}} 
                              </span>   
-                             <div><span class="lbl_input latoBold appendBottom5">Mumbai</span></div>
+                             <div><span class="lbl_input latoBold appendBottom5"> {{flights.destination}}</span></div>
                              </div> 
                           </div>
                           <div class="fsw_inputBox searchToCity inactiveWidget border-0">
                             <div class="text-center"> 
                             <span class="fsw_inputField font20 font-weight-bold ">
-                              <i class="fa fa-rupee icon-rup-cus"></i>6,305 
+                              6,305 
+                              {{flights.fare}}
                              </span>                          
                              </div> 
-                          </div>
-                           
-  
-                </div>
-                <div class="fsw_inner d-flex">
-                  <div class="fsw_inputBox searchCity inactiveWidget">
-                    <div class="text-center">                                       
-                      <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
-                       Air India
-                      </span>   
-                      <div><span class="lbl_input appendBottom5">G8-286</span></div> 
-                    </div>
-                      </div>                    
-                        <div class="fsw_inputBox searchToCity inactiveWidget ">
-                          <div class="text-center"> 
-                          <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
-                            10:30
-                           </span>                          
-                           <div><span class="lbl_input latoBold appendBottom5">Mumbai</span></div> 
-                          </div>
-                        </div>
-                          <div class="fsw_inputBox searchToCity inactiveWidget">    
-                           <div class="text-center">                     
-                            <div><hr class="space-right20">
-                              <span class="lbl_input latoBold appendBottom10">Non Stop</span></div>                          
-                           </div>                      
-                          </div>  
-                          <div class="fsw_inputBox searchToCity inactiveWidget">
-                            <div class="text-center"> 
-                            <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
-                              10:30
-                             </span>   
-                             <div><span class="lbl_input latoBold appendBottom5">Mumbai</span></div>
-                             </div> 
-                          </div>
-                          <div class="fsw_inputBox searchToCity inactiveWidget border-0">
-                            <div class="text-center"> 
-                            <span class="fsw_inputField font20 font-weight-bold ">
-                              <i class="fa fa-rupee icon-rup-cus"></i> 6,305 
-                             </span>                          
-                             </div> 
-                          </div>
-                           
-  
-                </div>
-                <div class="fsw_inner d-flex">
-                  <div class="fsw_inputBox searchCity inactiveWidget">
-                    <div class="text-center">                                       
-                      <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
-                       Air India
-                      </span>   
-                      <div><span class="lbl_input appendBottom5">G8-286</span></div> 
-                    </div>
-                      </div>                    
-                        <div class="fsw_inputBox searchToCity inactiveWidget ">
-                          <div class="text-center"> 
-                          <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
-                            10:30
-                           </span>                          
-                           <div><span class="lbl_input latoBold appendBottom5">Mumbai</span></div> 
-                          </div>
-                        </div>
-                          <div class="fsw_inputBox searchToCity inactiveWidget">    
-                           <div class="text-center">                     
-                            <div><hr class="space-right20">
-                              <span class="lbl_input latoBold appendBottom10">Non Stop</span></div>                          
-                           </div>                      
-                          </div>  
-                          <div class="fsw_inputBox searchToCity inactiveWidget">
-                            <div class="text-center"> 
-                            <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
-                              10:30
-                             </span>   
-                             <div><span class="lbl_input latoBold appendBottom5">Mumbai</span></div>
-                             </div> 
-                          </div>
-                          <div class="fsw_inputBox searchToCity inactiveWidget border-0">
-                            <div class="text-center"> 
-                            <span class="fsw_inputField font20 font-weight-bold ">
-                              <i class="fa fa-rupee icon-rup-cus"></i>6,305 
-                             </span>                          
-                             </div> 
-                          </div>
-                           
-  
-                </div>
-                <div class="fsw_inner d-flex">
-                  <div class="fsw_inputBox searchCity inactiveWidget">
-                    <div class="text-center">                                       
-                      <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
-                       Air India
-                      </span>   
-                      <div><span class="lbl_input appendBottom5">G8-286</span></div> 
-                    </div>
-                      </div>                    
-                        <div class="fsw_inputBox searchToCity inactiveWidget ">
-                          <div class="text-center"> 
-                          <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
-                            10:30
-                           </span>                          
-                           <div><span class="lbl_input latoBold appendBottom5">Mumbai</span></div> 
-                          </div>
-                        </div>
-                          <div class="fsw_inputBox searchToCity inactiveWidget">    
-                           <div class="text-center">                     
-                            <div><hr class="space-right20">
-                              <span class="lbl_input latoBold appendBottom10">Non Stop</span></div>                          
-                           </div>                      
-                          </div>  
-                          <div class="fsw_inputBox searchToCity inactiveWidget">
-                            <div class="text-center"> 
-                            <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
-                              10:30
-                             </span>   
-                             <div><span class="lbl_input latoBold appendBottom5">Mumbai</span></div>
-                             </div> 
-                          </div>
-                          <div class="fsw_inputBox searchToCity inactiveWidget border-0">
-                            <div class="text-center"> 
-                            <span class="fsw_inputField font20 font-weight-bold ">
-                              <i class="fa fa-rupee icon-rup-cus"></i>6,305 
-                             </span>                          
-                             </div> 
-                          </div>
-                           
-  
-                </div>
+                            </div>
+                      </div>
+                
               </mat-step>
               <mat-step label="Accomodation">
                 <div class="section-title text-primary">               
@@ -442,11 +338,11 @@
                             </select>                        
                           </div>                                                
                            <div class="fsw_inputBox dates inactiveWidget"> 
-                             <button class="btn btn-primary btn-lg">Search</button>
+                             <button class="btn btn-primary btn-lg" (click)="getHotel();">Search</button>
                            </div>
   
                 </div>
-                <div class="fsw_inner d-md-flex justify-content-between">
+                <div class="fsw_inner d-md-flex justify-content-between" *ngFor="let getHotelDatas of getHotelData" id="hotelDiv" (click)="selectHotel('myDiv');">
                   <div class="prof-img-full">
                     <img src="assets/images/hotel.jpg" alt="hotel">
                   </div>
@@ -471,7 +367,7 @@
                     <span class="price font30"><i class="fa fa-rupee"></i>1,305</span>
                   </div>
                 </div>
-                <div class="fsw_inner d-md-flex justify-content-between">
+                <!-- <div class="fsw_inner d-md-flex justify-content-between">
                   <div class="prof-img-full">
                     <img src="assets/images/hotel.jpg" alt="hotel">
                   </div>
@@ -494,8 +390,8 @@
                   <div class="ex-col mr-5">
                     <span class="price font30"><i class="fa fa-rupee icon-rup-cus"></i>1,305</span>
                   </div>
-                </div>
-                <div class="fsw_inner d-md-flex justify-content-between">
+                </div> -->
+                <!-- <div class="fsw_inner d-md-flex justify-content-between">
                   <div class="prof-img-full">
                     <img src="assets/images/hotel.jpg" alt="hotel">
                   </div>
@@ -518,8 +414,8 @@
                   <div class="ex-col mr-5">
                     <span class="price font30"><i class="fa fa-rupee icon-rup-cus"></i>1,305</span>
                   </div>
-                </div>
-                <div class="fsw_inner d-md-flex justify-content-between">
+                </div> -->
+                <!-- <div class="fsw_inner d-md-flex justify-content-between">
                   <div class="prof-img-full">
                     <img src="assets/images/hotel.jpg" alt="hotel">
                   </div>
@@ -542,7 +438,7 @@
                   <div class="ex-col mr-5">
                     <span class="price font30"><i class="fa fa-rupee icon-rup-cus"></i>1,305</span>
                   </div>
-                </div>
+                </div> -->
               </mat-step>
               <mat-step label="Car Pool">
                 <div class="section-title text-primary">               
@@ -580,35 +476,47 @@
                  <div class="row trip-info-details">
                   <div class="col trip-info-list">
                     <label>Travel Type</label>
-                    <div class="t-val"><span>Domestic Travel</span></div>                  
+                    <div class="t-val"><span>{{travelType}}</span></div>                  
                   </div>
                   <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
-                    <label>Travel Type</label>
-                    <div class="t-val"><span>Domestic Travel</span></div>                  
+                    <label>Way</label>
+                    <div class="t-val"><span>{{wayType}}</span></div>                  
                   </div>
                   <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
-                    <label>Travel Type</label>
-                    <div class="t-val"><span>Domestic Travel</span></div>                  
+                    <label>From Location</label>
+                    <div class="t-val"><span>{{fromLocation}}</span></div>                  
                   </div>
                   <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
-                    <label>Travel Type</label>
-                    <div class="t-val"><span>Domestic Travel</span></div>                  
+                    <label>To Location</label>
+                    <div class="t-val"><span>{{toLocation}}</span></div>                  
                   </div>
                   <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
-                    <label>Travel Type</label>
-                    <div class="t-val"><span>Domestic Travel</span></div>                  
+                    <label>Start Date</label>
+                    <div class="t-val"><span>{{startDate}}</span></div>                  
                   </div>
                   <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
-                    <label>Travel Type</label>
-                    <div class="t-val"><span>Domestic Travel</span></div>                  
+                    <label>End Date</label>
+                    <div class="t-val"><span>{{endDate}}</span></div>                  
                   </div>
                   <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
-                    <label>Travel Type</label>
-                    <div class="t-val"><span>Domestic Travel</span></div>                  
+                    <label>Purpose</label>
+                    <div class="t-val"><span>{{purpose}}</span></div>                  
                   </div>
                   <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
-                    <label>Travel Type</label>
-                    <div class="t-val "><span>Domestic Travel</span></div>                  
+                    <label>Trip For</label>
+                    <div class="t-val "><span>{{tripFor}}</span></div>                  
+                  </div>
+                  <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
+                    <label>Travel Details</label>
+                    <div class="t-val "><span>{{travelDetails}}</span></div>                  
+                  </div>
+                  <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
+                    <label>Trip Cost Center</label>
+                    <div class="t-val "><span>{{tripCostCenter}}</span></div>                  
+                  </div>
+                  <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
+                    <label>Event Code</label>
+                    <div class="t-val "><span>{{eventCode}}</span></div>                  
                   </div>
                  </div>
                 </div>
@@ -618,26 +526,22 @@
                    <div class="text-primary"><h4><i></i>Traveller Details</h4></div>                  
                   </div>
                  </div>
-                 <div class="row traveler-list">
+                 <div class="row traveler-list" *ngFor="let allTravellerLists of allTravellerList; index as i ">
                   <div class="col-md-4 col-sm-12">
-                    <div class="pt-3">Abhisek</div>
+                    <div class="pt-3">{{allTravellerLists.userFirstName}}</div>
+                  </div>
+                  <div class="col-md-4 col-sm-12" *ngIf="allTravellerLists.type && allTravellerLists.type === 'G'">
+                    <div class="text-md-center pt-3"><img class="icon-space" src="assets/images/icon/guest-employee.png">Guest</div>
+                  </div>
+                  <div class="col-md-4 col-sm-12" *ngIf="allTravellerLists.userId && allTravellerLists.type !== ''">
+                    <div class="text-md-center pt-3"><img class="icon-space" src="assets/images/icon/guest-employee.png">Employee</div>
+                  </div>
+                  <div class="col-md-4 col-sm-12" *ngIf="allTravellerLists.retainerId && allTravellerLists.retainerId !== ''">
+                    <div class="text-md-center pt-3"><img class="icon-space" src="assets/images/icon/guest-employee.png">Retainer</div>
                   </div>
                   <div class="col-md-4 col-sm-12">
-                    <div class="text-center pt-3"><img class="icon-space" src="assets/images/icon/guest-employee.png">Guest</div>
-                  </div>
-                  <div class="col-md-4 col-sm-12">
-                    <div class="d-flex justify-content-end"><a class="action-circle outline-circle"><i class="fa fa-arrow-down"></i></a><a class="action-circle primary-bg"><i class="fa fa-remove"></i></a></div>
-                  </div>                  
-                </div>
-                <div class="row traveler-list">
-                  <div class="col-md-4 col-sm-12">
-                    <div class="pt-3">Abhisek</div>
-                  </div>
-                  <div class="col-md-4 col-sm-12">
-                    <div class="text-center pt-3"><img class="icon-space" src="assets/images/icon/guest-employee.png">Guest</div>
-                  </div>
-                  <div class="col-md-4 col-sm-12">
-                    <div class="d-flex justify-content-end"><a class="action-circle outline-circle"><i class="fa fa-arrow-down"></i></a><a class="action-circle primary-bg"><i class="fa fa-remove"></i></a></div>
+                    <div class="d-flex justify-content-end"><a class="action-circle outline-circle"><i class="fa fa-arrow-down"></i></a>
+                      <a style="cursor: pointer;" class="action-circle primary-bg" (click)="deleteTraveller(i)"><i class="fa fa-remove"></i></a></div>
                   </div>                  
                 </div>
                 </div>
@@ -647,8 +551,8 @@
                      <div class="text-primary"><h4><i></i>Flight/Train</h4></div>                  
                     </div>
                   </div>
-                  <div class="fsw_inner d-flex">
-                    <div class="fsw_inputBox searchCity inactiveWidget">
+                  <div class="fsw_inner" *ngFor="let selectedFlights of selectedFlight">
+                    <div class="fsw_inputBox searchCity inactiveWidget" >
                       <div class="text-center">                                       
                         <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
                          Air India
@@ -698,7 +602,7 @@
                      <div class="text-primary"><h4><i></i>Accomodation</h4></div>                  
                     </div>
                   </div>
-                  <div class="fsw_inner d-md-flex justify-content-between">
+                  <div class="fsw_inner justify-content-between" *ngFor="let selectedHotels of selectedHotel">
                     <div class="prof-img-full">
                       <img src="assets/images/hotel.jpg" alt="hotel">
                     </div>
@@ -745,8 +649,11 @@
           <div class="row button-row">
             <div class="col-12">
               <div class="d-flex justify-content-between btn-lg-cus mt-2">
-                <button class="btn btn-outline-primary radius-full btn-lg"><i class="fa fa-arrow-left"></i> &nbsp; Back</button>
-                <button class="btn btn-primary radius-full btn-lg">Next &nbsp; <i class="fa fa-arrow-right"></i></button>
+                <button *ngIf="stepStatus>1" (click)="goBack(stepper)" class="btn btn-outline-primary radius-full btn-lg"><i class="fa fa-arrow-left"></i> &nbsp; Back</button>
+                <button class="btn btn-primary radius-full btn-lg" (click)="save(stepper)">Save & Continue &nbsp; <i class="fa fa-arrow-right"></i></button>
+                <!-- <div>
+                  <button mat-button (click)="goForward(stepper)">Next2</button>
+                </div>  -->
               </div>   
              <!-- <div class="float-right">
                 <app-expense-import (dataExported)="dataExported($event)"></app-expense-import>
