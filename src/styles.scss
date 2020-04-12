@@ -387,6 +387,7 @@ body {
     }
     .main-header {
       height: 95px !important;
+      padding: 10px 0px !important;
   }
   .trip-round-button {
     width: 146px;
@@ -419,6 +420,12 @@ body {
     position: absolute;
     top: -15px;
     right: -20px;
+  }
+  .breadcrumb-cus .breadcrumb li,.breadcrumb-cus .breadcrumb li a,.breadcrumb-cus .breadcrumb li:before{
+    color:$black-text;
+  }
+  .btn-group-apptrip button{
+    width: 100%;
   }
   
   }
