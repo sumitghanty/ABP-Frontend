@@ -58,3 +58,15 @@ $white:#fff;
     color: #fff;
 }
 
+@media (min-width:100px) and (max-width:760px){
+  .cover-login{
+    width: 100%;
+  }
+  .login-text p{
+    display: none;
+  }
+  .login-text{
+    width: 100%;
+    text-align: center;
+  }
+}
