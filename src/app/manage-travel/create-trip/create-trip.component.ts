@@ -6,6 +6,12 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { TravellerModalComponent } from './traveller-modal/traveller-modal.component';
 import { CreateTripService } from './create-trip.service';
 import {MatStepper} from '@angular/material/stepper';
+import {
+  Validators,
+  FormBuilder,
+  FormGroup,
+  FormControl,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-create-trip',
@@ -13,7 +19,8 @@ import {MatStepper} from '@angular/material/stepper';
   styleUrls: ['./create-trip.component.scss']
 })
 export class CreateTripComponent implements OnInit {
-  
+
+    frmTravellerInformation: FormGroup;
     travelType: any;
     //internationalTravel: any;
     wayType: any;
@@ -49,6 +56,7 @@ export class CreateTripComponent implements OnInit {
     selectedFlight:any;
     selectedHotel:any;
 
+    test_form: any;
 
     @ViewChild('stepper') private myStepper: MatStepper;
     totalStepsCount: number;
@@ -56,7 +64,8 @@ export class CreateTripComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    public _createTripService: CreateTripService
+    public _createTripService: CreateTripService,
+    private formBuilder:FormBuilder
     //private snackBar: MatSnackBar
    
   ) {
@@ -72,6 +81,23 @@ export class CreateTripComponent implements OnInit {
    }
 
   ngOnInit() {
+
+    this.frmTravellerInformation = this.formBuilder.group({
+      travelType: ['', Validators.required],
+      wayType: ['', Validators.required],
+      fromLocation: ['', Validators.required],
+      toLocation: ['', Validators.required],
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required],
+      purpose: ['', Validators.required],
+      tripFor: ['', Validators.required],
+      travelDetails: ['', Validators.required],
+      tripCostCenter: ['', Validators.required],
+      eventCode: ['', Validators.required]
+    });
+    this.departtureTime = '';
+    this.arrivalTime = '';
+    this.travelStop = '';
     let userLoginData : any;
     userLoginData = JSON.parse(localStorage.getItem('userLoginData'));
     this.getCity = userLoginData.masterResponseModel.cityMaster;
@@ -97,6 +123,27 @@ export class CreateTripComponent implements OnInit {
   // Event fired after view is initialized
   ngAfterViewInit() {
     this.totalStepsCount = this.myStepper._steps.length;
+  }
+
+  travDetDivOpen(inumber,travType){
+    console.log('inumber',inumber);
+    console.log('travType',travType);
+    //debugger
+    if(travType!==undefined && travType === 'G'){
+      document.getElementById("travDiv"+inumber).style.display = "";
+    } else if(travType !== 'G'){
+      document.getElementById("travDivE"+inumber).style.display = "";
+    }
+    document.getElementById("travFirstDiv"+inumber).style.display = "none";
+  }
+
+  travDetDivClose(inumber,travType){
+    if(travType!==undefined && travType === 'G'){   
+      document.getElementById("travDiv"+inumber).style.display = "none";
+    } else if(travType !== 'G'){ 
+      document.getElementById("travDivE"+inumber).style.display = "none";
+    }
+      document.getElementById("travFirstDiv"+inumber).style.display = "";
   }
 
   
@@ -141,6 +188,7 @@ export class CreateTripComponent implements OnInit {
 
   selectFlight(i,airline,flightNo,depTime,origin,stops,arrTime,destination,fare){
     document.getElementById("airDiv"+i).style.borderColor = "red";
+    document.getElementById("selectIco"+i).style.display = "";
     this.selectedFlight.push({
           "bookingType":"1",
           "tripId": this.tripId,
@@ -157,6 +205,10 @@ export class CreateTripComponent implements OnInit {
 
   save(stepper: MatStepper){
     //console.log('tripInfo------',this);
+    if(this.frmTravellerInformation.invalid){
+      return;
+    }
+
     stepper.next();
     console.log('stepStatus',this.stepStatus);
     if(this.stepStatus === 1){

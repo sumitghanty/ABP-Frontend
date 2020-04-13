@@ -82,6 +82,11 @@ export class TravellerModalComponent implements OnInit {
       userLastName: this.guestLastName,
       userEmailId: this.guestEmailId,
       userPhoneNumber: this.guestPhoneNo,
+      age:this.guestAge,
+      costCenterNo:this.guestCostNo,
+      gender:this.guestGender,
+      orgName:this.guestOrgName,
+      eventNo:this.guestEventNo,
       type: 'G'
     }
 

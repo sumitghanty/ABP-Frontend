@@ -15,7 +15,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatStepperModule} from '@angular/material/stepper';
 import { PopoverModule } from "ngx-smart-popover";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule }        from '@angular/forms';
+import { FormsModule,ReactiveFormsModule }        from '@angular/forms';
 
 //import { MdePopoverModule } from '@angular/material/mde';
 
@@ -39,7 +39,8 @@ import { FormsModule }        from '@angular/forms';
     MatInputModule,
     PopoverModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
     //MdePopoverModule
   ],
   exports: [
@@ -56,7 +57,8 @@ import { FormsModule }        from '@angular/forms';
     MatInputModule,
     PopoverModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
     //MdePopoverModule
   ]
 })

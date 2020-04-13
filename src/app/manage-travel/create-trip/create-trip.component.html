@@ -13,25 +13,26 @@
                    <div class="text-primary"><h4><i></i>Trip Information</h4></div>                  
                   </div>
                  </div>
+              <form [formGroup]="frmTravellerInformation" role="form">  
                 <div class="row">
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-check form-check-inline mb-3">
-                      <input class="form-check-input" type="radio" [(ngModel)]="travelType" name="traveltype" id="inlineRadio1" value="d">
+                      <input class="form-check-input"  type="radio" [(ngModel)]="travelType" formControlName="travelType" id="inlineRadio1" value="d">
                       <label class="form-check-label" for="inlineRadio1">Domestic Travel</label>
                     </div>
                     <div class="form-check form-check-inline mb-3">
-                      <input class="form-check-input" type="radio" [(ngModel)]="travelType" name="traveltype" id="inlineRadio2" value="I">
+                      <input class="form-check-input" type="radio" [(ngModel)]="travelType" formControlName="travelType" id="inlineRadio2" value="I">
                       <label class="form-check-label" for="inlineRadio2">International Travel</label>
                     </div>
                   </div>
           
                   <div class=" col-lg-6 col-sm-12 hightlight-gray mb-3">
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" [(ngModel)]="wayType" name="wayType" id="inlineRadio3" value="1">
+                      <input class="form-check-input" type="radio"  [(ngModel)]="wayType" formControlName="wayType" id="inlineRadio3" value="1">
                       <label class="form-check-label" for="inlineRadio3">One Way</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" [(ngModel)]="wayType" name="wayType" id="inlineRadio4" value="2">
+                      <input class="form-check-input" type="radio" [(ngModel)]="wayType" formControlName="wayType" id="inlineRadio4" value="2">
                       <label class="form-check-label" for="inlineRadio4">Round Way</label>
                     </div>
                   </div>
@@ -42,7 +43,7 @@
                       <label for="fromlocation">From Location</label>
                       <!-- <input type="text" class="form-control" [(ngModel)]="fromLocation"  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="From Location">
                      -->
-                      <select class="form-control" [(ngModel)]="fromLocation"> 
+                      <select class="form-control"  [(ngModel)]="fromLocation" formControlName="fromLocation"> 
                          <option selected>Select</option>
                          <option *ngFor="let city of getCity" value="{{city.id}}">{{city.city_name}}</option>
                       </select>
@@ -53,7 +54,7 @@
                     <div class="form-group">
                       <label for="tolocation">To Location</label>
                       <!-- <input type="email" class="form-control" [(ngModel)]="toLocation" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="To Location"> -->
-                      <select class="form-control" [(ngModel)]="toLocation"> 
+                      <select class="form-control" [(ngModel)]="toLocation" formControlName="toLocation"> 
                         <option selected>Select</option>
                         <option *ngFor="let city of getCity" value="{{city.id}}">{{city.city_name}}</option>
                      </select>
@@ -64,14 +65,14 @@
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-group">
                       <label for="fromlocation">Start Date</label>
-                      <input type="date" class="form-control" [(ngModel)]="startDate" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                      <input type="date" class="form-control" [(ngModel)]="startDate" formControlName="startDate" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
                     </div>
                   </div>
           
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-group">
                       <label for="tolocation">End Date</label>
-                      <input type="date" class="form-control" [(ngModel)]="endDate" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                      <input type="date" class="form-control" [(ngModel)]="endDate" formControlName="endDate" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
                     </div>
                   </div>
                 </div>
@@ -79,14 +80,17 @@
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-group">
                       <label for="fromlocation">Purpose</label>
-                      <input type="text" class="form-control" [(ngModel)]="purpose" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Purpose">
+                      <input type="text" class="form-control" [(ngModel)]="purpose"  formControlName="purpose"  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Purpose">
+                      <!-- <div *ngIf="purpose.errors">
+                        <div *ngIf="purpose.errors.required">The Field is required!</div>
+                      </div> -->
                     </div>
                   </div>
           
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-group">
                       <label for="tolocation">Trip For</label>
-                      <input type="text" [(ngModel)]="tripFor" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Trip For">
+                      <input type="text" [(ngModel)]="tripFor" formControlName="tripFor" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Trip For">
                     </div>
                   </div>
                 </div>
@@ -94,7 +98,7 @@
                   <div class=" col-lg-12 col-sm-12">
                     <div class="form-group">
                       <label for="tolocation">Travel Details</label>                    
-                      <textarea class="form-control" [(ngModel)]="travelDetails"></textarea>
+                      <textarea class="form-control" [(ngModel)]="travelDetails" formControlName="travelDetails"></textarea>
                     </div>
                   </div>
                 </div>
@@ -102,17 +106,18 @@
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-group">
                       <label for="fromlocation">Trip Cost Center</label>
-                      <input type="text" class="form-control" [(ngModel)]="tripCostCenter" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Trip Cost Center">
+                      <input type="text" class="form-control" [(ngModel)]="tripCostCenter" formControlName="tripCostCenter" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Trip Cost Center">
                     </div>
                   </div>
           
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-group">
                       <label for="tolocation">Event Code</label>
-                      <input type="text" class="form-control" [(ngModel)]="eventCode" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Event Code">
+                      <input type="text" class="form-control" [(ngModel)]="eventCode" formControlName="eventCode" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Event Code">
                     </div>
                   </div>
                 </div> 
+               </form> 
                 <!-- <div>
                   <button mat-button matStepperNext (click)="goNext()">Next</button>
                 </div>      -->
@@ -126,23 +131,90 @@
                 </div>              
                  
                   
-                  <div class="row traveler-list" *ngFor="let allTravellerLists of allTravellerList; index as i ">
+                  <div class="" *ngFor="let allTravellerLists of allTravellerList; index as i ">
+                   <div class="row traveler-list" id="travFirstDiv{{i}}"> 
                     <div class="col-md-4 col-sm-12">
                       <div class="pt-3">{{allTravellerLists.userFirstName}}</div>
                     </div>
                     <div class="col-md-4 col-sm-12" *ngIf="allTravellerLists.type && allTravellerLists.type === 'G'">
                       <div class="text-md-center pt-3"><img class="icon-space" src="assets/images/icon/guest-employee.png">Guest</div>
                     </div>
-                    <div class="col-md-4 col-sm-12" *ngIf="allTravellerLists.userId && allTravellerLists.type !== ''">
+                    <div class="col-md-4 col-sm-12" *ngIf="allTravellerLists.userId && allTravellerLists.userId !== ''">
                       <div class="text-md-center pt-3"><img class="icon-space" src="assets/images/icon/guest-employee.png">Employee</div>
                     </div>
                     <div class="col-md-4 col-sm-12" *ngIf="allTravellerLists.retainerId && allTravellerLists.retainerId !== ''">
                       <div class="text-md-center pt-3"><img class="icon-space" src="assets/images/icon/guest-employee.png">Retainer</div>
                     </div>
                     <div class="col-md-4 col-sm-12">
-                      <div class="d-flex justify-content-end"><a class="action-circle outline-circle"><i class="fa fa-arrow-down"></i></a>
+                      <div class="d-flex justify-content-end"><a style="cursor: pointer;" class="action-circle outline-circle" (click)="travDetDivOpen(i,allTravellerLists.type)"><i class="fa fa-arrow-down"></i></a>
                         <a style="cursor: pointer;" class="action-circle primary-bg" (click)="deleteTraveller(i)"><i class="fa fa-remove"></i></a></div>
-                    </div>                  
+                    </div>  
+                   </div>
+                   
+                   <!--- for guest div-->
+                   <div class="row traveler-list" id="travDiv{{i}}" *ngIf="allTravellerLists.type && allTravellerLists.type === 'G'" style="background-color: #fff4f4;
+                   border: 1px solid #d39898; display: none;"> 
+                    <div class="col-md-3 col-sm-12">
+                      <div class="pt-3">{{allTravellerLists.userFirstName}} {{allTravellerLists.userLastName}}</div>
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                      <div class="pt-3">{{allTravellerLists.orgName}}</div>
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                      <div class="pt-3">{{allTravellerLists.userPhoneNumber}}</div>
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                      <div class="pt-3">Guest</div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                      <div style="cursor: pointer;" class="d-flex justify-content-end"><a class="action-circle outline-circle" (click)="travDetDivClose(i,allTravellerLists.type)"><i class="fa fa-arrow-up"></i></a>
+                        <a style="cursor: pointer;" class="action-circle primary-bg" (click)="deleteTraveller(i)"><i class="fa fa-remove"></i></a></div>
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                      <div class="pt-3">{{allTravellerLists.costCenterNo}}</div>
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                      <div class="pt-3">{{allTravellerLists.eventNo}}</div>
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                      <div class="pt-3">{{allTravellerLists.gender}}</div>
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                      <div class="pt-3">{{allTravellerLists.userEmailId}}</div>
+                    </div>  
+                   </div>   
+                   <!-- for employee & renter div -->
+                   <div class="row traveler-list" id="travDivE{{i}}" *ngIf="allTravellerLists.userId || allTravellerLists.retainerId" style="background-color: #fff4f4;
+                   border: 1px solid #d39898; display: none;"> 
+                    <div class="col-md-3 col-sm-12">
+                      <div class="pt-3">{{allTravellerLists.userFirstName}} {{allTravellerLists.userLastName}}</div>
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                      <div class="pt-3">{{allTravellerLists.userPhoneNumber}}</div>
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                      <div class="pt-3">{{allTravellerLists.userAddress}}</div>
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                      <div class="pt-3"><span *ngIf="allTravellerLists.userId">Employee</span> <span *ngIf="allTravellerLists.retainerId">Retainer</span></div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                      <div style="cursor: pointer;" class="d-flex justify-content-end"><a class="action-circle outline-circle" (click)="travDetDivClose(i,allTravellerLists.type)"><i class="fa fa-arrow-up"></i></a>
+                        <a style="cursor: pointer;" class="action-circle primary-bg" (click)="deleteTraveller(i)"><i class="fa fa-remove"></i></a></div>
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                      <div class="pt-3">{{allTravellerLists.userEmailId}}</div>
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                      <div class="pt-3"><!--{{allTravellerLists.eventNo}}--></div>
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                      <div class="pt-3">{{allTravellerLists.gender}}</div>
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                      <div class="pt-3"><!--{{allTravellerLists.userEmailId}}--></div>
+                    </div>  
+                   </div>                
                   </div>
                   <!-- <div class="row traveler-list">
                     <div class="col-md-4 col-sm-12">
@@ -188,8 +260,9 @@
                 <div class="fsw_inner d-md-flex search-panel">
                   <div class="fsw_inputBox searchCity inactiveWidget ">
                     <label for="fromCity">
-                      <div><span class="lbl_input appendBottom5">Departture From {{tripFromLocation}}</span></div>                    
+                      <div><span class="lbl_input appendBottom5 traFont">Departture From {{tripFromLocation}}</span></div>                    
                       <select class="fsw_inputField font20 lineHeight36 latoBlack font20" [(ngModel)]="departtureTime">
+                        <option value="" ng-selected="selected">Select</option>
                         <option  value="1">Before 6AM</option>
                         <option  value="1">Before 8AM</option>
                       </select>   
@@ -197,16 +270,18 @@
                       </div>
                       <span class="swipCircle"><span class="landingSprite swipIcon"></span></span>
                         <div class="fsw_inputBox searchToCity inactiveWidget ">
-                          <label for="toCity"><div><span class="lbl_input latoBold  appendBottom5">Arrival at {{tripToLocation}}</span></div>
+                          <label for="toCity"><div><span class="lbl_input latoBold  appendBottom5 traFont">Arrival at {{tripToLocation}}</span></div>
                           <select class="fsw_inputField font20 lineHeight36 latoBlack font20" [(ngModel)]="arrivalTime">
+                            <option value="" ng-selected="selected">Select</option>
                             <option value="1">Before 10AM</option>
                             <option  value="1">Before 12AM</option>
                           </select>  
                         </label>
                         </div>
                           <div class="fsw_inputBox searchToCity  inactiveWidget">                        
-                           <div><span class="lbl_input appendBottom10">Stops</span></div>                          
+                           <div><span class="lbl_input appendBottom10 traFont">Stops</span></div>                          
                             <select class="fsw_inputField font20" [(ngModel)]="travelStop">
+                              <option value="" ng-selected="selected">Select</option>
                               <option value="0">0</option>
                               <option value="1">1</option>
                               <option value="2">2</option>
@@ -220,7 +295,42 @@
                            <div class="fsw_inputBox dates inactiveWidget"> 
                              <button class="btn btn-primary btn-lg" (click)="getFlight();">Search</button>
                            </div>
-                </div>
+                    </div>
+                    <div class="row"> 
+                      <div class="col-md-2 col-sm-12 filterByHeader">
+                        <div class="pt-3">
+                          Filter By
+                        </div>
+                      </div>
+                      <!-- <div class="col-md-1"></div> -->
+                      <div class="col-md-2 col-sm-12 departHeader">
+                        <div class="pt-3">
+                          Departture &nbsp;&nbsp;
+                        </div>
+                      </div>
+                      <div class="col-md-2 col-sm-12 timeHeader">
+                        <div class="pt-3">
+                          &nbsp; &nbsp;
+                          Time
+                        </div>
+                      </div>
+                      <div class="col-md-2 col-sm-12 arrivalHeader">
+                        <div class="pt-3">
+                          &nbsp;&nbsp;
+                          Arrival
+                        </div>
+                      </div>
+                      <div class="col-md-1"></div>
+                      <div class="col-md-2 col-sm-12 priceHeader">
+                        <div class="pt-3">
+                          Price
+                        </div>
+                      </div>
+                    </div>
+
+
+
+                    
                 <!-- <div class="fsw_inner">
                   <div class="fsw_inputBox searchCity inactiveWidget">
                     <div class="text-center">                                       
@@ -299,11 +409,12 @@
                           </div>
                           <div class="fsw_inputBox searchToCity inactiveWidget border-0">
                             <div class="text-center"> 
-                            <span class="fsw_inputField font20 font-weight-bold ">
-                              6,305 
-                              {{flights.fare}}
-                             </span>                          
-                             </div> 
+                              <span class="fsw_inputField font20 font-weight-bold ">
+                                6,305 
+                                {{flights.fare}}
+                              </span>
+                              <mat-icon id="selectIco{{i}}" style="margin-left: 100%; color: red; display: none; ">check_circle_outline</mat-icon>
+                            </div>
                             </div>
                       </div>
                 
