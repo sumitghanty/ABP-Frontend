@@ -11,16 +11,7 @@
     <span class="tagline">{{userFisrtname}} <i class="fa fa-angle-down"></i></span>
    </div> -->
 
-   <div class="row profileDiv"  [ngbPopover]="popContent" >
-      <div class="col-xs-6">
-        <div class="prof-thumb">
-          <img src="assets/images/profile.png" class="headerProfilePic" alt="profile image">
-        </div>
-      </div>
-      <div class="col-xs-6 headerUserName">
-        {{userFisrtname}} <i class="fa fa-angle-down"></i>
-      </div>
-  </div>
+   
    <nav class="my-2 my-md-0 mr-md-3"> 
      <!-- <button mat-button [ngbPopover]="popContent">{{userFisrtname}} <i class="fa fa-angle-down"></i></button> -->
      <button mat-button routerLink="/managetravel/dashboard">Home</button>
@@ -34,7 +25,16 @@
      
     <button mat-button (click)="logout()">Logout</button>
     </nav>
-    
+    <div class="row profileDiv"  [ngbPopover]="popContent" >
+      <div class="col-xs-6">
+        <div class="prof-thumb">
+          <img src="assets/images/profile.png" class="headerProfilePic" alt="profile image">
+        </div>
+      </div>
+      <div class="col-xs-6 headerUserName">
+        {{userFisrtname}} <i class="fa fa-angle-down"></i>
+      </div>
+  </div>
 </mat-toolbar>
 
 
@@ -52,7 +52,7 @@
                   <br>
                   <div class=" col-lg-6 col-sm-12 popverusernamediv">
                     <div class="form-group">
-                      <i class="fa fa-user"></i>
+                      <i class="icon-sprite cus-icon-user"></i>
                       {{userFisrtname}} {{userLastname}}
                       <button class="btn btn-primary radius-full btn-xs">254888A </button>
                     </div>
@@ -62,7 +62,7 @@
               <div class="row otherDetDiv">
                 <div class=" col-lg-6 col-sm-12">
                   <div class="form-group">
-                    <label for="fromlocation">Organization</label> 
+                    <i class="icon-sprite cus-icon-org"></i><label for="fromlocation">Organization</label> 
                   </div>
                 </div>
         
@@ -76,7 +76,7 @@
              <div class="row otherDetDiv">
               <div class=" col-lg-6 col-sm-12">
                 <div class="form-group">
-                  <label for="fromlocation">Employee Category Group</label> 
+                  <i class="icon-sprite cus-icon-emp-cat"></i> <label for="fromlocation">Employee Category Group</label> 
                 </div>
               </div>
       
@@ -89,7 +89,7 @@
          <div class="row otherDetDiv">
           <div class=" col-lg-6 col-sm-12">
             <div class="form-group">
-              <label for="fromlocation">Date Of Birth</label> 
+              <i class="icon-sprite cus-icon-birth"></i><label for="fromlocation">Date Of Birth</label> 
             </div>
           </div>
   
@@ -103,7 +103,7 @@
        <div class="row otherDetDiv">
         <div class=" col-lg-6 col-sm-12">
           <div class="form-group">
-            <label for="fromlocation">Gender</label> 
+            <i class="icon-sprite cus-icon-gender"></i> <label for="fromlocation">Gender</label> 
           </div>
         </div>
 
@@ -117,7 +117,7 @@
      <div class="row otherDetDiv">
       <div class=" col-lg-6 col-sm-12">
         <div class="form-group">
-          <label for="fromlocation">Department</label> 
+          <i class="icon-sprite cus-icon-dept"></i><label for="fromlocation">Department</label> 
         </div>
       </div>
 
@@ -132,7 +132,7 @@
      <div class="row otherDetDiv">
       <div class=" col-lg-6 col-sm-12">
         <div class="form-group">
-          <label for="fromlocation">Designation</label> 
+          <i class="icon-sprite cus-icon-desig"></i><label for="fromlocation">Designation</label> 
         </div>
       </div>
 
@@ -146,21 +146,7 @@
      <div class="row otherDetDiv">
       <div class=" col-lg-6 col-sm-12">
         <div class="form-group">
-          <label for="fromlocation">Work Location</label> 
-        </div>
-      </div>
-
-      <div class=" col-lg-6 col-sm-12 otherDetSecondDiv">
-        <div class="form-group">
-            <b></b>
-        </div>
-      </div>
-   </div>
-   
-     <div class="row otherDetDiv">
-      <div class=" col-lg-6 col-sm-12">
-        <div class="form-group">
-          <label for="fromlocation">Employee Group</label> 
+          <i class="icon-sprite cus-icon-location"></i><label for="fromlocation">Work Location</label> 
         </div>
       </div>
 
@@ -174,7 +160,7 @@
      <div class="row otherDetDiv">
       <div class=" col-lg-6 col-sm-12">
         <div class="form-group">
-          <label for="fromlocation">First Level Approver</label> 
+          <i class="icon-sprite cus-icon-emp-group"></i> <label for="fromlocation">Employee Group</label> 
         </div>
       </div>
 
@@ -188,7 +174,7 @@
      <div class="row otherDetDiv">
       <div class=" col-lg-6 col-sm-12">
         <div class="form-group">
-          <label for="fromlocation">Second Level Approver</label> 
+          <i class="icon-sprite cus-icon-fir-approval"></i><label for="fromlocation">First Level Approver</label> 
         </div>
       </div>
 
@@ -202,7 +188,7 @@
      <div class="row otherDetDiv">
       <div class=" col-lg-6 col-sm-12">
         <div class="form-group">
-          <label for="fromlocation">Finance Approver</label> 
+          <i class="icon-sprite cus-icon-sec-approval"></i> <label for="fromlocation">Second Level Approver</label> 
         </div>
       </div>
 
@@ -216,7 +202,7 @@
      <div class="row otherDetDiv">
       <div class=" col-lg-6 col-sm-12">
         <div class="form-group">
-          <label for="fromlocation">Out of Policy Approver</label> 
+          <i class="icon-sprite cus-icon-finance-approval"></i><label for="fromlocation">Finance Approver</label> 
         </div>
       </div>
 
@@ -230,7 +216,7 @@
      <div class="row otherDetDiv">
       <div class=" col-lg-6 col-sm-12">
         <div class="form-group">
-          <label for="fromlocation">Immediate Manager</label> 
+          <i class="icon-sprite cus-icon-policy-approval"></i> <label for="fromlocation">Out of Policy Approver</label> 
         </div>
       </div>
 
@@ -244,7 +230,21 @@
      <div class="row otherDetDiv">
       <div class=" col-lg-6 col-sm-12">
         <div class="form-group">
-          <label for="fromlocation">Master Cost Center</label> 
+          <i class="icon-sprite cus-icon-imm-manager"></i><label for="fromlocation">Immediate Manager</label> 
+        </div>
+      </div>
+
+      <div class=" col-lg-6 col-sm-12 otherDetSecondDiv">
+        <div class="form-group">
+            <b></b>
+        </div>
+      </div>
+   </div>
+   
+     <div class="row otherDetDiv">
+      <div class=" col-lg-6 col-sm-12">
+        <div class="form-group">
+          <i class="icon-sprite cus-icon-master-cost"></i> <label for="fromlocation">Master Cost Center</label> 
         </div>
       </div>
 
