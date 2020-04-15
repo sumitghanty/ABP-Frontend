@@ -14,7 +14,7 @@ const routes: Routes = [
   { 
     path: 'managetravel', 
     loadChildren: () => import('./manage-travel/manage-travel.module').then(m => m.ManageTravelModule),
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   //{ path: 'approveTrip', component: ApproveTripComponent }
 ];

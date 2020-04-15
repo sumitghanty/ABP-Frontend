@@ -147,6 +147,7 @@ export class CreateTripService {
   }
 
   getHotelList(token,email,searchVal){
+    console.log('token',token);
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -157,6 +158,25 @@ export class CreateTripService {
 
     return this.http
       .post(this.apiUrl+'hotelSearchService', searchVal, httpOptions)
+      .pipe(map(response => {
+        // if (user.data && user.data.accessToken) {
+        //   this.storage.set('shopData', user.data);
+        // }
+        return response;
+      }));
+  }
+
+  getTripList(email,token){
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'token': token,
+        'emailId': email
+      }),
+    };
+
+    return this.http
+      .get(this.apiUrl+'getTripList', httpOptions)
       .pipe(map(response => {
         // if (user.data && user.data.accessToken) {
         //   this.storage.set('shopData', user.data);

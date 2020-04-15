@@ -9,13 +9,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 //import { MatChipInputEvent } from '@angular/material/chips';
 //import { MatSnackBar } from '@angular/material/snack-bar';
 //import { MatHorizontalStepper } from '@angular/material/stepper';
 import {MatStepperModule} from '@angular/material/stepper';
 import { PopoverModule } from "ngx-smart-popover";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule,ReactiveFormsModule }        from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { SelectDropDownModule } from 'ngx-select-dropdown';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 //import { MdePopoverModule } from '@angular/material/mde';
 
@@ -37,10 +40,13 @@ import { FormsModule,ReactiveFormsModule }        from '@angular/forms';
     MatFormFieldModule,
     MatDialogModule,
     MatInputModule,
+    MatAutocompleteModule,
     PopoverModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SelectDropDownModule,
+    MatDatepickerModule
     //MdePopoverModule
   ],
   exports: [
@@ -55,10 +61,13 @@ import { FormsModule,ReactiveFormsModule }        from '@angular/forms';
     MatFormFieldModule,
     MatDialogModule,
     MatInputModule,
+    MatAutocompleteModule,
     PopoverModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SelectDropDownModule,
+    MatDatepickerModule
     //MdePopoverModule
   ]
 })

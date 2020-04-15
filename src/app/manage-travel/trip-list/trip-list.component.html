@@ -39,64 +39,14 @@
           
       </thead>
       <tbody>
-      <tr role="row" class="odd">
-          <td class="">#123</td>
-          <td>Ganesh das</td>
-          <td class="sorting_1">10-03-2020</td>
-          <td>15-03-2020</td>
-          <td>Kolkata</td>
-          <td>Mumbai</td>
-          <td>Completed</td>
-          <td align="center"><i class="fa fa-eye"></i></td>
-        </tr>
-        <tr role="row" class="odd">
-          <td class="">#123</td>
-          <td>Ganesh das</td>
-          <td class="sorting_1">10-03-2020</td>
-          <td>15-03-2020</td>
-          <td>Kolkata</td>
-          <td>Mumbai</td>
-          <td>Completed</td>
-          <td align="center"><i class="fa fa-eye"></i></td>
-        </tr>
-        <tr role="row" class="odd">
-          <td class="">#123</td>
-          <td>Ganesh das</td>
-          <td class="sorting_1">10-03-2020</td>
-          <td>15-03-2020</td>
-          <td>Kolkata</td>
-          <td>Mumbai</td>
-          <td>Completed</td>
-          <td align="center"><i class="fa fa-eye"></i></td>
-        </tr>
-        <tr role="row" class="odd">
-          <td class="">#123</td>
-          <td>Ganesh das</td>
-          <td class="sorting_1">10-03-2020</td>
-          <td>15-03-2020</td>
-          <td>Kolkata</td>
-          <td>Mumbai</td>
-          <td>Completed</td>
-          <td align="center"><i class="fa fa-eye"></i></td>
-        </tr>
-        <tr role="row" class="odd">
-          <td class="">#123</td>
-          <td>Ganesh das</td>
-          <td class="sorting_1">10-03-2020</td>
-          <td>15-03-2020</td>
-          <td>Kolkata</td>
-          <td>Mumbai</td>
-          <td>Completed</td>
-          <td align="center"><i class="fa fa-eye"></i></td>
-        </tr>
-        <tr role="row" class="odd">
-          <td class="">#123</td>
-          <td>Ganesh das</td>
-          <td class="sorting_1">10-03-2020</td>
-          <td>15-03-2020</td>
-          <td>Kolkata</td>
-          <td>Mumbai</td>
-          <td>Completed</td>
+      <tr role="row" class="odd" *ngFor="let tripListDatas of tripListData">
+          <td class="">{{tripListDatas.tripNumber}}</td>
+          <td>{{tripListDatas.tripUserMapping[0].passengerName}}</td>
+          <td class="sorting_1">{{tripListDatas.startDate}}</td>
+          <td>{{tripListDatas.startDate}}</td>
+          <td>{{tripListDatas.fromLocation}}</td>
+          <td>{{tripListDatas.toLocation}}</td>
+          <td>{{tripListDatas.status}}</td>
           <td align="center"><i class="fa fa-eye"></i></td>
         </tr>
         </tbody>

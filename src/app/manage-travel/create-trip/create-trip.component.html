@@ -6,7 +6,8 @@
         <mat-card-title>Create Trip</mat-card-title>
         <mat-card-content>
           <div class="my-5">
-            <mat-horizontal-stepper #stepper>            
+            <mat-horizontal-stepper #stepper linear>            
+              <!-- <mat-step label="Trip Information" [stepControl]="frmTravellerInformation"> -->
               <mat-step label="Trip Information">
                 <div class="section-title text-primary">               
                   <div class="d-flex justify-content-between">
@@ -24,6 +25,7 @@
                       <input class="form-check-input" type="radio" [(ngModel)]="travelType" formControlName="travelType" id="inlineRadio2" value="I">
                       <label class="form-check-label" for="inlineRadio2">International Travel</label>
                     </div>
+                    <span *ngIf="travelTypeError===true" class="errorField">This field  is required</span>
                   </div>
           
                   <div class=" col-lg-6 col-sm-12 hightlight-gray mb-3">
@@ -35,6 +37,7 @@
                       <input class="form-check-input" type="radio" [(ngModel)]="wayType" formControlName="wayType" id="inlineRadio4" value="2">
                       <label class="form-check-label" for="inlineRadio4">Round Way</label>
                     </div>
+                    <span *ngIf="wayTypeError===true" class="errorField">This field  is required</span>
                   </div>
                 </div>
                 <div class="row">
@@ -43,21 +46,30 @@
                       <label for="fromlocation">From Location</label>
                       <!-- <input type="text" class="form-control" [(ngModel)]="fromLocation"  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="From Location">
                      -->
-                      <select class="form-control"  [(ngModel)]="fromLocation" formControlName="fromLocation"> 
+                      <!-- <select class="form-control"  [(ngModel)]="fromLocation" formControlName="fromLocation"> 
                          <option selected>Select</option>
                          <option *ngFor="let city of getCity" value="{{city.id}}">{{city.city_name}}</option>
-                      </select>
-                    </div>
+                      </select> -->
+                      <ngx-select-dropdown tabindex="0"  [multiple]="false"
+                      [options]="getCity" (change)="getFromLocation($event)"
+                      [config]="config_city" formControlName="fromLocation"></ngx-select-dropdown>
+                      <span *ngIf="fromLocationError===true" class="errorField">This field  is required</span>
+                    </div>        
                   </div>
           
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-group">
                       <label for="tolocation">To Location</label>
                       <!-- <input type="email" class="form-control" [(ngModel)]="toLocation" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="To Location"> -->
-                      <select class="form-control" [(ngModel)]="toLocation" formControlName="toLocation"> 
+                      <!-- <select class="form-control" [(ngModel)]="toLocation" formControlName="toLocation"> 
                         <option selected>Select</option>
                         <option *ngFor="let city of getCity" value="{{city.id}}">{{city.city_name}}</option>
-                     </select>
+                     </select> -->
+                     <ngx-select-dropdown tabindex="0"  [multiple]="false"
+                     (change)="getToLocation($event)"
+                     [options]="getCity"
+                     [config]="config_city" formControlName="toLocation"></ngx-select-dropdown>
+                     <span *ngIf="toLocationError===true"  class="errorField">This field  is required</span>
                     </div>
                   </div>
                 </div>
@@ -66,6 +78,7 @@
                     <div class="form-group">
                       <label for="fromlocation">Start Date</label>
                       <input type="date" class="form-control" [(ngModel)]="startDate" formControlName="startDate" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                      <span *ngIf="startDateError===true" class="errorField">This field  is required</span>
                     </div>
                   </div>
           
@@ -73,6 +86,7 @@
                     <div class="form-group">
                       <label for="tolocation">End Date</label>
                       <input type="date" class="form-control" [(ngModel)]="endDate" formControlName="endDate" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                      <span *ngIf="endDateError===true" class="errorField">This field  is required</span>
                     </div>
                   </div>
                 </div>
@@ -80,7 +94,13 @@
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-group">
                       <label for="fromlocation">Purpose</label>
-                      <input type="text" class="form-control" [(ngModel)]="purpose"  formControlName="purpose"  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Purpose">
+                      <!-- <input type="text" class="form-control" [(ngModel)]="purpose"  formControlName="purpose"  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Purpose">
+                       -->
+                      <select class="form-control" [(ngModel)]="purpose" formControlName="purpose"> 
+                        <option selected value="">Select</option>
+                        <option *ngFor="let purposeMasters of purposeMaster" value="{{purposeMasters.purposeId}}">{{purposeMasters.purposeDescription}}</option>
+                     </select>
+                     <span *ngIf="purposeError===true" class="errorField">This field  is required</span>
                       <!-- <div *ngIf="purpose.errors">
                         <div *ngIf="purpose.errors.required">The Field is required!</div>
                       </div> -->
@@ -90,7 +110,13 @@
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-group">
                       <label for="tolocation">Trip For</label>
-                      <input type="text" [(ngModel)]="tripFor" formControlName="tripFor" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Trip For">
+                      <!-- <input type="text" [(ngModel)]="tripFor" formControlName="tripFor" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Trip For">
+                       -->
+                      <select class="form-control" [(ngModel)]="tripFor" formControlName="tripFor"> 
+                        <option selected value="">Select</option>
+                        <option *ngFor="let tripForMasters of tripForMaster" value="{{tripForMasters.tripForMasterId}}">{{tripForMasters.tripForMasterDescription}}</option>
+                     </select>
+                     <span *ngIf="tripForError===true" class="errorField">This field  is required</span>
                     </div>
                   </div>
                 </div>
@@ -122,7 +148,7 @@
                   <button mat-button matStepperNext (click)="goNext()">Next</button>
                 </div>      -->
               </mat-step>
-              <mat-step label="Traveller Details">
+              <mat-step label="Traveller Details" >
                 <div class="section-title text-primary">               
                  <div class="d-flex justify-content-between">
                   <div class="text-primary"><h4><i></i>Travellers Details</h4></div> 
@@ -248,7 +274,7 @@
                  <div class="row mb-5">
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-check form-check-inline mb-3">
-                      <input class="form-check-input" [(ngModel)]="tripType" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="F">
+                      <input class="form-check-input" [(ngModel)]="tripType" checked type="radio" name="inlineRadioOptions" id="inlineRadio1" value="F">
                       <label class="form-check-label" for="inlineRadio1">Flight Booking</label>
                     </div>
                     <div class="form-check form-check-inline mb-3">
@@ -267,16 +293,18 @@
                         <option  value="1">Before 8AM</option>
                       </select>   
                      </label>
+                     <span *ngIf="departtureTime === false" class="errorField">Please select</span>
                       </div>
                       <span class="swipCircle"><span class="landingSprite swipIcon"></span></span>
                         <div class="fsw_inputBox searchToCity inactiveWidget ">
                           <label for="toCity"><div><span class="lbl_input latoBold  appendBottom5 traFont">Arrival at {{tripToLocation}}</span></div>
-                          <select class="fsw_inputField font20 lineHeight36 latoBlack font20" [(ngModel)]="arrivalTime">
-                            <option value="" ng-selected="selected">Select</option>
-                            <option value="1">Before 10AM</option>
-                            <option  value="1">Before 12AM</option>
-                          </select>  
-                        </label>
+                            <select class="fsw_inputField font20 lineHeight36 latoBlack font20" [(ngModel)]="arrivalTime">
+                              <option value="" ng-selected="selected">Select</option>
+                              <option value="1">Before 10AM</option>
+                              <option  value="1">Before 12AM</option>
+                            </select>  
+                          </label>
+                          <span *ngIf="arrivalTime === false" class="errorField">Please select</span>
                         </div>
                           <div class="fsw_inputBox searchToCity  inactiveWidget">                        
                            <div><span class="lbl_input appendBottom10 traFont">Stops</span></div>                          
@@ -285,7 +313,8 @@
                               <option value="0">0</option>
                               <option value="1">1</option>
                               <option value="2">2</option>
-                            </select>                        
+                            </select>     
+                            <span *ngIf="travelStop === false" class="errorField">Please select</span>                   
                           </div>  
                           <div class="fsw_inputBox dates inactiveWidget">                                        
                              <select class="form-control" >
@@ -304,26 +333,63 @@
                       </div>
                       <!-- <div class="col-md-1"></div> -->
                       <div class="col-md-2 col-sm-12 departHeader">
-                        <div class="pt-3">
-                          Departture &nbsp;&nbsp;
+                        <div class="pt-3" *ngIf="deparSort === 'A' || deparSort === ''" (click)="flightSort('depTime','D');" style="cursor: pointer;">
+                          Departture 
+                          <span *ngIf="deparSort === 'A'" class="material-icons">
+                            arrow_upward
+                          </span>
+                        </div>
+
+                        <div *ngIf="deparSort === 'D'" class="pt-3" (click)="flightSort('depTime','A');" style="cursor: pointer;">
+                          Departture 
+                          <span class="material-icons">
+                            arrow_downward
+                          </span>
                         </div>
                       </div>
                       <div class="col-md-2 col-sm-12 timeHeader">
-                        <div class="pt-3">
-                          &nbsp; &nbsp;
+                        <div class="pt-3" *ngIf="timeSort === 'A' || timeSort === ''" (click)="flightSort('finalArrivalTime','D');" style="cursor: pointer;">
                           Time
+                          <span *ngIf="timeSort === 'A'" class="material-icons" >
+                            arrow_upward
+                          </span>
                         </div>
+
+                        <div class="pt-3" *ngIf="timeSort === 'D'" (click)="flightSort('finalArrivalTime','A');" style="cursor: pointer;">
+                          Time
+                          <span class="material-icons">
+                            arrow_downward
+                          </span>
+                        </div>
+                        
                       </div>
                       <div class="col-md-2 col-sm-12 arrivalHeader">
-                        <div class="pt-3">
-                          &nbsp;&nbsp;
+                        <div class="pt-3" *ngIf="arrivalSort === 'A' || arrivalSort === ''" (click)="flightSort('arrTime','D');" style="cursor: pointer;">
                           Arrival
+                          <span  *ngIf="arrivalSort === 'A'" class="material-icons">
+                            arrow_upward
+                          </span>
+                        </div>
+                        <div class="pt-3" *ngIf="arrivalSort === 'D'"  (click)="flightSort('arrTime','A');" style="cursor: pointer;">
+                          Arrival
+                          <span class="material-icons">
+                            arrow_downward
+                          </span>
                         </div>
                       </div>
                       <div class="col-md-1"></div>
-                      <div class="col-md-2 col-sm-12 priceHeader">
-                        <div class="pt-3">
+                      <div class="col-md-2 col-sm-12 priceHeader" style="cursor: pointer;">
+                        <div *ngIf="fareSort === 'A' || fareSort === ''" class="pt-3" (click)="flightSort('fare','D');">
                           Price
+                          <span *ngIf="fareSort === 'A'" class="material-icons">
+                            arrow_upward
+                          </span>
+                        </div>
+                        <div *ngIf="fareSort === 'D'" class="pt-3" (click)="flightSort('fare','A');" style="cursor: pointer;">
+                          Price
+                          <span  class="material-icons" style="cursor: pointer;">
+                            arrow_downward
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -374,49 +440,165 @@
                           </div>
                 </div> -->
 
-                <div class="fsw_inner" *ngFor="let flights of getFlightData; index as i" id="airDiv{{i}}" (click)="selectFlight(i,flights.airline,flights.flightNo,flights.depTime,flights.origin,flights.stops,flights.arrTime,flights.destination,flights.fare)">
-                  <div class="fsw_inputBox searchCity inactiveWidget">
-                    <div class="text-center">                                       
-                      <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
-                       {{flights.airline}}
-                      </span>   
-                      <div><span class="lbl_input appendBottom5">{{flights.flightNo}}</span></div> 
-                    </div>
-                      </div>                    
+            <!--<div class="row" *ngIf="tripDet.tripType === '2'"> -->
+              <div class="row" *ngIf="flightTripType === '2'"> 
+                  <div class="col-md-6 col-sm-12">
+                      <!--- start round trip 1st div-->
+                    <div *ngFor="let flights of getFlightData; index as i">
+                      <div class="fsw_inner d-flex" style="cursor: pointer;"  id="onWardDiv{{i}}" (click)="selectFlight(i,flights.airline,flights.flightNo,flights.depTime,flights.origin,flights.stops,flights.arrTime,flights.destination,flights.fare)">
+                       <div class="fsw_inputBox searchCity inactiveWidget">
+                          <div class="text-center">                                       
+                            <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
+                              {{flights.airline}}
+                            </span>   
+                            <div><span class="lbl_input appendBottom5">{{flights.flightNo}}</span></div> 
+                          </div>
+                          <div class="text-center doubleContentRoundTrip">                                       
+                            <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
+                              {{flights.depTime}} 
+                            </span>   
+                            <div><span class="lbl_input appendBottom5">{{flights.origin}}</span></div> 
+                          </div>
+                        </div>                    
+                        <div class="fsw_inputBox searchToCity inactiveWidget">    
+                          <div class="text-center roundTripPadding">                     
+                           <div><hr class="space-right20 roundTripStop">
+                            <span class="lbl_input latoBold appendBottom10" *ngIf="flights.stops>0"> {{flights.stops}}</span>
+                            <span class="lbl_input latoBold appendBottom10" *ngIf="flights.stops===0"> Non Stop</span>
+                           </div>                          
+                          </div>                      
+                         </div>
                         <div class="fsw_inputBox searchToCity inactiveWidget ">
-                          <div class="text-center"> 
+                          <!-- <span  class="label rec-flag btn-success mb-2 btn ml-4 mr-4">Recomended</span> -->
+                          <div class="text-center roundTripPadding"> 
+                          <button *ngIf="i===0" type="button" class="btn btn-success btn-sm">Recomended</button>
                           <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
-                            {{flights.depTime}}
+                            {{flights.arrTime}} 
                            </span>                          
-                           <div><span class="lbl_input latoBold appendBottom5"> {{flights.origin}}</span></div> 
+                           <div><span class="lbl_input latoBold appendBottom5">{{flights.destination}} </span></div> 
                           </div>
                         </div>
-                          <div class="fsw_inputBox searchToCity inactiveWidget">    
-                           <div class="text-center">                     
-                            <div><hr class="space-right20">
-                              <span class="lbl_input latoBold appendBottom10" *ngIf="flights.stops>0"> {{flights.stops}}</span>
-                              <span class="lbl_input latoBold appendBottom10" *ngIf="flights.stops===0"> Non Stop</span>
-                            </div>                          
-                           </div>                      
-                          </div>  
-                          <div class="fsw_inputBox searchToCity inactiveWidget">
-                            <div class="text-center"> 
-                            <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
-                              {{flights.arrTime}} 
-                             </span>   
-                             <div><span class="lbl_input latoBold appendBottom5"> {{flights.destination}}</span></div>
-                             </div> 
-                          </div>
                           <div class="fsw_inputBox searchToCity inactiveWidget border-0">
-                            <div class="text-center"> 
+                            <mat-icon id="selectOnwardIco{{i}}" style="color: red; display: none; ">check_circle_outline</mat-icon>
+                            <div class="text-center roundTripPadding"> 
                               <span class="fsw_inputField font20 font-weight-bold ">
-                                6,305 
-                                {{flights.fare}}
+                                ₹​ {{flights.fare}} 
                               </span>
-                              <mat-icon id="selectIco{{i}}" style="margin-left: 100%; color: red; display: none; ">check_circle_outline</mat-icon>
-                            </div>
+                           </div>
                             </div>
                       </div>
+                      <div class="form-group" id="reasonDiv{{i}}" style="display: none;">
+                        <textarea placeholder="Please Enter Reason" class="form-control"></textarea>
+                      </div>
+                    </div> 
+                      <!-- end round trip 1st div-->
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                     <!---start round trip 2nd div -->
+                   <div *ngFor="let returnflightss of returnflights; index as j">  
+                     <div class="fsw_inner d-flex" style="cursor: pointer;" id="returnDiv{{j}}" (click)="selectFlightReturn(j,returnflightss.airline,returnflightss.flightNo,returnflightss.depTime,returnflightss.origin,returnflightss.stops,returnflightss.arrTime,returnflightss.destination,returnflightss.fare)">
+                      <div class="fsw_inputBox searchCity inactiveWidget">
+                         <div class="text-center">                                       
+                           <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
+                            {{returnflightss.airline}}
+                           </span>   
+                           <div><span class="lbl_input appendBottom5">{{returnflightss.flightNo}}</span></div> 
+                         </div>
+                         <div class="text-center doubleContentRoundTrip">                                       
+                           <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
+                            {{returnflightss.depTime}}
+                           </span>   
+                           <div><span class="lbl_input appendBottom5">{{returnflightss.origin}}</span></div> 
+                         </div>
+                       </div>                    
+                       <div class="fsw_inputBox searchToCity inactiveWidget">    
+                         <div class="text-center roundTripPadding">                     
+                          <div><hr class="space-right20 roundTripStop">
+                            <span class="lbl_input latoBold appendBottom10" *ngIf="returnflightss.stops>0"> {{returnflightss.stops}}</span>
+                              <span class="lbl_input latoBold appendBottom10" *ngIf="returnflightss.stops===0"> Non Stop</span>
+                          </div>                          
+                         </div>                      
+                        </div>
+                       <div class="fsw_inputBox searchToCity inactiveWidget ">
+                         <div class="text-center roundTripPadding"> 
+                          <button *ngIf="j===0" type="button" class="btn btn-success btn-sm">Recomended</button>
+                         <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
+                          {{returnflightss.arrTime}} 
+                          </span>                          
+                          <div><span class="lbl_input latoBold appendBottom5">{{returnflightss.destination}}</span></div> 
+                         </div>
+                       </div>
+                         <div class="fsw_inputBox searchToCity inactiveWidget border-0">
+                          <mat-icon id="selectReturnIco{{j}}" style="color: red; display: none; ">check_circle_outline</mat-icon>
+                           <div class="text-center roundTripPadding"> 
+                             <span class="fsw_inputField font20 font-weight-bold ">
+                              ₹​ {{returnflightss.fare}}
+                             </span>
+                          </div>
+                           </div>
+                     </div>
+                     <div class="form-group" id="reasonReturnDiv{{j}}" style="display: none;">
+                      <textarea placeholder="Please Enter Reason" class="form-control"></textarea>
+                    </div>
+                   </div>
+                     <!-- end round trip 2nd div-->
+                  </div>
+                </div>
+
+
+
+               <div *ngIf="flightTripType==='1'"> 
+                <div *ngFor="let flights of getFlightData; index as i">   
+                  <div class="fsw_inner d-flex"  style="cursor: pointer;" id="airDiv{{i}}" (click)="selectFlight(i,flights.airline,flights.flightNo,flights.depTime,flights.origin,flights.stops,flights.arrTime,flights.destination,flights.fare)">
+                    <div class="fsw_inputBox searchCity inactiveWidget">
+                      <div class="text-center">                                       
+                        <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
+                        {{flights.airline}}
+                        </span>   
+                        <div><span class="lbl_input appendBottom5">{{flights.flightNo}}</span></div> 
+                      </div>
+                        </div>                    
+                          <div class="fsw_inputBox searchToCity inactiveWidget ">
+                            <div class="text-center"> 
+                            <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
+                              {{flights.depTime}}
+                            </span>                          
+                            <div><span class="lbl_input latoBold appendBottom5"> {{flights.origin}}</span></div> 
+                            </div>
+                          </div>
+                            <div class="fsw_inputBox searchToCity inactiveWidget">    
+                            <div class="text-center">                     
+                              <div><hr class="space-right20">
+                                <span class="lbl_input latoBold appendBottom10" *ngIf="flights.stops>0"> {{flights.stops}}</span>
+                                <span class="lbl_input latoBold appendBottom10" *ngIf="flights.stops===0"> Non Stop</span>
+                              </div>                          
+                            </div>                      
+                            </div>  
+                            <div class="fsw_inputBox searchToCity inactiveWidget">
+                              <div class="text-center"> 
+                              <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
+                                {{flights.arrTime}} 
+                              </span>   
+                              <div><span class="lbl_input latoBold appendBottom5"> {{flights.destination}}</span></div>
+                              </div> 
+                            </div>
+                            <div class="fsw_inputBox" *ngIf="i===0">
+                              <span class="label rec-flag btn-success mb-2 btn ml-4 mr-4">Recomended</span>
+                            </div>
+                            <div class="fsw_inputBox searchToCity inactiveWidget border-0">
+                              <div class="text-center"> 
+                                <span class="fsw_inputField font20 font-weight-bold "> 
+                                  ₹ {{flights.fare}}
+                                </span>
+                                <mat-icon id="selectIco{{i}}" style="margin-left: 100%; color: red; display: none; ">check_circle_outline</mat-icon>
+                              </div>
+                              </div>
+                        </div>
+                        <div class="form-group" id="reasonMainDiv{{i}}" style="display: none;">
+                          <textarea placeholder="Please Enter Reason" class="form-control"></textarea>
+                        </div>
+                </div>
+               </div>
                 
               </mat-step>
               <mat-step label="Accomodation">
@@ -429,54 +611,81 @@
                   <div class="fsw_inputBox searchCity inactiveWidget ">
                     <label for="fromCity">
                       <div><span class="lbl_input appendBottom5">Star Ratings</span></div>                    
-                      <select class="fsw_inputField font20 lineHeight36 latoBlack font20">
-                        <option>3 Star</option>
+                      <select class="fsw_inputField font20 lineHeight36 latoBlack font20" [(ngModel)]="starRating">
+                        <option value="" selected>Select Rating</option>
+                        <option value="1">1 Star</option>
+                        <option value="2">2 Star</option>
+                        <option value="3">3 Star</option>
+                        <option value="4">4 Star</option>
                       </select>   
                      </label>
+                     <span *ngIf="starRating === false" class="errorField">Please select</span>
                       </div>
                       <span class="swipCircle"><span class="landingSprite swipIcon"></span></span>
                         <div class="fsw_inputBox searchToCity inactiveWidget ">
                           <label for="toCity"><div><span class="lbl_input latoBold  appendBottom5">User Rating</span></div>
-                          <select class="fsw_inputField font20 lineHeight36 latoBlack font20">
-                            <option>4.0 and above</option>
+                          <select class="fsw_inputField font20 lineHeight36 latoBlack font20" [(ngModel)]="userRating">
+                            <option value="" selected>Select Rating</option>
+                            <option value="1">1.0 and above</option>
+                            <option value="2">2.0 and above</option>
+                            <option value="3">3.0 and above</option>
+                            <option value="4">4.0 and above</option>
                           </select>  
                         </label>
+                        <span *ngIf="userRating === false" class="errorField">Please select</span>
                         </div>
                           <div class="fsw_inputBox searchToCity  inactiveWidget">                        
                            <div><span class="lbl_input appendBottom10">Meal</span></div>                          
-                            <select class="fsw_inputField font20">
-                              <option>Breakfast</option>
+                            <select class="fsw_inputField font20" [(ngModel)]="hotelMeal">
+                              <option value="" selected>Select Meal </option>
+                              <option value="Breakfast">Breakfast</option>
                             </select>                        
-                          </div>                                                
+                          </div>
+                          <div class="fsw_inputBox searchToCity  inactiveWidget">                        
+                            <div><span class="lbl_input appendBottom10">Locality</span></div>                          
+                             <select class="fsw_inputField font20" [(ngModel)]="hotelLocality">
+                               <option value="" selected>Select Locality</option>
+                               <option value="kolkata">Kolkata</option>
+                             </select>                        
+                           </div>
+                           <div class="fsw_inputBox searchToCity  inactiveWidget">                        
+                            <div><span class="lbl_input appendBottom10">Hotel</span></div>                          
+                             <input type="text" class="form-control" [(ngModel)]="hotelName"/>                        
+                           </div>                                                
                            <div class="fsw_inputBox dates inactiveWidget"> 
                              <button class="btn btn-primary btn-lg" (click)="getHotel();">Search</button>
                            </div>
   
                 </div>
-                <div class="fsw_inner d-md-flex justify-content-between" *ngFor="let getHotelDatas of getHotelData" id="hotelDiv" (click)="selectHotel('myDiv');">
-                  <div class="prof-img-full">
-                    <img src="assets/images/hotel.jpg" alt="hotel">
+
+                <div *ngFor="let getHotelDatas of getHotelData; index as i">
+                <div class="fsw_inner d-md-flex justify-content-between"  style="cursor: pointer;" id="hotelDiv{{i}}" (click)="selectHotel(i);">
+                  <div class="hotelImageDiv">
+                    <img class="hotelImage" src="{{getHotelDatas.imageUrl}}" alt="hotel">
                   </div>
                   <div class="h-item-description">
-                    <h3>Park Guest House</h3> 
-                    <span class="h-location">2.5 KM from Mumbai</span>
+                    <h3>{{getHotelDatas.name}}</h3> 
+                    <!-- <span class="h-location">2.5 KM from Mumbai</span> -->
                     <div class="h-features">
-                      <ul class="ui-icon-bullet d-flex">
-                      <li>Swiming Pool</li>
-                      <li>Parking</li>
-                      <li>Housekeeping</li>
-                     </ul>
-                    </div>
+                           <ul>
+                              <li *ngFor="let amenities of getHotelDatas.amenities">{{amenities}}</li>
+                           </ul>
+                      </div>
                   </div>
                   <div class="ex-col">
-                    <span class="label rec-flag btn-success mb-2 btn ml-4 mr-4">Recomended</span>
+                    <span class="label rec-flag btn-success mb-2 btn ml-4 mr-4" *ngIf="i===0">Recomended</span>
                     <div class="ratings">
-                      4.5/5
+                      {{getHotelDatas.guestRating}}
                     </div>
                   </div>
                   <div class="ex-col mr-5">
-                    <span class="price font30"><i class="fa fa-rupee"></i>1,305</span>
+                    <span class="price font30"><i class="fa fa-rupee"></i>{{getHotelDatas.price}}</span>
+                    <mat-icon id="selectHotelIco{{i}}" style="margin-left: 100%; color: red; display: none; ">check_circle_outline</mat-icon>
                   </div>
+                </div>
+                <div class="form-group" id="reasonMainHotelDiv{{i}}" style="display: none;">
+                  <textarea placeholder="Please Enter Reason" class="form-control"></textarea>
+                </div>
                 </div>
                 <!-- <div class="fsw_inner d-md-flex justify-content-between">
                   <div class="prof-img-full">
@@ -662,35 +871,35 @@
                      <div class="text-primary"><h4><i></i>Flight/Train</h4></div>                  
                     </div>
                   </div>
-                  <div class="fsw_inner" *ngFor="let selectedFlights of selectedFlight">
+                  <div class="fsw_inner d-flex" *ngFor="let selectedFlights of selectedFlight">
                     <div class="fsw_inputBox searchCity inactiveWidget" >
                       <div class="text-center">                                       
                         <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
-                         Air India
+                         {{selectedFlights.flightTrainName}}
                         </span>   
-                        <div><span class="lbl_input appendBottom5">G8-286</span></div> 
+                        <div><span class="lbl_input appendBottom5">{{selectedFlights.flightTrainNumber}}</span></div> 
                       </div>
                         </div>                    
                           <div class="fsw_inputBox searchToCity inactiveWidget ">
                             <div class="text-center"> 
                             <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
-                              10:30
+                              {{selectedFlights.depTime}}
                              </span>                          
-                             <div><span class="lbl_input latoBold appendBottom5">Mumbai</span></div> 
+                             <div><span class="lbl_input latoBold appendBottom5">{{selectedFlights.fromLocation}}</span></div> 
                             </div>
                           </div>
                             <div class="fsw_inputBox searchToCity inactiveWidget">    
                              <div class="text-center">                     
                               <div><hr class="space-right20">
-                                <span class="lbl_input latoBold appendBottom10">Non Stop</span></div>                          
+                                <span class="lbl_input latoBold appendBottom10">Stop: {{selectedFlights.stops}}</span></div>                          
                              </div>                      
                             </div>  
                             <div class="fsw_inputBox searchToCity inactiveWidget">
                               <div class="text-center"> 
                               <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
-                                10:30
+                                {{selectedFlights.arrTime}}
                                </span>   
-                               <div><span class="lbl_input latoBold appendBottom5">Mumbai</span></div>
+                               <div><span class="lbl_input latoBold appendBottom5">{{selectedFlights.toLocation}}</span></div>
                                </div> 
                             </div>
                             <div class="fsw_inputBox">
@@ -699,15 +908,13 @@
                             <div class="fsw_inputBox searchToCity inactiveWidget border-0">
                               <div class="text-center"> 
                               <span class="fsw_inputField font20 font-weight-bold ">
-                                <i class="fa fa-rupee icon-rup-cus"></i>6,305 
+                                <i class="fa fa-rupee icon-rup-cus"></i>{{selectedFlights.amount}} 
                                </span>                          
                                </div> 
                             </div>
-                             
-    
-                  </div>
-                </div>
-                <div class="prev-section">
+                        </div>
+                      </div>
+                <!-- <div class="prev-section">
                   <div class="section-title text-primary">               
                     <div class="d-flex justify-content-between">
                      <div class="text-primary"><h4><i></i>Accomodation</h4></div>                  
@@ -737,7 +944,7 @@
                       <span class="price font30"><i class="fa fa-rupee icon-rup-cus"></i>1,305</span>
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <div class="prev-section">
                     <div class="section-title text-primary">               
                       <div class="d-flex justify-content-between">
@@ -758,10 +965,14 @@
         </mat-card-content>
         <mat-card-actions>
           <div class="row button-row">
-            <div class="col-12">
+            <div class="col-md-12">
               <div class="d-flex justify-content-between btn-lg-cus mt-2">
-                <button *ngIf="stepStatus>1" (click)="goBack(stepper)" class="btn btn-outline-primary radius-full btn-lg"><i class="fa fa-arrow-left"></i> &nbsp; Back</button>
-                <button class="btn btn-primary radius-full btn-lg" (click)="save(stepper)">Save & Continue &nbsp; <i class="fa fa-arrow-right"></i></button>
+                <div class="col-md-6">
+                  <button *ngIf="stepStatus>1" (click)="goBack(stepper)" class="btn btn-outline-primary radius-full btn-lg"><i class="fa fa-arrow-left"></i> &nbsp; Back</button>
+                </div>
+                <div class="col-md-6" style="padding-left: 30%;">
+                  <button class="btn btn-primary radius-full btn-lg" (click)="save(stepper)">Save & Continue &nbsp; <i class="fa fa-arrow-right"></i></button>
+                </div>
                 <!-- <div>
                   <button mat-button (click)="goForward(stepper)">Next2</button>
                 </div>  -->

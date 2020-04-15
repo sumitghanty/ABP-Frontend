@@ -40,10 +40,9 @@ export class TravellerModalComponent implements OnInit {
     }
 
   ngOnInit(){
-    console.log('test');
+    this.guestGender = '';
     let userLoginData : any;
     userLoginData = JSON.parse(localStorage.getItem('userLoginData'));
-    console.log('this.userLoginData modal',userLoginData);
     this.emailId = userLoginData.login.userEmail;
     this.token = userLoginData.login.generatedToken;
     
@@ -71,11 +70,17 @@ export class TravellerModalComponent implements OnInit {
     console.log('test----',this.retainer);
     console.log('this.employee----',this.retainerList);
     //debugger
-    let getEmp = this.userList.filter(element => element.userId == this.employee);
-    console.log('getfil',getEmp);
+    let getEmp = [];
+    let getRet = [];
+    if(this.employee){
+      getEmp = this.userList.filter(element => element.userId == this.employee);
+      console.log('getfil',getEmp);
+    }
 
-    let getRet = this.retainerList.filter(element2 => element2.retainerId == this.retainer);
-    console.log('getRet',getRet);
+    if(this.retainer){
+      getRet = this.retainerList.filter(element2 => element2.retainerId == this.retainer);
+      console.log('getRet',getRet);
+    }
 
     let getGuest = {
       userFirstName: this.guestFirstName,

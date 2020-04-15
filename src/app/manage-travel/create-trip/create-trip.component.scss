@@ -22,3 +22,36 @@
 .priceHeader{
     padding-left: 3%;
 }
+
+.doubleContentRoundTrip{
+    padding-top:16% ;
+}
+
+.roundTripPadding{
+    padding-top:50% ;
+}
+
+.roundTripStop{
+    margin-bottom: 5px;
+    margin-right: 4px;
+}
+
+.hotelImageDiv{
+    width: 26%;
+}
+
+.hotelImage{
+    width: 100%
+}
+
+li{
+    float: left;
+    padding-right: 30%;
+  }
+  
+li:nth-child(3n+4){
+    clear: both;
+  }
+.errorField{
+    color: red;
+}

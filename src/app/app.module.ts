@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthGuard } from './auth.guard';
+import { DatePipe } from '@angular/common';
 // import { MatToolbarModule } from '@angular/material/toolbar';
 // import { MatIconModule } from '@angular/material/icon';
 //import { MatCardModule } from '@angular/material/card';
@@ -83,7 +84,8 @@ import { ShareModule } from './share/share.module';
   ],
   providers: [
     SocialloginService,
-    AuthGuard
+    AuthGuard,
+    DatePipe
     /*{
       provide: AuthServiceConfig,
       useFactory: socialConfigs
