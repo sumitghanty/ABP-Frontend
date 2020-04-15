@@ -659,7 +659,7 @@
                 </div>
 
                 <div *ngFor="let getHotelDatas of getHotelData; index as i">
-                <div class="fsw_inner d-md-flex justify-content-between"  style="cursor: pointer;" id="hotelDiv{{i}}" (click)="selectHotel(i);">
+                <div class="fsw_inner d-md-flex justify-content-between"  style="cursor: pointer;" id="hotelDiv{{i}}" (click)="selectHotel(i,getHotelDatas.name,getHotelDatas.amenities,getHotelDatas.guestRating,getHotelDatas.price,getHotelDatas.imageUrl);">
                   <div class="hotelImageDiv">
                     <img class="hotelImage" src="{{getHotelDatas.imageUrl}}" alt="hotel">
                   </div>
@@ -684,7 +684,7 @@
                   </div>
                 </div>
                 <div class="form-group" id="reasonMainHotelDiv{{i}}" style="display: none;">
-                  <textarea placeholder="Please Enter Reason" class="form-control"></textarea>
+                  <textarea placeholder="Please Enter Reason" (ngModelChange)="getReasonHotel(i)" [(ngModel)]="selectReasonHotel" class="form-control"></textarea>
                 </div>
                 </div>
                 <!-- <div class="fsw_inner d-md-flex justify-content-between">
@@ -891,8 +891,10 @@
                             <div class="fsw_inputBox searchToCity inactiveWidget">    
                              <div class="text-center">                     
                               <div><hr class="space-right20">
-                                <span class="lbl_input latoBold appendBottom10">Stop: {{selectedFlights.stops}}</span></div>                          
-                             </div>                      
+                                <span class="lbl_input latoBold appendBottom10" *ngIf="selectedFlights.stops>0"> {{selectedFlights.stops}}</span>
+                                <span class="lbl_input latoBold appendBottom10" *ngIf="selectedFlights.stops===0"> Non Stop</span>
+                              </div>                          
+                              </div>                      
                             </div>  
                             <div class="fsw_inputBox searchToCity inactiveWidget">
                               <div class="text-center"> 
@@ -914,6 +916,45 @@
                             </div>
                         </div>
                       </div>
+
+
+
+                      <!--- Hotel Selection Preview -->
+                    <div class="prev-section"> 
+                      <div class="section-title text-primary">               
+                        <div class="d-flex justify-content-between">
+                         <div class="text-primary"><h4><i></i>Accomodation</h4></div>                  
+                        </div>
+                      </div>
+                      <div *ngFor="let getHotelDatas of selectedHotel;">
+                        <div class="fsw_inner d-md-flex justify-content-between">
+                          <div class="hotelImageDiv">
+                            <img class="hotelImage" src="{{getHotelDatas.hotelImage}}" alt="hotel">
+                          </div>
+                          <div class="h-item-description">
+                            <h3>{{getHotelDatas.hotelGuesthouseName}}</h3> 
+                            <!-- <span class="h-location">2.5 KM from Mumbai</span> -->
+                            <div class="h-features">
+                                   <ul>
+                                      <li *ngFor="let amenities of getHotelDatas.amenities">{{amenities}}</li>
+                                   </ul>
+                              </div>
+                          </div>
+                          <div class="ex-col">
+                            <div class="ratings">
+                              {{getHotelDatas.guestRating}}
+                            </div>
+                          </div>
+                          <div class="ex-col mr-5">
+                            <span class="price font30"><i class="fa fa-rupee"></i>{{getHotelDatas.amount}}</span>
+                          </div>
+                        </div>
+                        <div class="form-group" id="reasonMainHotel" *ngIf="getHotelDatas.selectedIndex > 0">
+                          <textarea readonly class="form-control">{{getHotelDatas.reason}}</textarea>
+                        </div>
+                        </div>
+                      </div> 
+                      <!-- End Hotel Selection Preview -->
                 <!-- <div class="prev-section">
                   <div class="section-title text-primary">               
                     <div class="d-flex justify-content-between">

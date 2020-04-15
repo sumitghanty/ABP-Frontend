@@ -103,6 +103,7 @@ export class CreateTripComponent implements OnInit {
     hotelMeal: any;
     hotelLocality: any;
     hotelName: any;
+    selectReasonHotel: any;
 
     @ViewChild('stepper') private myStepper: MatStepper;
     totalStepsCount: number;
@@ -1217,10 +1218,10 @@ export class CreateTripComponent implements OnInit {
   }
 
 
-  selectHotel(i){
+  selectHotel(i,hotelName,amenities,guestRating,hotelPrice,imageUrl){
 
-    console.log('return');
-    console.log('this.hotelSelectedStatus',this.hotelSelectedStatus);
+    console.log('amenities',amenities);
+    // console.log('this.hotelSelectedStatus',this.hotelSelectedStatus);
     if(this.hotelSelectedStatus){
        this.hotelSelectedStatus = false;
        let hotelData = [];
@@ -1245,18 +1246,32 @@ export class CreateTripComponent implements OnInit {
         document.getElementById("reasonMainHotelDiv"+i).style.display = "";
        }
 
+
         this.selectedHotel.push({
             "bookingType":"1",
-            "tripId":123,
-            "hotelGuesthouseName":"ABC",
+            "tripId":this.tripId,
+            "hotelGuesthouseName": hotelName,
             "hSNCode":"we345",
-            "amount":120,
+            "amount": hotelPrice,
             "checkInTime":"10:12",
             "checkOutTime":"12",
             "selectedIndex":i,
             "selectionType": 'S', // S/C
+            "hotelImage": imageUrl,
+            "amenities": amenities,
+            "guestRating":guestRating,
+            "reason": ''
            });
+
+           console.log('selected hotel',this.selectedHotel);
       }
+  }
+
+  getReasonHotel(indexHotel){
+    console.log('indexhotel',indexHotel);
+    console.log('selectReasonHotel',this.selectReasonHotel);
+    let getHotelData = this.selectedHotel.filter(ele => ele.selectedIndex === indexHotel)
+    getHotelData[0].reason = this.selectReasonHotel;
   }
 
 
