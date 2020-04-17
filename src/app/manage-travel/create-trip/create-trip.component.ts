@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Injectable } from '@angular/core';
 import { MatChipInputEvent } from '@angular/material/chips';
 //import { MatSnackBar } from '@angular/material/snack-bar';
 //import { MatHorizontalStepper } from '@angular/material/stepper';
@@ -6,6 +6,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { TravellerModalComponent } from './traveller-modal/traveller-modal.component';
 import { CreateTripService } from './create-trip.service';
 import {MatStepper} from '@angular/material/stepper';
+import { Router } from '@angular/router';
 import {
   Validators,
   FormBuilder,
@@ -13,11 +14,68 @@ import {
   FormControl,
 } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import {NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+
+
+
+/************************* Start bootstrap injectable date picker **********************/
+@Injectable()
+export class CustomAdapter extends NgbDateAdapter<string> {
+
+  readonly DELIMITER = '-';
+
+  fromModel(value: string | null): NgbDateStruct | null {
+    if (value) {
+      let date = value.split(this.DELIMITER);
+      return {
+        day : parseInt(date[0], 10),
+        month : parseInt(date[1], 10),
+        year : parseInt(date[2], 10)
+      };
+    }
+    return null;
+  }
+
+  toModel(date: NgbDateStruct | null): string | null {
+    return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : null;
+  }
+}
+
+/**
+ * This Service handles how the date is rendered and parsed from keyboard i.e. in the bound input field.
+ */
+@Injectable()
+export class CustomDateParserFormatter extends NgbDateParserFormatter {
+
+  readonly DELIMITER = '/';
+
+  parse(value: string): NgbDateStruct | null {
+    if (value) {
+      let date = value.split(this.DELIMITER);
+      return {
+        day : parseInt(date[0], 10),
+        month : parseInt(date[1], 10),
+        year : parseInt(date[2], 10)
+      };
+    }
+    return null;
+  }
+
+  format(date: NgbDateStruct | null): string {
+    return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : '';
+  }
+}
+
+/************************* End bootstrap injectable date picker **********************/
 
 @Component({
   selector: 'app-create-trip',
   templateUrl: './create-trip.component.html',
-  styleUrls: ['./create-trip.component.scss']
+  styleUrls: ['./create-trip.component.scss'],
+  providers: [
+    {provide: NgbDateAdapter, useClass: CustomAdapter},
+    {provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter}
+  ]
 })
 export class CreateTripComponent implements OnInit {
 
@@ -31,6 +89,8 @@ export class CreateTripComponent implements OnInit {
     startDate: any;
     endDate: any;
     purpose: any;
+    purposeDesc: any;
+    tripForMasterDesc: any;
     tripFor: any;
     travelDetails: any;
     tripCostCenter: any;
@@ -63,6 +123,7 @@ export class CreateTripComponent implements OnInit {
     flightSelectedStatus = false;
     flightSelectedRetrunStatus = false;
     returnflights: any;
+    poolService: any;
 
     hotelSelectedStatus = false;
     config_city = {
@@ -83,6 +144,7 @@ export class CreateTripComponent implements OnInit {
     deparSort = '';
 
     flightTripType = '';
+    reasonSelectFlight: any;
 
     ///error
     
@@ -104,6 +166,10 @@ export class CreateTripComponent implements OnInit {
     hotelLocality: any;
     hotelName: any;
     selectReasonHotel: any;
+    testmodel: NgbDateStruct;
+    itaCityMaster: any;
+
+    model2: string;
 
     @ViewChild('stepper') private myStepper: MatStepper;
     totalStepsCount: number;
@@ -113,7 +179,8 @@ export class CreateTripComponent implements OnInit {
     public dialog: MatDialog,
     public _createTripService: CreateTripService,
     private formBuilder:FormBuilder,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private router: Router,
     //private snackBar: MatSnackBar
    
   ) {
@@ -158,11 +225,12 @@ export class CreateTripComponent implements OnInit {
     let userLoginData : any;
     userLoginData = JSON.parse(localStorage.getItem('userLoginData'));
     this.getCity = userLoginData.masterResponseModel.cityMaster;
-
+ 
     this.purposeMaster = userLoginData.masterResponseModel.purposeMaster
     this.tripForMaster = userLoginData.masterResponseModel.tripForMaster
     this.costCenter = userLoginData.masterResponseModel.costCenter
     this.eventMaster = userLoginData.masterResponseModel.eventMaster
+    this.itaCityMaster = userLoginData.masterResponseModel.domesticIataMapping;
 
     this.allTravellerList =  JSON.parse(localStorage.getItem('userAllList'));
 
@@ -170,11 +238,11 @@ export class CreateTripComponent implements OnInit {
     this.token = userLoginData.login.generatedToken;
     this.userId = userLoginData.login.userId;
 
-   this.tripFromLocation = localStorage.getItem('fromLocation');
-   this.tripToLocation = localStorage.getItem('fromLocation');
+   this.tripFromLocation = localStorage.getItem('tripFromLocation');
+   this.tripToLocation = localStorage.getItem('tripToLocation');
 
     this._createTripService.getUserList(this.emailId,this.token).subscribe((res: any) => {
-      console.log(res);
+      //console.log(res);
       this.userDet = res;
     });    
 
@@ -187,9 +255,6 @@ export class CreateTripComponent implements OnInit {
   }
 
   travDetDivOpen(inumber,travType){
-    console.log('inumber',inumber);
-    console.log('travType',travType);
-    //debugger
     if(travType!==undefined && travType === 'G'){
       document.getElementById("travDiv"+inumber).style.display = "";
     } else if(travType !== 'G'){
@@ -209,8 +274,13 @@ export class CreateTripComponent implements OnInit {
 
   
   goForward(stepper: MatStepper) {
-    console.log(stepper)
     stepper.next();
+  }
+
+  setTabIndex(events){
+    console.log(events);
+    this.stepStatus = events.selectedIndex+2;
+    console.log('this.stepStatus tab-',this.stepStatus);
   }
 
   openDialog(): void {
@@ -221,7 +291,7 @@ export class CreateTripComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      //console.log('The dialog was closed');
       //this.animal = result;
     });
   }
@@ -230,11 +300,11 @@ export class CreateTripComponent implements OnInit {
 
   goBack(stepper: MatStepper) {
     this.stepStatus--;
+    console.log('this.go back-',this.stepStatus);
     stepper.previous();
   }
 
   getFromLocation(getData){
-    console.log(getData);
     if(getData.value !== undefined){
       this.fromLocation = getData.value.city_id;
       this.fromCityName = getData.value.city_name;
@@ -244,7 +314,6 @@ export class CreateTripComponent implements OnInit {
   }
 
   getToLocation(getData){
-    console.log(getData);
     if(getData.value !== undefined){
       this.toLocation = getData.value.city_id;
       this.toCityName = getData.value.city_name;
@@ -256,7 +325,7 @@ export class CreateTripComponent implements OnInit {
 
 
   save(stepper: MatStepper){
-    //console.log('tripInfo------',this);
+    console.log('save -------------',this.stepStatus);
   if(this.stepStatus === 1){  
     if(this.frmTravellerInformation.invalid){
 
@@ -317,16 +386,20 @@ export class CreateTripComponent implements OnInit {
 
 
     stepper.next();
-    console.log('stepStatus',this.stepStatus);
-    localStorage.setItem('fromLocation',this.fromLocation);
-    localStorage.setItem('toLocation',this.toLocation);
+    localStorage.setItem('fromLocation',this.fromLocation); // for from city_id
+    localStorage.setItem('toLocation',this.toLocation); // for to city_id
+    localStorage.setItem('tripFromLocation',this.tripFromLocation); // for from city_name
+    localStorage.setItem('tripToLocation',this.tripToLocation); // for from city_name
     localStorage.setItem('wayType',this.toLocation);
 
     this.tripFromLocation = this.fromCityName;
     this.tripToLocation = this.toCityName;
-    console.log('wayType',this.wayType);
     this.flightTripType = this.wayType
-    
+    let purposeSelectedArr = this.purposeMaster.filter(ele => ele.purposeId == this.purpose);
+    this.purposeDesc = purposeSelectedArr[0].purposeDescription;
+
+    let tipForArr = this.tripForMaster.filter(ele => ele.tripForMasterId == this.tripFor);
+    this.tripForMasterDesc = tipForArr[0].tripForMasterDescription;
     // let travelInfo = {
     //     domesticTravel: this.travelType,
     //     //internationalTravel: this.internationalTravel,
@@ -362,16 +435,14 @@ export class CreateTripComponent implements OnInit {
         console.log(res);
         this.tripId = res.tripcreation.tripid;
         this.tripDet = res.tripcreation;
+        console.log('this.tripDet',this.tripDet.tripId);
         this.stepStatus++;
       });
     } 
     /********************** update trip ****************************/
     else if(this.stepStatus > 1){
-      console.log('update');
-      console.log('this.tripdet', this.tripDet);
-
       let travelllerUserList = [];
-
+    if(this.allTravellerList && this.allTravellerList.length>0){  
       for(const allTravellerLists of this.allTravellerList){
         let employeeId = '';
         if(allTravellerLists.userId){
@@ -381,10 +452,14 @@ export class CreateTripComponent implements OnInit {
         }
         travelllerUserList.push({'passengerName': allTravellerLists.userFirstName,'employeeId':employeeId});
       }
-
+    }
+      
+      if(!this.tripDet){
+        this.tripDet = {tripId:0};
+      } 
 
       let updateTripData = {
-        "tripId": this.tripId,
+        "tripId": this.tripDet.tripId,
         "employeeId": this.tripDet.employeeId,
         "travelType": this.tripDet.travelType,
         "tripType": this.tripDet.tripType,
@@ -401,10 +476,14 @@ export class CreateTripComponent implements OnInit {
         "tripUserMapping": travelllerUserList,
         "lineItemMaster":[{
           "lineItemtype":"2",
-          "tripId":1,
+          "tripId": this.tripId,
           "flightOrTrainBooking": this.selectedFlight,
           "hotelGuestHouseBookingDetaills": this.selectedHotel
         }]
+      }
+      stepper.next();
+      if(this.stepStatus>7){
+        this.router.navigate(['/managetravel/tripList']);
       }
       this._createTripService.tripUpdate(this.emailId,this.token,updateTripData).subscribe((res: any) => {
         console.log(res);
@@ -419,31 +498,44 @@ export class CreateTripComponent implements OnInit {
   }
 
   deleteTraveller(indexNo){
-    console.log('index',indexNo);
-    console.log('this.allTravellerList length',this.allTravellerList.length);
     //delete this.allTravellerList[indexNo];
     this.allTravellerList.splice(indexNo, 1);
     localStorage.setItem('userAllList',JSON.stringify(this.allTravellerList));
-    console.log('this.allTravellerList.length ----',this.allTravellerList.length);
     
   }
 
   getFlight(){
-    console.log('triptype',this.wayType);
     if(!this.departtureTime || !this.arrivalTime || !this.travelStop){
       this.departtureTime = false;
       this.arrivalTime = false;
       this.travelStop = false;
       return
     } else {
+    let fromCityShortArr = this.itaCityMaster.filter(ele => ele.city == this.tripFromLocation.toLowerCase()); 
+    let toCityShortArr = this.itaCityMaster.filter(ele => ele.city == this.tripToLocation.toLowerCase()); 
+    console.log('cityShortCode',fromCityShortArr);
+    let fromCityShortCode = '';
+    let toCityShortCode = '';
+
+    if(fromCityShortArr && fromCityShortArr.length>0){
+      fromCityShortCode = fromCityShortArr[0].iata;
+    } else {
+      fromCityShortCode = this.tripFromLocation;
+    }
+    
+    if(toCityShortArr && toCityShortArr.length>0){
+      toCityShortCode = toCityShortArr[0].iata;
+    } else {
+      toCityShortCode = this.tripFromLocation;
+    }
+
     let searchVal = {
         "queryData":{
-          "source": this.tripFromLocation,  
-          "destination": this.tripToLocation,
+          "source": fromCityShortCode,  
+          "destination": toCityShortCode,
           "dateOfDeparture":"20200929",
           "dateOfArrival":"20201003",
           "adults":"1"
-          
         },
         "customFilters":
         {
@@ -1034,20 +1126,19 @@ export class CreateTripComponent implements OnInit {
      });
 
 
-    //   this._createTripService.getFlightList(this.token,this.emailId,searchVal).subscribe((res: any) => {
-    //   console.log(res);
-    //   this.getFlightData = res.flightResponse.onwardflights;
-    //   this.returnflights = res.flightResponse.returnflights;
-    //     /***** sort onwardflights ********/
-    //     this.getFlightData.sort(function(x,y){
-    //       return x.fare - y.fare
-    //     });
-    //     this.returnflights = flightDa.flightResponse.returnflights;
-    //     /// sort returnflights
-    //     this.returnflights.sort(function(x,y){
-    //       return x.fare - y.fare
-    //     });  
-    // });
+      this._createTripService.getFlightList(this.token,this.emailId,searchVal).subscribe((res: any) => {
+      this.getFlightData = res.flightResponse.onwardflights;
+      this.returnflights = res.flightResponse.returnflights;
+        /***** sort onwardflights ********/
+        this.getFlightData.sort(function(x,y){
+          return x.fare - y.fare
+        });
+        this.returnflights = flightDa.flightResponse.returnflights;
+        /// sort returnflights
+        this.returnflights.sort(function(x,y){
+          return x.fare - y.fare
+        });  
+    });
 
    } 
   
@@ -1055,8 +1146,6 @@ export class CreateTripComponent implements OnInit {
 
 
   flightSort(fieldsort,sorttype){
-    console.log('call');
-    console.log('this.fareSort',this.fareSort);
     if(fieldsort === 'fare'){
         this.fareSort = sorttype;
         this.arrivalSort = '';
@@ -1110,7 +1199,6 @@ export class CreateTripComponent implements OnInit {
        this.flightSelectedStatus = false;
        let getSlData = [];
        getSlData = this.selectedFlight.filter(slEle => slEle.travelType == 'O' && slEle.selectionType == 'S');
-       console.log('filter data',getSlData);
        let preIndex = getSlData[0].selectedIndex;
        if(this.flightTripType === '1'){
         document.getElementById("airDiv"+preIndex).style.borderColor = "";
@@ -1123,7 +1211,6 @@ export class CreateTripComponent implements OnInit {
        }
        
        let indexNo = this.selectedFlight.findIndex(slEle => slEle.travelType === 'O' && slEle.selectionType === 'S');
-       console.log('indexNo',indexNo);
        this.selectedFlight.splice(indexNo, 1);
        //this.selectedFlight = this.selectedFlight.filter(slEle => slEle.travelType !== 'O' && slEle.selectionType !== 'S');
     }
@@ -1145,10 +1232,6 @@ export class CreateTripComponent implements OnInit {
        }
     }
     
-    
-    
-       
-
     this.selectedFlight.push({
             "bookingType":"1",
             "tripId": this.tripId,
@@ -1158,21 +1241,20 @@ export class CreateTripComponent implements OnInit {
             "fromLocation": origin,
             "toLocation": destination,
             "ticketClass": "Business",
-            "tripType": "One-Way",
-            "timeOfTravel":"12-05-2020",
+            "tripType": this.flightTripType, //"One-Way",
+            "timeOfTravel": this.startDate,
             "selectedIndex":i,
             "selectionType": 'S', // S/C
-            "travelType":'O',
+            "travelType":'O', // origin or retrun
             "depTime":depTime,
             "arrTime":arrTime,
-            "stops":stops
+            "stops":stops,
+            "reason":''
       });
     }
   }
 
   selectFlightReturn(i,airline,flightNo,depTime,origin,stops,arrTime,destination,fare){
-    console.log('return');
-    console.log('this.flightSelectedRetrunStatus',this.flightSelectedRetrunStatus);
     if(this.flightSelectedRetrunStatus){
        this.flightSelectedRetrunStatus = false;
        let getSlData2 = [];
@@ -1184,7 +1266,6 @@ export class CreateTripComponent implements OnInit {
        
 
        let indexNo = this.selectedFlight.findIndex(slEle => slEle.travelType === 'R' && slEle.selectionType === 'S');
-       console.log('indexNo',indexNo);
        this.selectedFlight.splice(indexNo, 1);
      }
 
@@ -1205,23 +1286,21 @@ export class CreateTripComponent implements OnInit {
                 "fromLocation": origin,
                 "toLocation": destination,
                 "ticketClass": "Business",
-                "tripType": "One-Way",
+                "tripType": this.flightTripType, //"One-Way",
                 "timeOfTravel":"12-05-2020",
                 "selectedIndex":i,
                 "selectionType": 'S', // S/C
                 "travelType": 'R',
                 "depTime":depTime,
                 "arrTime":arrTime,
-                "stops":stops
+                "stops":stops,
+                "reason":''
           });
       }   
   }
 
 
   selectHotel(i,hotelName,amenities,guestRating,hotelPrice,imageUrl){
-
-    console.log('amenities',amenities);
-    // console.log('this.hotelSelectedStatus',this.hotelSelectedStatus);
     if(this.hotelSelectedStatus){
        this.hotelSelectedStatus = false;
        let hotelData = [];
@@ -1234,7 +1313,6 @@ export class CreateTripComponent implements OnInit {
        
 
        let indexNo = this.selectedHotel.findIndex(slEle => slEle.selectionType === 'S');
-       console.log('indexNo',indexNo);
        this.selectedHotel.splice(indexNo, 1);
      }
 
@@ -1262,14 +1340,17 @@ export class CreateTripComponent implements OnInit {
             "guestRating":guestRating,
             "reason": ''
            });
-
-           console.log('selected hotel',this.selectedHotel);
       }
   }
 
+  getReasonFlight(indexFlight){
+    console.log('indexFlight',indexFlight);
+    let getFlightData = this.selectedFlight.filter(ele => ele.selectedIndex === indexFlight)
+    console.log('getFlightData',getFlightData);
+    getFlightData[0].reason = this.reasonSelectFlight;
+  }
+
   getReasonHotel(indexHotel){
-    console.log('indexhotel',indexHotel);
-    console.log('selectReasonHotel',this.selectReasonHotel);
     let getHotelData = this.selectedHotel.filter(ele => ele.selectedIndex === indexHotel)
     getHotelData[0].reason = this.selectReasonHotel;
   }
@@ -1288,7 +1369,6 @@ export class CreateTripComponent implements OnInit {
       "checkOutDate": "20200930",
       "rooms":1,
       "guests":2
-      
       },
       "customFilters":
       {
@@ -1350,14 +1430,14 @@ export class CreateTripComponent implements OnInit {
         return x.price - y.price
        });
 
-      // this._createTripService.getHotelList(this.token,this.emailId,hotelSearchVal).subscribe((res: any) => {
-      //   console.log(res);
-      //   this.getHotelData = res.flightResponse.onwardflights;
-            // this.getHotelData = hotelRes.customHotelModel;
+      this._createTripService.getHotelList(this.token,this.emailId,hotelSearchVal).subscribe((res: any) => {
+        console.log(res);
+            // this.getHotelData = res.customHotelModel;
+            // //this.getHotelData = hotelRes.customHotelModel;
             // this.getHotelData.sort(function(x,y){
             //   return x.price - y.price
             // });
-      // });
+      });
 
     }
                 

@@ -70,3 +70,26 @@ $white:#fff;
     text-align: center;
   }
 }
+
+body {
+  opacity: 0.5;
+}
+
+.loaderDiv {
+  padding-left: 45%;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  padding-top: 15%;
+}
+
+.loaderImage {
+  width: 20%;
+}
+
+.pageFade {
+  opacity: 0.5;
+}

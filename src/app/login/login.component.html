@@ -1,5 +1,7 @@
 
-<mat-toolbar color="primary" class="main-header d-flex flex-column flex-md-row justify-content-sm-around px-md-4 bg-white border-bottom shadow-sm">
+
+
+<mat-toolbar id="headerId"  color="primary" class="main-header d-flex flex-column flex-md-row justify-content-sm-around px-md-4 bg-white border-bottom shadow-sm">
   <div class="branding-logo my-0 mr-md-auto font-weight-normal">
    <img src="assets/images/logo.png" alt="logo">
    <span class="tagline">Travel & Expense Management</span>
@@ -16,6 +18,13 @@
   </div> -->
 </mat-toolbar>
 
+
+<div class="loaderDiv" id="loaderDivId" style="display: none;">
+  <img src="assets/images/loader2.gif" class="loaderImage" alt="profile image">
+</div>
+
+
+
 <!--<div class="google-btn">
   <div class="google-icon-wrapper">
     <img
@@ -25,7 +34,7 @@
   </div>
   <p class="btn-text" (click)="signInWithGoogle()"><b>LOGIN WITH GOOGLE</b></p>
 </div>-->
-<div class="d-flex">
+<div class="d-flex" id="loginMainDivId">
 <div class="row">
   <div class="col-md-8">
     <div class="relative">

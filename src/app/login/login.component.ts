@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
 
   auth2: any;
   loginError: any;
+  loaderStatus: boolean;
   @ViewChild('loginRef', {static: true }) loginElement: ElementRef;
 
   response;
@@ -44,6 +45,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.loaderStatus = false;
     //this.toastr.error("Hello, I'm the toastr message.");
     this.googleSDK();
   }
@@ -86,7 +88,7 @@ export class LoginComponent implements OnInit {
   // gmail login
 
   prepareLoginButton() {
- 
+   
     this.auth2.attachClickHandler(this.loginElement.nativeElement, {},
       (googleUser) => {
  
@@ -99,8 +101,14 @@ export class LoginComponent implements OnInit {
         //YOUR CODE HERE
         const param = {userEmail: profile.getEmail()};
         //param.email =  profile.getEmail();
+        this.loaderStatus = true;
+        document.getElementById("headerId").style.opacity = "0.3";
+        document.getElementById("loginMainDivId").style.opacity = "0.3";
+        document.getElementById("loaderDivId").style.display = "";
+        console.log('this.loaderStatus',this.loaderStatus);
         this.authService.login(googleUser.getAuthResponse().id_token,param).subscribe(
             allData => {
+              
               this.afterLogin(allData);
               // let userLoginData = info.;
               // localStorage.setItem("userLoginData", JSON.stringify(userLoginData));
@@ -151,9 +159,9 @@ export class LoginComponent implements OnInit {
   }
 
   afterLogin(getData){
-    //console.log(getData.login);
+    console.log(getData.login);
     //console.log('call');
-    
+    //this.loaderStatus = false;
     if(getData && getData.login === null && getData.responseCode === 201){
       this.loginError = getData.responseMessage;
       //this.loginError.status = true;

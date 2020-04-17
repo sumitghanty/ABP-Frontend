@@ -18,7 +18,7 @@ import { PopoverModule } from "ngx-smart-popover";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+//import {MatDatepickerModule} from '@angular/material/datepicker';
 
 //import { MdePopoverModule } from '@angular/material/mde';
 
@@ -46,7 +46,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     FormsModule,
     ReactiveFormsModule,
     SelectDropDownModule,
-    MatDatepickerModule
+    //MatDatepickerModule
     //MdePopoverModule
   ],
   exports: [
@@ -67,7 +67,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     FormsModule,
     ReactiveFormsModule,
     SelectDropDownModule,
-    MatDatepickerModule
+    //MatDatepickerModule
     //MdePopoverModule
   ]
 })
