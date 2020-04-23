@@ -146,6 +146,8 @@ body {
     width: 230px;
     height: 95px;
     border-right: solid 1px #e7e7e7;
+    padding-left: 1%;
+    padding-right: 1%;
   }
    
   .fsw_inputBox {
@@ -498,4 +500,14 @@ body {
  .cus-icon-master-cost{
   background-position:-51px -801px;
  }
+
+ .required-field::after {
+  content: "*";
+  color: red;
+  padding-left: 1%;
+}
+
+.label {
+  width: 100%;
+}
  

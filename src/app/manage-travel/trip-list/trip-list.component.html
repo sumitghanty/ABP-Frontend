@@ -39,7 +39,17 @@
           
       </thead>
       <tbody>
-      <tr role="row" class="odd" *ngFor="let tripListDatas of tripListData">
+        <!-- <tr role="row" class="odd">
+          <td class="">15555</td>
+          <td>chandra</td>
+          <td class="sorting_1">20-04-2020</td>
+          <td>30-04-2020</td>
+          <td>Kolkata</td>
+          <td>Mumbai</td>
+          <td>Pending</td>
+          <td align="center" (click)="goDetail(1)" style="cursor: pointer;"><i class="fa fa-eye"></i></td>
+        </tr> -->
+        <tr role="row" class="odd" *ngFor="let tripListDatas of tripListData">
           <td class="">{{tripListDatas.tripNumber}}</td>
           <td>{{tripListDatas.tripUserMapping[0].passengerName}}</td>
           <td class="sorting_1">{{tripListDatas.startDate}}</td>
@@ -47,7 +57,7 @@
           <td>{{tripListDatas.fromLocation}}</td>
           <td>{{tripListDatas.toLocation}}</td>
           <td>{{tripListDatas.status}}</td>
-          <td align="center"><i class="fa fa-eye"></i></td>
+          <td align="center" (click)="goDetail(tripListDatas.tripNumber)" style="cursor: pointer;"><i class="fa fa-eye"></i></td>
         </tr>
         </tbody>
        

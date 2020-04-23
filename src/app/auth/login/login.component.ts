@@ -10,8 +10,8 @@ import {
 //import { MatSnackBar } from '@angular/material/snack-bar';
 //import {  GoogleLoginProvider,  AuthService,  SocialUser} from 'angular-6-social-login';
 //import { SocialLoginModule, AuthServiceConfig } from 'angular-6-social-login';
-import { Socialusers } from '../shared/product';
-import { SocialloginService } from '../service/sociallogin.service';
+//import { Socialusers } from '../shared/product';
+import { SocialloginService } from '../../core/service/sociallogin.service';
 import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   @ViewChild('loginRef', {static: true }) loginElement: ElementRef;
 
   response;
-  socialusers = new Socialusers();
+  //socialusers = new Socialusers();
   constructor(
     private authService: SocialloginService,
     private router: Router,
@@ -69,19 +69,19 @@ export class LoginComponent implements OnInit {
     const element = document.getElementById('content');
     element.scrollIntoView();
   }
-  Savesresponse(socialusers: Socialusers) {
-    this.authService.Savesresponse(socialusers).subscribe((res: any) => {
-      debugger;
-      console.log(res);
-      this.socialusers = res;
-      this.response = res.userDetail;
-      localStorage.setItem('socialusers', JSON.stringify(this.socialusers));
-      console.log(
-        localStorage.setItem('socialusers', JSON.stringify(this.socialusers))
-      );
-      this.router.navigate([`/home`]);
-    });
-  }
+  // Savesresponse(socialusers: Socialusers) {
+  //   this.authService.Savesresponse(socialusers).subscribe((res: any) => {
+  //     debugger;
+  //     console.log(res);
+  //     this.socialusers = res;
+  //     this.response = res.userDetail;
+  //     localStorage.setItem('socialusers', JSON.stringify(this.socialusers));
+  //     console.log(
+  //       localStorage.setItem('socialusers', JSON.stringify(this.socialusers))
+  //     );
+  //     this.router.navigate([`/home`]);
+  //   });
+  // }
 
 
 

@@ -29,41 +29,61 @@
                  <div class="text-primary"><h4><i></i>Trip Information</h4></div>                               
                 </div>                
              </div>
-          <div class="row trip-info-details">
-                <div class="col trip-info-list">
-                  <label>Travel Type</label>
-                  <div class="t-val"><span>Domestic Travel</span></div>                  
-                </div>
-                <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
-                  <label>Travel Type</label>
-                  <div class="t-val"><span>Domestic Travel</span></div>                  
-                </div>
-                <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
-                  <label>Travel Type</label>
-                  <div class="t-val"><span>Domestic Travel</span></div>                  
-                </div>
-                <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
-                  <label>Travel Type</label>
-                  <div class="t-val"><span>Domestic Travel</span></div>                  
-                </div>
-                <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
-                  <label>Travel Type</label>
-                  <div class="t-val"><span>Domestic Travel</span></div>                  
-                </div>
-                <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
-                  <label>Travel Type</label>
-                  <div class="t-val"><span>Domestic Travel</span></div>                  
-                </div>
-                <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
-                  <label>Travel Type</label>
-                  <div class="t-val"><span>Domestic Travel</span></div>                  
-                </div>
-                <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
-                  <label>Travel Type</label>
-                  <div class="t-val "><span>Domestic Travel</span></div>                  
-                </div>
-         </div>
+             <div class="row trip-info-details">
+              <div class="col trip-info-list">
+                <label>Travel Type</label>
+                <div class="t-val">
+                  <span *ngIf="tripListData.travelType === 'D'">Domestic Travel
+                  </span>
+                  <span *ngIf="tripListData.travelType === 'I'">International Travel
+                  </span>
+                </div>                  
+              </div>
+              <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
+                <label>Way</label>
+                <div class="t-val">
+                  <span *ngIf="tripListData.tripType == 1">One Way</span>
+                  <span *ngIf="tripListData.tripType == 2">Two Way</span>
+                </div>                  
+              </div>
+              <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
+                <label>From Location</label>
+                <div class="t-val"><span>{{tripListData.toLocation}}</span></div>                  
+              </div>
+              <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
+                <label>To Location</label>
+                <div class="t-val"><span>{{tripListData.fromLocation}}</span></div>                  
+              </div>
+              <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
+                <label>Start Date</label>
+                <div class="t-val"><span>{{tripListData.startDate}}</span></div>                  
+              </div>
+              <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
+                <label>End Date</label>
+                <div class="t-val"><span>{{tripListData.endDate}}</span></div>                  
+              </div>
+              <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
+                <label>Purpose</label>
+                <div class="t-val"><span>{{tripListData.purpose}}</span></div>                  
+              </div>
+              <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
+                <label>Trip For</label>
+                <div class="t-val "><span>{{tripListData.tripFor}}</span></div>                  
+              </div>
+              <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
+                <label>Travel Details</label>
+                <div class="t-val "><span>{{tripListData.tripDescription}}</span></div>                  
+              </div>
+              <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
+                <label>Trip Cost Center</label>
+                <div class="t-val "><span>{{tripListData.tripCostCentre}}</span></div>                  
+              </div>
+              <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
+                <label>Event Code</label>
+                <div class="t-val "><span>{{tripListData.eventCode}}</span></div>                  
+              </div>
         </div>
+      </div>
       </section>
       <section class="mb-4">
        <div class="traveller-details">
@@ -72,44 +92,30 @@
                 <div class="text-primary">
                  <h4 ><i _ngcontent-lyb-c66=""></i>Travellers Details</h4>
                 </div>
-                <div>
-                 <button class="btn btn-primary">+ Add Traveller</button>
-                </div>
             </div>
         </div>
-        <div class="row traveler-list">
-            <div class="col-md-4 col-sm-12">
-              <div class="pt-3">Abhisek</div>
-            </div>
-            <div class="col-md-4 col-sm-12">
-              <div class="text-md-center pt-3"><img class="icon-space" src="assets/images/icon/guest-employee.png">Guest</div>
-            </div>
-            <div class="col-md-4 col-sm-12">
-              <div class="d-flex justify-content-end"><a class="action-circle outline-circle"><i class="fa fa-arrow-down"></i></a><a class="action-circle primary-bg"><i class="fa fa-remove"></i></a></div>
-            </div>                  
-          </div>
-          <div class="row traveler-list">
-            <div class="col-md-4 col-sm-12">
-              <div class="pt-3">Abhisek</div>
-            </div>
-            <div class="col-md-4 col-sm-12">
-              <div class="text-md-center pt-3"><img class="icon-space" src="assets/images/icon/guest-employee.png">Guest</div>
-            </div>
-            <div class="col-md-4 col-sm-12">
-              <div class="d-flex justify-content-end"><a class="action-circle outline-circle"><i class="fa fa-arrow-down"></i></a><a class="action-circle primary-bg"><i class="fa fa-remove"></i></a></div>
-            </div>                  
-          </div>
-          <div class="row traveler-list">
-            <div class="col-md-4 col-sm-12">
-              <div class="pt-3">Abhisek</div>
-            </div>
-            <div class="col-md-4 col-sm-12">
-              <div class="text-md-center pt-3"><img class="icon-space" src="assets/images/icon/guest-employee.png">Guest</div>
-            </div>
-            <div class="col-md-4 col-sm-12">
-              <div class="d-flex justify-content-end"><a class="action-circle outline-circle"><i class="fa fa-arrow-down"></i></a><a class="action-circle primary-bg"><i class="fa fa-remove"></i></a></div>
-            </div>                  
-          </div>
+        
+        <div class="row traveler-list" *ngFor="let allTravellerLists of tripListData.tripUserMapping; index as i ">
+                  <div class="col-md-4 col-sm-12">
+                    <div class="pt-3">{{allTravellerLists.passengerName}}</div>
+                  </div>
+                  <!-- <div class="col-md-4 col-sm-12" *ngIf="allTravellerLists.type">
+                    <div class="text-md-center pt-3"><img class="icon-space" src="assets/images/icon/guest-employee.png">Guest</div>
+                  </div> -->
+                  <div class="col-md-4 col-sm-12" *ngIf="allTravellerLists.tripUserId">
+                    <div class="text-md-center pt-3"><img class="icon-space" src="assets/images/icon/guest-employee.png">Employee</div>
+                  </div>
+                  <!-- <div class="col-md-4 col-sm-12" *ngIf="allTravellerLists.retainerId">
+                    <div class="text-md-center pt-3"><img class="icon-space" src="assets/images/icon/guest-employee.png">Retainer</div>
+                  </div> -->
+                  <div class="col-md-4 col-sm-12">
+                    <div class="d-flex justify-content-end">
+                      <!-- <a class="action-circle outline-circle"><i class="fa fa-arrow-down"></i></a>
+                      <a style="cursor: pointer;" class="action-circle primary-bg" (click)="deleteTraveller(i)"><i class="fa fa-remove"></i></a>-->
+                    </div> 
+                  </div>                  
+                </div>
+          
        </div>
       </section>
       <section class="mb-4">
@@ -123,91 +129,55 @@
             </div>
            </div>            
           
-           <div class="fsw_inner d-flex">
-            <div class="fsw_inputBox searchCity inactiveWidget">
-              <div class="text-center">                                       
-                <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
-                 Air India
-                </span>   
-                <div><span class="lbl_input appendBottom5">G8-286</span></div> 
-              </div>
-                </div>                    
-                  <div class="fsw_inputBox searchToCity inactiveWidget ">
-                    <div class="text-center"> 
-                    <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
-                      10:30
-                     </span>                          
-                     <div><span class="lbl_input latoBold appendBottom5">Mumbai</span></div> 
-                    </div>
-                  </div>
-                    <div class="fsw_inputBox searchToCity inactiveWidget">    
-                     <div class="text-center">                     
-                      <div><hr class="space-right20">
-                        <span class="lbl_input latoBold appendBottom10">Non Stop</span></div>                          
-                     </div>                      
-                    </div>  
-                    <div class="fsw_inputBox searchToCity inactiveWidget">
+           <div *ngFor="let selectedFlights of flightList">
+            <div class="fsw_inner d-flex">
+              <div class="fsw_inputBox searchCity inactiveWidget" >
+                <div class="text-center">                                       
+                  <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
+                  {{selectedFlights.flightTrainName}}
+                  </span>   
+                  <div><span class="lbl_input appendBottom5">{{selectedFlights.flightTrainNumber}}</span></div> 
+                </div>
+                  </div>                    
+                    <div class="fsw_inputBox searchToCity inactiveWidget ">
                       <div class="text-center"> 
-                      <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
-                        10:30
-                       </span>   
-                       <div><span class="lbl_input latoBold appendBottom5">Mumbai</span></div>
-                       </div> 
+                      <!-- <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
+                        {{selectedFlights.depTime}}
+                      </span>                           -->
+                      <div><span class="lbl_input latoBold appendBottom5">{{selectedFlights.fromLocation}}</span></div> 
+                      </div>
                     </div>
-                    <div class="fsw_inputBox">
-                      <span class="label rec-flag btn-success mb-2 btn ml-4 mr-4">Recomended</span>
-                    </div>
-                    <div class="fsw_inputBox searchToCity inactiveWidget border-0">
-                      <div class="text-center"> 
-                      <span class="fsw_inputField font20 font-weight-bold ">
-                        <i class="fa fa-rupee icon-rup-cus"></i>6,305 
-                       </span>                          
-                       </div> 
-                    </div>
-                     
-
-          </div>
-          <div class="fsw_inner d-flex">
-            <div class="fsw_inputBox searchCity inactiveWidget">
-              <div class="text-center">                                       
-                <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
-                 Air India
-                </span>   
-                <div><span class="lbl_input appendBottom5">G8-286</span></div> 
-              </div>
-                </div>                    
-                  <div class="fsw_inputBox searchToCity inactiveWidget ">
-                    <div class="text-center"> 
-                    <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
-                      10:30
-                     </span>                          
-                     <div><span class="lbl_input latoBold appendBottom5">Mumbai</span></div> 
-                    </div>
-                  </div>
-                    <div class="fsw_inputBox searchToCity inactiveWidget">    
-                     <div class="text-center">                     
-                      <div><hr class="space-right20">
-                        <span class="lbl_input latoBold appendBottom10">Non Stop</span></div>                          
-                     </div>                      
-                    </div>  
-                    <div class="fsw_inputBox searchToCity inactiveWidget">
-                      <div class="text-center"> 
-                      <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
-                        10:30
-                       </span>   
-                       <div><span class="lbl_input latoBold appendBottom5">Mumbai</span></div>
-                       </div> 
-                    </div>
-                    <div class="fsw_inputBox searchToCity inactiveWidget border-0">
-                      <div class="text-center"> 
-                      <span class="fsw_inputField font20 font-weight-bold ">
-                        <i class="fa fa-rupee icon-rup-cus"></i>6,305 
-                       </span>                          
-                       </div> 
-                    </div>
-                     
-
-          </div>
+                      <div class="fsw_inputBox searchToCity inactiveWidget">    
+                      <div class="text-center">                     
+                        <div><hr class="space-right20">
+                          <!-- <span class="lbl_input latoBold appendBottom10" *ngIf="selectedFlights.stops>0"> {{selectedFlights.stops}}</span>
+                          <span class="lbl_input latoBold appendBottom10" *ngIf="selectedFlights.stops===0"> Non Stop</span> -->
+                        </div>                          
+                        </div>                      
+                      </div>  
+                      <div class="fsw_inputBox searchToCity inactiveWidget">
+                        <div class="text-center"> 
+                        <!-- <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
+                          {{selectedFlights.arrTime}}
+                        </span>    -->
+                        <div><span class="lbl_input latoBold appendBottom5">{{selectedFlights.toLocation}}</span></div>
+                        </div> 
+                      </div>
+                      <div class="fsw_inputBox">
+                        <span class="label rec-flag btn-success mb-2 btn ml-4 mr-4" *ngIf="selectedFlights.selectedIndex === 0">Recomended</span>
+                      </div>
+                      <div class="fsw_inputBox searchToCity inactiveWidget border-0">
+                        <div class="text-center"> 
+                        <span class="fsw_inputField font20 font-weight-bold ">
+                          <i class="fa fa-rupee icon-rup-cus"></i>{{selectedFlights.amount}} 
+                        </span>                          
+                        </div> 
+                      </div>
+            </div>
+            <!-- <div class="form-group" *ngIf="selectedFlights.selectedIndex > 0">
+              <textarea readonly class="form-control">{{selectedFlights.reason}}</textarea>
+            </div> -->
+        </div>
                    
        </div>
       </section>
@@ -221,31 +191,33 @@
                    </div>               
                 </div>
                </div>
-               <div class="fsw_inner d-md-flex justify-content-between">
-                <div class="prof-img-full">
-                  <img src="assets/images/hotel.jpg" alt="hotel">
-                </div>
-                <div class="h-item-description">
-                  <h3>Park Guest House</h3> 
-                  <span class="h-location">2.5 KM from Mumbai</span>
-                  <div class="h-features">
-                    <ul class="ui-icon-bullet d-flex">
-                    <li>Swiming Pool</li>
-                    <li>Parking</li>
-                    <li>Housekeeping</li>
-                   </ul>
+               <div *ngFor="let getHotelDatas of hotelList;">
+                <div class="fsw_inner d-md-flex justify-content-between">
+                  <div class="hotelImageDiv">
+                    <!-- <img class="hotelImage" src="{{getHotelDatas.hotelImage}}" alt="hotel"> -->
+                  </div>
+                  <div class="h-item-description">
+                    <h3>{{getHotelDatas.hotelGuesthouseName}}</h3> 
+                    <!-- <span class="h-location">2.5 KM from Mumbai</span> -->
+                    <div class="h-features">
+                           <!-- <ul>
+                              <li *ngFor="let amenities of getHotelDatas.amenities">{{amenities}}</li>
+                           </ul> -->
+                      </div>
+                  </div>
+                  <div class="ex-col">
+                    <!-- <div class="ratings">
+                      {{getHotelDatas.guestRating}}
+                    </div> -->
+                  </div>
+                  <div class="ex-col mr-5">
+                    <span class="price font30"><i class="fa fa-rupee"></i>{{getHotelDatas.amount}}</span>
                   </div>
                 </div>
-                <div class="ex-col">
-                  <span class="label rec-flag btn-success mb-2 btn ml-4 mr-4">Recomended</span>
-                  <div class="ratings">
-                    4.5/5
-                  </div>
+                <!-- <div class="form-group" id="reasonMainHotel" *ngIf="getHotelDatas.selectedIndex > 0">
+                  <textarea readonly class="form-control">{{getHotelDatas.reason}}</textarea>
+                </div> -->
                 </div>
-                <div class="ex-col mr-5">
-                  <span class="price font30"><i class="fa fa-rupee"></i>1,305</span>
-                </div>
-              </div>
                
         </div>
       </section>
@@ -263,11 +235,11 @@
              <div class="row">
               <div class="col">
                 <div class="form-check form-check-inline mb-3">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                  <label class="form-check-label" for="inlineRadio1">Yes</label>
+                  <!-- <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> -->
+                  <!-- <label class="form-check-label" for="inlineRadio1">Yes</label> -->
                 </div>
                 <div class="form-check form-check-inline mb-3">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                  <!-- <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> -->
                   <label class="form-check-label" for="inlineRadio2">No</label>
                 </div>
               </div>
@@ -275,7 +247,7 @@
             </div>
        </div>
       </section>
-      <section class="mb-4">
+      <!-- <section class="mb-4">
         <div class="section-title text-primary">               
           <div class="d-flex justify-content-between">
            <div class="text-primary"><h4><i></i>Advance Request</h4></div>                  
@@ -322,8 +294,8 @@
               </tbody>
              
           </table>
-      </section>
-      <section class="mb-4">
+      </section> -->
+      <!-- <section class="mb-4">
         <div class="section-title text-primary">               
           <div class="d-flex justify-content-between">
            <div class="text-primary"><h4><i></i>Trip History</h4></div>                  
@@ -359,13 +331,13 @@
               </tbody>
              
         </table>
-      </section>
+      </section> -->
      </div>
      <div class="row button-row">
         <div class="col-12">
           <div class="d-flex justify-content-end btn-lg-cus mt-2">
             <button class="btn btn-primary radius-full btn-lg"><i class="fa fa-remove"></i> &nbsp; Reject</button>
-            <button class="btn btn-success radius-full btn-lg ml-2">Approve &nbsp; <i class="fa fa-check"></i></button>
+            <button class="btn btn-success radius-full btn-lg ml-2" (click)="approveTrip();">Approve &nbsp; <i class="fa fa-check"></i></button>
           </div>   
          <!-- <div class="float-right">
             <app-expense-import (dataExported)="dataExported($event)"></app-expense-import>

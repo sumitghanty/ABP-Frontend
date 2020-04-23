@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CreateTripService } from './../create-trip/create-trip.service';
+import { CreateTripService } from '../../core/service/create-trip.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-trip-list',
@@ -16,9 +17,10 @@ export class TripListComponent implements OnInit {
   userId:any;
   tripListData:any;
 
-
-
-  constructor(private _createTripService:CreateTripService) { }
+  constructor(
+    private _createTripService:CreateTripService,
+    private router:Router
+  ) { }
 
   ngOnInit() {
     let userLoginData : any;
@@ -36,6 +38,11 @@ export class TripListComponent implements OnInit {
       console.log(res);
       this.tripListData = res.tripCreationList;
     }); 
+  }
+
+  goDetail(tripNumber){
+    localStorage.setItem('detailstripNumber',tripNumber);
+    this.router.navigate(['/managetravel/approveTrip']);
   }
 
 }

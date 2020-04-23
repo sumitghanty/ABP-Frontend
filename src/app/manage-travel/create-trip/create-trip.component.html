@@ -14,93 +14,81 @@
                    <div class="text-primary"><h4><i></i>Trip Information</h4></div>                  
                   </div>
                  </div>
-              <form [formGroup]="frmTravellerInformation" role="form">  
+              <form [formGroup]="frmTravellerInformation" role="form" #formDir="ngForm">  
                 <div class="row">
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-check form-check-inline mb-3">
-                      <input class="form-check-input"  type="radio" [(ngModel)]="travelType" formControlName="travelType" id="inlineRadio1" value="D">
+                      <input class="form-check-input"  type="radio" [(ngModel)]="_tripInformation.travelType" formControlName="travelType" id="inlineRadio1" value="D">
                       <label class="form-check-label" for="inlineRadio1">Domestic Travel</label>
                     </div>
                     <div class="form-check form-check-inline mb-3">
-                      <input class="form-check-input" type="radio" [(ngModel)]="travelType" formControlName="travelType" id="inlineRadio2" value="I">
+                      <input class="form-check-input" type="radio" [(ngModel)]="_tripInformation.travelType" formControlName="travelType" id="inlineRadio2" value="I">
                       <label class="form-check-label" for="inlineRadio2">International Travel</label>
                     </div>
-                    <span *ngIf="travelTypeError===true" class="errorField">This field  is required</span>
+                    <span class="errorField"
+                                *ngIf="(TravellerInformationFromControl.travelType.touched  || formDir.submitted) && TravellerInformationFromControl.travelType.errors">
+                                This field  is required
+                      </span>
                   </div>
           
                   <div class=" col-lg-6 col-sm-12 hightlight-gray mb-3">
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio"  [(ngModel)]="wayType" formControlName="wayType" id="inlineRadio3" value="1">
+                      <input class="form-check-input" type="radio"  [(ngModel)]="_tripInformation.wayType" formControlName="wayType" id="inlineRadio3" value="1">
                       <label class="form-check-label" for="inlineRadio3">One Way</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" [(ngModel)]="wayType" formControlName="wayType" id="inlineRadio4" value="2">
+                      <input class="form-check-input" type="radio" [(ngModel)]="_tripInformation.wayType" formControlName="wayType" id="inlineRadio4" value="2">
                       <label class="form-check-label" for="inlineRadio4">Round Way</label>
                     </div>
-                    <span *ngIf="wayTypeError===true" class="errorField">This field  is required</span>
+                     <span class="errorField"
+                                *ngIf="(TravellerInformationFromControl.wayType.touched  || formDir.submitted) && TravellerInformationFromControl.wayType.errors">
+                                This field  is required
+                      </span>
                   </div>
                 </div>
                 <div class="row">
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-group">
-                      <label for="fromlocation">From Location</label>
-                      <!-- <input type="text" class="form-control" [(ngModel)]="fromLocation"  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="From Location">
-                     -->
-                      <!-- <select class="form-control"  [(ngModel)]="fromLocation" formControlName="fromLocation"> 
-                         <option selected>Select</option>
-                         <option *ngFor="let city of getCity" value="{{city.id}}">{{city.city_name}}</option>
-                      </select> -->
+                      <label for="fromlocation" class="required-field label">From Location</label>
                       <ngx-select-dropdown tabindex="0"  [multiple]="false"
-                      [options]="getCity" (change)="getFromLocation($event)"
+                      [options]="getCity" (change)="getLocationData($event,'fromLoc')"
                       [config]="config_city" formControlName="fromLocation"></ngx-select-dropdown>
-                      <span *ngIf="fromLocationError===true" class="errorField">This field  is required</span>
+                      <span class="errorField"
+                      *ngIf="(TravellerInformationFromControl.fromLocation.touched  || formDir.submitted) && TravellerInformationFromControl.fromLocation.errors">
+                      This field  is required
+                      </span>  
                     </div>        
                   </div>
           
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-group">
-                      <label for="tolocation">To Location</label>
-                      <!-- <input type="email" class="form-control" [(ngModel)]="toLocation" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="To Location"> -->
-                      <!-- <select class="form-control" [(ngModel)]="toLocation" formControlName="toLocation"> 
-                        <option selected>Select</option>
-                        <option *ngFor="let city of getCity" value="{{city.id}}">{{city.city_name}}</option>
-                     </select> -->
-                     <ngx-select-dropdown tabindex="0"  [multiple]="false"
-                     (change)="getToLocation($event)"
-                     [options]="getCity"
-                     [config]="config_city" formControlName="toLocation"></ngx-select-dropdown>
-                     <span *ngIf="toLocationError===true"  class="errorField">This field  is required</span>
+                      <label for="tolocation" class="required-field label">To Location</label>
+                      <ngx-select-dropdown tabindex="0"  [multiple]="false"
+                      (change)="getLocationData($event,'toLoc')"
+                      [options]="getCity"
+                      [config]="config_city" formControlName="toLocation"></ngx-select-dropdown>
+                      <span class="errorField"
+                      *ngIf="(TravellerInformationFromControl.toLocation.touched  || formDir.submitted) && TravellerInformationFromControl.toLocation.errors">
+                      This field  is required
+                      </span> 
                     </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class=" col-lg-6 col-sm-12">
-                    <!-- <div class="form-group">
-                      <label for="fromlocation">Start Date</label>
-                      <input type="date" class="form-control" [(ngModel)]="startDate" formControlName="startDate" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
-                      <span *ngIf="startDateError===true" class="errorField">This field  is required</span>
-                    </div> -->
-                    <!-- <div class="form-group">
-                      <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd"
-                               name="dp" [(ngModel)]="testmodel" ngbDatepicker #d="ngbDatepicker">
-                        <div class="input-group-append">
-                          <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
-                        </div>
-                      </div>
-                    </div> -->
-
-
                     <div class="form-group">
-                      <label for="fromlocation">Start Date</label>
+                      <label for="fromlocation" class="required-field label">Start Date</label>
                       <div class="input-group">
                         <input class="form-control" placeholder="dd/mm/yyyy"
-                               name="d2" [(ngModel)]="startDate" formControlName="startDate" ngbDatepicker #d2="ngbDatepicker">
+                               name="d2" [(ngModel)]="_tripInformation.startDate" formControlName="startDate" ngbDatepicker #d2="ngbDatepicker">
                         <div class="input-group-append">
                           <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"><i class="fa fa-calendar"></i></button>
                         </div>
                       </div>
-                      <span *ngIf="startDateError===true" class="errorField">This field  is required</span>
+                      <span class="errorField"
+                      *ngIf="(TravellerInformationFromControl.startDate.touched  || formDir.submitted) && TravellerInformationFromControl.startDate.errors">
+                      This field  is required
+                      </span>
                     </div>
                   </div>
           
@@ -112,53 +100,60 @@
                     </div> -->
 
                     <div class="form-group">
-                      <label for="fromlocation">End Date</label>
+                      <label for="fromlocation" class="required-field label">End Date</label>
                       <div class="input-group">
                         <input class="form-control" placeholder="dd/mm/yyyy"
-                               name="d3" [(ngModel)]="endDate" formControlName="endDate" ngbDatepicker #d3="ngbDatepicker">
+                               name="d3" [(ngModel)]="_tripInformation.endDate" formControlName="endDate" ngbDatepicker #d3="ngbDatepicker">
                         <div class="input-group-append">
                           <button class="btn btn-outline-secondary calendar" (click)="d3.toggle()" type="button"><i class="fa fa-calendar"></i></button>
                         </div>
                       </div>
-                      <span *ngIf="endDateError===true" class="errorField">This field  is required</span>
+                      <span class="errorField"
+                      *ngIf="(TravellerInformationFromControl.endDate.touched  || formDir.submitted) && TravellerInformationFromControl.endDate.errors">
+                      This field  is required
+                      </span>  
                     </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-group">
-                      <label for="fromlocation">Purpose</label>
+                      <label for="fromlocation" class="required-field label">Purpose</label>
                       <!-- <input type="text" class="form-control" [(ngModel)]="purpose"  formControlName="purpose"  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Purpose">
                        -->
-                      <select class="form-control" [(ngModel)]="purpose" formControlName="purpose"> 
+                      <select class="form-control" [(ngModel)]="_tripInformation.purpose" formControlName="purpose"> 
                         <option selected value="">Select</option>
-                        <option *ngFor="let purposeMasters of purposeMaster" value="{{purposeMasters.purposeId}}">{{purposeMasters.purposeDescription}}</option>
+                        <option *ngFor="let purposeMasters of _tripInformation.purposeMaster" value="{{purposeMasters.purposeId}}">{{purposeMasters.purposeDescription}}</option>
                      </select>
-                     <span *ngIf="purposeError===true" class="errorField">This field  is required</span>
-                      <!-- <div *ngIf="purpose.errors">
-                        <div *ngIf="purpose.errors.required">The Field is required!</div>
-                      </div> -->
+                     <span class="errorField"
+                                *ngIf="(TravellerInformationFromControl.purpose.touched  || formDir.submitted) && TravellerInformationFromControl.purpose.errors">
+                                This field  is required
+                      </span>
                     </div>
                   </div>
           
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-group">
-                      <label for="tolocation">Trip For</label>
+                      <label for="tolocation" class="required-field label">Trip For</label>
                       <!-- <input type="text" [(ngModel)]="tripFor" formControlName="tripFor" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Trip For">
                        -->
-                      <select class="form-control" [(ngModel)]="tripFor" formControlName="tripFor"> 
+                      <select class="form-control" [(ngModel)]="_tripInformation.tripFor" formControlName="tripFor"> 
                         <option selected value="">Select</option>
-                        <option *ngFor="let tripForMasters of tripForMaster" value="{{tripForMasters.tripForMasterId}}">{{tripForMasters.tripForMasterDescription}}</option>
+                        <option *ngFor="let tripForMasters of _tripInformation.tripForMaster" value="{{tripForMasters.tripForMasterId}}">{{tripForMasters.tripForMasterDescription}}</option>
                      </select>
-                     <span *ngIf="tripForError===true" class="errorField">This field  is required</span>
+                     <span class="errorField"
+                                *ngIf="(TravellerInformationFromControl.tripFor.touched  || formDir.submitted) && TravellerInformationFromControl.tripFor.errors">
+                                This field  is required
+                      </span>
                     </div>
                   </div>
+                  
                 </div>
                 <div class="row">
                   <div class=" col-lg-12 col-sm-12">
                     <div class="form-group">
                       <label for="tolocation">Travel Details</label>                    
-                      <textarea class="form-control" [(ngModel)]="travelDetails" formControlName="travelDetails"></textarea>
+                      <textarea class="form-control" [(ngModel)]="_tripInformation.travelDetails" formControlName="travelDetails"></textarea>
                     </div>
                   </div>
                 </div>
@@ -166,17 +161,30 @@
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-group">
                       <label for="fromlocation">Trip Cost Center</label>
-                      <input type="text" class="form-control" [(ngModel)]="tripCostCenter" formControlName="tripCostCenter" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Trip Cost Center">
+                      <input type="text" class="form-control" [(ngModel)]="_tripInformation.tripCostCenter" formControlName="tripCostCenter" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Trip Cost Center">
                     </div>
                   </div>
           
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-group">
                       <label for="tolocation">Event Code</label>
-                      <input type="text" class="form-control" [(ngModel)]="eventCode" formControlName="eventCode" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Event Code">
+                      <input type="text" class="form-control" [(ngModel)]="_tripInformation.eventCode" formControlName="eventCode" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Event Code">
                     </div>
                   </div>
                 </div> 
+                <div class="row button-row">
+                  <div class="col-md-12">
+                    <div class="d-flex justify-content-between btn-lg-cus mt-2">
+                      <div class="col-md-12 saveButtonAlign">
+                        <button class="btn btn-primary radius-full btn-lg" (click)="saveTrip(stepper)">Save & Continue &nbsp; <i class="fa fa-arrow-right"></i></button>
+                      </div>
+                    </div>   
+                   <!-- <div class="float-right">
+                      <app-expense-import (dataExported)="dataExported($event)"></app-expense-import>
+                    </div>-->
+                  </div>
+                  <div class="bottom-space"></div>
+                </div>
                </form> 
                 <!-- <div>
                   <button mat-button matStepperNext (click)="goNext()">Next</button>
@@ -318,9 +326,21 @@
                     </div>
                   </div>
                 <div class="fsw_inner d-md-flex search-panel">
+                <div class="fsw_inputBox searchCity inactiveWidget "> 
+                  <div class="form-group">
+                    <div><span class="lbl_input appendBottom5 traFont">Departure Location</span></div>
+                    <ngx-select-dropdown tabindex="0"  [multiple]="false"
+                    [options]="itaCityMaster" (change)="getLocationData($event,'fromItaLoc')"
+                    [config]="config_itaCity" ></ngx-select-dropdown>
+                    <!-- <span class="errorField"
+                    *ngIf="(TravellerInformationFromControl.fromLocation.touched  || formDir.submitted) && TravellerInformationFromControl.fromLocation.errors">
+                    This field  is required
+                    </span>   -->
+                  </div>
+                </div>  
                   <div class="fsw_inputBox searchCity inactiveWidget ">
                     <label for="fromCity">
-                      <div><span class="lbl_input appendBottom5 traFont">Departture From {{tripFromLocation}}</span></div>                    
+                      <div><span class="lbl_input appendBottom5 traFont">Departure Time</span></div>                    
                       <select class="fsw_inputField font20 lineHeight36 latoBlack font20" [(ngModel)]="departtureTime">
                         <option value="" ng-selected="selected">Select</option>
                         <option  value="1">Before 6AM</option>
@@ -329,9 +349,21 @@
                      </label>
                      <span *ngIf="departtureTime === false" class="errorField">Please select</span>
                       </div>
+                      <div class="fsw_inputBox searchCity inactiveWidget "> 
+                        <div class="form-group">
+                          <div><span class="lbl_input appendBottom5 traFont">Arrival Location</span></div>
+                          <ngx-select-dropdown tabindex="0"  [multiple]="false"
+                          [options]="itaCityMaster" (change)="getLocationData($event,'toItaLoc')"
+                          [config]="config_itaCity" ></ngx-select-dropdown>
+                          <!-- <span class="errorField"
+                          *ngIf="(TravellerInformationFromControl.fromLocation.touched  || formDir.submitted) && TravellerInformationFromControl.fromLocation.errors">
+                          This field  is required
+                          </span>   -->
+                        </div>
+                      </div> 
                       <span class="swipCircle"><span class="landingSprite swipIcon"></span></span>
                         <div class="fsw_inputBox searchToCity inactiveWidget ">
-                          <label for="toCity"><div><span class="lbl_input latoBold  appendBottom5 traFont">Arrival at {{tripToLocation}}</span></div>
+                          <label for="toCity"><div><span class="lbl_input latoBold  appendBottom5 traFont">Arrival Time</span></div>
                             <select class="fsw_inputField font20 lineHeight36 latoBlack font20" [(ngModel)]="arrivalTime">
                               <option value="" ng-selected="selected">Select</option>
                               <option value="1">Before 10AM</option>
@@ -350,11 +382,11 @@
                             </select>     
                             <span *ngIf="travelStop === false" class="errorField">Please select</span>                   
                           </div>  
-                          <div class="fsw_inputBox dates inactiveWidget">                                        
+                          <!-- <div class="fsw_inputBox dates inactiveWidget">                                        
                              <select class="form-control" >
                                <option>Airlines</option>
                              </select>                        
-                           </div>                       
+                           </div>                        -->
                            <div class="fsw_inputBox dates inactiveWidget"> 
                              <button class="btn btn-primary btn-lg" (click)="getFlight();">Search</button>
                            </div>
@@ -505,7 +537,7 @@
                         <div class="fsw_inputBox searchToCity inactiveWidget ">
                           <!-- <span  class="label rec-flag btn-success mb-2 btn ml-4 mr-4">Recomended</span> -->
                           <div class="text-center roundTripPadding"> 
-                          <button *ngIf="i===0" type="button" class="btn btn-success btn-sm">Recomended</button>
+                          <button *ngIf="flights.fare === onwardFlightLowestPrice" type="button" class="btn btn-success btn-sm">Recomended</button>
                           <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
                             {{flights.arrTime}} 
                            </span>                          
@@ -555,7 +587,7 @@
                         </div>
                        <div class="fsw_inputBox searchToCity inactiveWidget ">
                          <div class="text-center roundTripPadding"> 
-                          <button *ngIf="j===0" type="button" class="btn btn-success btn-sm">Recomended</button>
+                          <button *ngIf="returnflightss.fare===returnFlightLowestPrice" type="button" class="btn btn-success btn-sm">Recomended</button>
                          <span class="fsw_inputField font-weight-bold lineHeight36 latoBlack">
                           {{returnflightss.arrTime}} 
                           </span>                          
@@ -616,7 +648,7 @@
                               <div><span class="lbl_input latoBold appendBottom5"> {{flights.destination}}</span></div>
                               </div> 
                             </div>
-                            <div class="fsw_inputBox" *ngIf="i===0">
+                            <div class="fsw_inputBox" *ngIf="flights.fare===onwardFlightLowestPrice">
                               <span class="label rec-flag btn-success mb-2 btn ml-4 mr-4">Recomended</span>
                             </div>
                             <div class="fsw_inputBox searchToCity inactiveWidget border-0">
@@ -641,7 +673,7 @@
                    <div class="text-primary"><h4><i></i>Accomodation</h4></div>                  
                   </div>
                  </div>
-                 <div class="fsw_inner search-panel d-md-flex">
+                <div class="fsw_inner search-panel d-md-flex">
                   <div class="fsw_inputBox searchCity inactiveWidget ">
                     <label for="fromCity">
                       <div><span class="lbl_input appendBottom5">Star Ratings</span></div>                    
@@ -669,6 +701,38 @@
                         <span *ngIf="userRating === false" class="errorField">Please select</span>
                         </div>
                           <div class="fsw_inputBox searchToCity  inactiveWidget">                        
+                           <div><span class="lbl_input appendBottom10">CheckIn Date</span></div>                          
+                           <div class="input-group">
+                            <input class="form-control" placeholder="dd/mm/yyyy"
+                                   name="d4" [(ngModel)]="checkInDate" ngbDatepicker #d4="ngbDatepicker">
+                            <div class="input-group-append">
+                              <button class="btn btn-outline-secondary calendar" (click)="d4.toggle()" type="button"><i class="fa fa-calendar"></i></button>
+                            </div>
+                          </div>                        
+                          </div>
+                          <div class="fsw_inputBox searchToCity  inactiveWidget">                        
+                            <div><span class="lbl_input appendBottom10">CheckOut Date</span></div>                          
+                            <div class="input-group">
+                              <input class="form-control" placeholder="dd/mm/yyyy"
+                                     name="d5" [(ngModel)]="checkOutDate" ngbDatepicker #d5="ngbDatepicker">
+                              <div class="input-group-append">
+                                <button class="btn btn-outline-secondary calendar" (click)="d5.toggle()" type="button"><i class="fa fa-calendar"></i></button>
+                              </div>
+                            </div>                  
+                           </div>
+                           <div class="fsw_inputBox searchToCity  inactiveWidget">                        
+                            <div><span class="lbl_input appendBottom10">Rooms</span></div>                          
+                            <select class="fsw_inputField font20 lineHeight36 latoBlack font20" [(ngModel)]="hotelRooms">
+                              <option value="" selected>select</option>
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4 </option>
+                            </select>                           
+                           </div>                                                
+                      </div>
+                <div class="fsw_inner search-panel d-md-flex">
+                         <div class="fsw_inputBox searchToCity  inactiveWidget">                        
                            <div><span class="lbl_input appendBottom10">Meal</span></div>                          
                             <select class="fsw_inputField font20" [(ngModel)]="hotelMeal">
                               <option value="" selected>Select Meal </option>
@@ -707,7 +771,7 @@
                       </div>
                   </div>
                   <div class="ex-col">
-                    <span class="label rec-flag btn-success mb-2 btn ml-4 mr-4" *ngIf="i===0">Recomended</span>
+                    <span class="label rec-flag btn-success mb-2 btn ml-4 mr-4" *ngIf="getHotelDatas.price === hotelLowestPrice">Recomended</span>
                     <div class="ratings">
                       {{getHotelDatas.guestRating}}
                     </div>
@@ -831,17 +895,17 @@
                   <div class="col trip-info-list">
                     <label>Travel Type</label>
                     <div class="t-val">
-                      <span *ngIf="travelType === 'D'">Domestic Travel
+                      <span *ngIf="_tripInformation.travelType === 'D'">Domestic Travel
                       </span>
-                      <span *ngIf="travelType === 'I'">International Travel
+                      <span *ngIf="_tripInformation.travelType === 'I'">International Travel
                       </span>
                     </div>                  
                   </div>
                   <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
                     <label>Way</label>
                     <div class="t-val">
-                      <span *ngIf="wayType == 1">One Way</span>
-                      <span *ngIf="wayType == 2">Two Way</span>
+                      <span *ngIf="_tripInformation.wayType == 1">One Way</span>
+                      <span *ngIf="_tripInformation.wayType == 2">Two Way</span>
                     </div>                  
                   </div>
                   <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
@@ -854,31 +918,31 @@
                   </div>
                   <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
                     <label>Start Date</label>
-                    <div class="t-val"><span>{{startDate}}</span></div>                  
+                    <div class="t-val"><span>{{_tripInformation.startDate}}</span></div>                  
                   </div>
                   <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
                     <label>End Date</label>
-                    <div class="t-val"><span>{{endDate}}</span></div>                  
+                    <div class="t-val"><span>{{_tripInformation.endDate}}</span></div>                  
                   </div>
                   <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
                     <label>Purpose</label>
-                    <div class="t-val"><span>{{purposeDesc}}</span></div>                  
+                    <div class="t-val"><span>{{_tripInformation.purposeDesc}}</span></div>                  
                   </div>
                   <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
                     <label>Trip For</label>
-                    <div class="t-val "><span>{{tripForMasterDesc}}</span></div>                  
+                    <div class="t-val "><span>{{_tripInformation.tripForMasterDesc}}</span></div>                  
                   </div>
                   <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
                     <label>Travel Details</label>
-                    <div class="t-val "><span>{{travelDetails}}</span></div>                  
+                    <div class="t-val "><span>{{_tripInformation.travelDetails}}</span></div>                  
                   </div>
                   <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
                     <label>Trip Cost Center</label>
-                    <div class="t-val "><span>{{tripCostCenter}}</span></div>                  
+                    <div class="t-val "><span>{{_tripInformation.tripCostCenter}}</span></div>                  
                   </div>
                   <div class="col-md-3  col-sm-12 mb-4 trip-info-list">
                     <label>Event Code</label>
-                    <div class="t-val "><span>{{eventCode}}</span></div>                  
+                    <div class="t-val "><span>{{_tripInformation.eventCode}}</span></div>                  
                   </div>
                  </div>
                 </div>
@@ -1060,13 +1124,13 @@
                 <div class="col-md-6">
                   <button *ngIf="stepStatus>1" (click)="goBack(stepper)" class="btn btn-outline-primary radius-full btn-lg"><i class="fa fa-arrow-left"></i> &nbsp; Back</button>
                 </div>
-                <div class="col-md-6" style="padding-left: 30%;" *ngIf="stepStatus < 7">
-                  <button class="btn btn-primary radius-full btn-lg" (click)="save(stepper)">Save & Continue &nbsp; <i class="fa fa-arrow-right"></i></button>
+                <div class="col-md-6" style="padding-left: 25%;" *ngIf="stepStatus < 7 && stepStatus>1">
+                  <button class="btn btn-primary radius-full btn-lg" (click)="updateTrip(stepper,0)">Save & Continue &nbsp; <i class="fa fa-arrow-right"></i></button>
                 </div>
                 <div class="col-md-6" style="padding-left: 27%;" *ngIf="stepStatus === 7">
                   <!-- <button class="btn btn-primary radius-full btn-lg" (click)="save(stepper)">Save On Draft &nbsp; <i class="fa fa-arrow-right"></i></button>
                    &nbsp; -->
-                  <button class="btn btn-primary radius-full btn-lg" (click)="save(stepper)">Send For Approval &nbsp; <i class="fa fa-arrow-right"></i></button>
+                  <button class="btn btn-primary radius-full btn-lg" (click)="updateTrip(stepper,1)">Send For Approval &nbsp; <i class="fa fa-arrow-right"></i></button>
                 </div>
                 
                 <!-- <div>

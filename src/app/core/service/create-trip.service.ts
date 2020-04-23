@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { map } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject,Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,7 @@ export class CreateTripService {
     this.dataStringSource.next(this.allTravellerList);
   }
 
-  tripSave(email,token,param){
+  tripSave(email,token,param): Observable<{}>{
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -167,6 +167,27 @@ export class CreateTripService {
   }
 
   getTripList(email,token){
+    // let httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type': 'application/json',
+    //     'token': token,
+    //     'emailId': email
+    //   }),
+    // };
+
+    return this.http
+      .get(this.apiUrl+'getTripListByEmailId')
+      //.get(this.apiUrl+'getTripList', httpOptions)
+      .pipe(map(response => {
+        // if (user.data && user.data.accessToken) {
+        //   this.storage.set('shopData', user.data);
+        // }
+        return response;
+      }));
+  }
+
+
+  tripDetailsByNumber(email,token,param){
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -176,7 +197,7 @@ export class CreateTripService {
     };
 
     return this.http
-      .get(this.apiUrl+'getTripList', httpOptions)
+      .post(this.apiUrl+'getTripDetailsByTripNumberForApprover', param, httpOptions)
       .pipe(map(response => {
         // if (user.data && user.data.accessToken) {
         //   this.storage.set('shopData', user.data);
@@ -184,5 +205,6 @@ export class CreateTripService {
         return response;
       }));
   }
+
 
 }

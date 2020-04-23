@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { CreateTripService } from './../create-trip.service';
+import { CreateTripService } from '../../../core/service/create-trip.service';
 import { element } from 'protractor';
 
 @Component({
