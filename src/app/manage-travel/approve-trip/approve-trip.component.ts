@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CreateTripService } from '../../core/service/create-trip.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-approve-trip',
@@ -20,7 +21,8 @@ export class ApproveTripComponent implements OnInit {
   userLoginData: any;
 
   constructor(
-    private _createTripService:CreateTripService
+    private _createTripService:CreateTripService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -35,7 +37,6 @@ export class ApproveTripComponent implements OnInit {
       this.tripListData = res.tripcreation;
 
       // from city name
-      debugger
       let getCity = this.userLoginData.masterResponseModel.cityMaster;
       let toCityArr= getCity.filter(ele => ele.cityid == this.tripListData.toLocation)
       this.toCityName = toCityArr[0].cityName;
@@ -66,6 +67,7 @@ export class ApproveTripComponent implements OnInit {
     this._createTripService.tripUpdate(this.emailId,this.token,this.tripListData).subscribe((res: any) => {
       console.log(res);
       this.tripListData = res.tripCreationList;
+      this.router.navigate(['/managetravel/tripList']);
     }); 
   }
 

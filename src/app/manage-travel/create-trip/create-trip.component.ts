@@ -87,7 +87,7 @@ export class CreateTripComponent implements OnInit {
     this.allTravellerList =  JSON.parse(localStorage.getItem('userAllList'));
     this._tripInformation.purpose = ''; this._tripInformation.tripFor = ''; this.departtureTime = ''; this.arrivalTime = ''; this.travelStop = '';
     this.starRating = ''; this.userRating = ''; this.hotelMeal = ''; this.hotelLocality = ''; this.hotelName = ''; this.hotelRooms = '';
-    let userLoginData : any;
+    let userLoginData : any; this._tripInformation.travelType = 'D'; this._tripInformation.wayType = '1';
     userLoginData = JSON.parse(localStorage.getItem('userLoginData'));
     this.getCity = userLoginData.masterResponseModel.cityMaster;
     this._tripInformation.purposeMaster = userLoginData.masterResponseModel.purposeMaster

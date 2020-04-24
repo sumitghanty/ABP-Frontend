@@ -18,7 +18,7 @@
                 <div class="row">
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-check form-check-inline mb-3">
-                      <input class="form-check-input"  type="radio" [(ngModel)]="_tripInformation.travelType" formControlName="travelType" id="inlineRadio1" value="D">
+                      <input class="form-check-input" type="radio" [(ngModel)]="_tripInformation.travelType" formControlName="travelType" id="inlineRadio1" value="D">
                       <label class="form-check-label" for="inlineRadio1">Domestic Travel</label>
                     </div>
                     <div class="form-check form-check-inline mb-3">
@@ -33,7 +33,7 @@
           
                   <div class=" col-lg-6 col-sm-12 hightlight-gray mb-3">
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio"  [(ngModel)]="_tripInformation.wayType" formControlName="wayType" id="inlineRadio3" value="1">
+                      <input class="form-check-input" checked type="radio"  [(ngModel)]="_tripInformation.wayType" formControlName="wayType" id="inlineRadio3" value="1">
                       <label class="form-check-label" for="inlineRadio3">One Way</label>
                     </div>
                     <div class="form-check form-check-inline">
@@ -316,7 +316,7 @@
                  <div class="row mb-5">
                   <div class=" col-lg-6 col-sm-12">
                     <div class="form-check form-check-inline mb-3">
-                      <input class="form-check-input" [(ngModel)]="tripType" checked type="radio" name="inlineRadioOptions" id="inlineRadio1" value="F">
+                      <input class="form-check-input" [(ngModel)]="tripType" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="F">
                       <label class="form-check-label" for="inlineRadio1">Flight Booking</label>
                     </div>
                     <div class="form-check form-check-inline mb-3">
