@@ -34,11 +34,11 @@ export class CreateTripComponent implements OnInit {
     getFlightData:any; returnflights: any; onwardFlightLowestPrice: any; returnFlightLowestPrice: any; getHotelData:any; tripId:any;
     tripDet:any; selectedFlight = []; selectedHotel = []; flightSelectedStatus = false; flightSelectedRetrunStatus = false;
     fromAirportCity: any; toAirportCity: any; fareSort = 'A';arrivalSort = ''; timeSort = ''; deparSort = ''; flightTripType = ''; reasonSelectFlight: any; flightSearchStartDate : any; flightSearchEndDate : any; fromCityName : any; toCityName : any;
-    
+    trainSelfBook: any; mmtTrainBook: any; bookPersonName: any; personDOB: any; personAge: any; personPhoneNo: any;  travelTrainDate: any; trainTimeTravel: any; sourceStation:any; destinationStation: any;
     //hotel varriable
     starRating: any; userRating: any; hotelMeal: any; hotelLocality: any;hotelName: any;hotelRooms: any;checkInDate: any;checkOutDate: any;selectReasonHotel: any;testmodel: NgbDateStruct;itaCityMaster: any;hotelLowestPrice: any;
     poolService: any;
-    hotelSelectedStatus = false;
+    hotelSelectedStatus = false; guestHouse: any; abpHotel: any; mmtHotel: any; selfBook: any; selfArrange: any;
 
     config_city = {
       displayKey: 'cityName', // if objects array passed which key to be displayed defaults to description
@@ -207,18 +207,10 @@ export class CreateTripComponent implements OnInit {
   /**************************** flight search ***********************************/
     async getFlight(){
       let getSearchFlightData = await this._createTripFuncComponent.searchFlight(this.emailId,this.token,this.fromAirportCity,this.toAirportCity,this.travelStop,this.flightSearchStartDate,this.flightSearchEndDate);
-
       this._createTripService.getFlightList(this.token,this.emailId,getSearchFlightData).subscribe((res: any) => {
         this.getFlightData = res.flightResponse.onwardflights;
-        this.returnflights = res.flightResponse.returnflights;
-        /***** sort onwardflights ********/
-        this.getFlightData.sort(function(x,y){
-          return x.fare - y.fare
-        });
-        /// sort returnflights
-        this.returnflights.sort(function(x,y){
-          return x.fare - y.fare
-        });  
+        this.returnflights = res.flightResponse.returnflights; 
+        this.sortFlightData('fare','A');
         this.onwardFlightLowestPrice = this.getFlightData[0].fare;
         this.returnFlightLowestPrice = this.returnflights[0].fare;
       });
@@ -322,6 +314,11 @@ export class CreateTripComponent implements OnInit {
               "ticketClass": "Business",
               "tripType": this.flightTripType, //"One-Way",
               "timeOfTravel": this._tripInformation.startDate,
+              "selectedFlight":{
+                "flightArrivalTime": arrTime,
+                "flightDepartureTime": depTime,
+                "flightStops": this.travelStop
+              },
               "selectedIndex":i,
               "selectionType": 'S', // S/C
               "travelType":'O', // origin or retrun
@@ -368,6 +365,11 @@ export class CreateTripComponent implements OnInit {
                   "ticketClass": "Business",
                   "tripType": this.flightTripType, //"One-Way",
                   "timeOfTravel":"12-05-2020",
+                  "selectedFlight":{
+                    "flightArrivalTime": arrTime,
+                    "flightDepartureTime": depTime,
+                    "flightStops": this.travelStop
+                  },
                   "selectedIndex":i,
                   "selectionType": 'S', // S/C
                   "travelType": 'R',
@@ -386,26 +388,22 @@ export class CreateTripComponent implements OnInit {
          let hotelData = [];
          hotelData = this.selectedHotel.filter(slEle => slEle.selectionType == 'S');
          let preIndex = hotelData[0].selectedIndex;
-        
-        document.getElementById("hotelDiv"+preIndex).style.borderColor = "";
-        document.getElementById("selectHotelIco"+preIndex).style.display = "none";
-        document.getElementById("reasonMainHotelDiv"+preIndex).style.display = "none";
-         
-  
+         document.getElementById("hotelDiv"+preIndex).style.borderColor = "";
+         document.getElementById("selectHotelIco"+preIndex).style.display = "none";
+         document.getElementById("reasonMainHotelDiv"+preIndex).style.display = "none";
          let indexNo = this.selectedHotel.findIndex(slEle => slEle.selectionType === 'S');
          this.selectedHotel.splice(indexNo, 1);
-       }
+      }
   
       if(!this.hotelSelectedStatus){ 
-          this.hotelSelectedStatus = true;
+         this.hotelSelectedStatus = true;
           document.getElementById("hotelDiv"+i).style.borderColor = "red";
           document.getElementById("selectHotelIco"+i).style.display = "";
          if(i>0){ 
           document.getElementById("reasonMainHotelDiv"+i).style.display = "";
          }
-  
-  
-          this.selectedHotel.push({
+        
+         this.selectedHotel.push({
               "bookingType":"1",
               "tripId":this.tripId,
               "hotelGuesthouseName": hotelName,
@@ -413,6 +411,11 @@ export class CreateTripComponent implements OnInit {
               "amount": hotelPrice,
               "checkInTime":"10:12",
               "checkOutTime":"12",
+              "selectedHotel":{
+                "userRating": guestRating,
+                "hotelAmenities": amenities.toString(),
+                "hotelPicture": imageUrl
+              },
               "selectedIndex":i,
               "selectionType": 'S', // S/C
               "hotelImage": imageUrl,
@@ -425,9 +428,7 @@ export class CreateTripComponent implements OnInit {
   
     /********************* reason for selcet flight *************/
     getReasonFlight(indexFlight){
-      console.log('indexFlight',indexFlight);
       let getFlightData = this.selectedFlight.filter(ele => ele.selectedIndex === indexFlight)
-      console.log('getFlightData',getFlightData);
       getFlightData[0].reason = this.reasonSelectFlight;
     }
   

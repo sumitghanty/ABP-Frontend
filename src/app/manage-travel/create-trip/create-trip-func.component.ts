@@ -60,12 +60,17 @@ export class CreateTripFuncComponent implements OnInit {
     if(allTravellerList && allTravellerList.length>0){  
       for(const allTravellerLists of allTravellerList){
         let employeeId = '';
+        let userType = '';
         if(allTravellerLists.userId){
           employeeId = allTravellerLists.userId;
+          userType = 'E';
         } else if(allTravellerLists.retainerId){
           employeeId = allTravellerLists.retainerId;
+          userType = 'R';
+        } else if(allTravellerLists.type && allTravellerLists.type === 'G'){
+          userType = 'G';
         }
-        travelllerUserList.push({'passengerName': allTravellerLists.userFirstName,'employeeId':employeeId});
+          travelllerUserList.push({'passengerName': allTravellerLists.userFirstName,'employeeId':employeeId,userType: userType});
       }
     }
     //let tripDet = JSON.parse(localStorage.getItem('getTripData'));
